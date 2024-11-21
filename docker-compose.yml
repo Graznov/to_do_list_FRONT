@@ -1,0 +1,28 @@
+services:
+  taskflow-web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      target: ${BUILD_MODE}
+      args:
+        - SSL_CERT_PATH
+        - SSL_CERT_KEY_PATH
+        - ORIGIN_URL
+        - ADMIN_EMAIL
+        - SITE_DOMAIN
+        - SITE_DOMAIN_WWW
+    restart: always
+    container_name: taskflow-web
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - .env
+    networks:
+      - taskflow-network
+      - frontend
+
+networks:
+  taskflow-network:
+    external: true
+  frontend:

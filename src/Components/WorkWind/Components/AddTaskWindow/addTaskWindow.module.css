@@ -1,0 +1,246 @@
+:root {
+    --color-main-bg: #282828;
+    --color-secondary-bg: #3c3836;
+    --color-secondary-bg-opac:rgba(60,56,54,0.95);
+    --color-primary-font: #A89984;
+    --color-secondary-font: #fbf1c7;
+    --color-primmary-icon: #7C6F64;
+    --color-secondary-icon: #fbf1c7;
+    --color-primary: #8EC07C;
+    --color-primary-hover: #689D6A;
+    --color-secondary: #83A598;
+    --color-secondary-hover: #458588;
+    --color-info: #D3869B;
+    --color-info-hover: #B16286;
+    --color-warning: #FABD2F;
+    --color-warning-hover: #D79921;
+    --color-success: #B8BB26;
+    --color-success-hover: #98971A;
+    --color-danger: #FB4934;
+    --color-danger-hover: #CC241D;
+    --color-header-bg: #282828;
+    --color-search-bg: #3c3836;
+    --color-gray-font: gray;
+}
+
+
+.AddTaskContainer{
+
+    position: absolute;
+    background: rgba(250, 250, 250, 0.89);
+    padding: 25px;
+    top: 50%;
+    left: 50%;
+    margin: -233px 0 0 -155px;
+    display: none;
+    border: 0.3px solid #717171;
+    border-radius: 5px;
+    font-family: "Exo 2", sans-serif;
+    .close{
+        border: none;
+        background: none;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 4px;
+        right: 5px;
+    }
+
+    /*Выбор тегов:*/
+    /* Кнопка выпадающего списка */
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        width: 100%;
+        padding: 7px 16px;
+        font-size: 16px;
+        border: none;
+    }
+
+    /* Контейнер <div> - необходим для размещения выпадающего содержимого */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+
+    }
+
+    /* Выпадающее содержимое (скрыто по умолчанию) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        width: 100%;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        button{
+            border: none;
+            width: 100%;
+        }
+    }
+
+    /* Ссылки внутри выпадающего списка */
+    .dropdown-content button {
+        color: black;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        /*display: block;*/
+    }
+
+    /* Изменение цвета выпадающих ссылок при наведении курсора */
+    .dropdown-content button:hover {background-color: #ddd;}
+
+    /* Показать выпадающее меню при наведении курсора */
+    .dropdown:hover .dropdown-content {display: block;}
+
+    /* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
+    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+/*...выбор тегов*/
+
+    .AddTaskContainerTop{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .AddTaskContainerTop_dateTimecontainer{
+            display: flex;
+            gap: 10px;
+            /*flex-direction: column;*/
+        }
+    }
+
+    .addTaskContainerTopInput{
+        font-size: 21px;
+        padding: 10px;
+        border: none;
+        border-bottom: 1.5px solid #5e5e5e;
+        background: inherit;
+        transition: 0.3s;
+    }
+    .addTaskContainerTopInput_Date{
+        width: 100%;
+    }
+    .addTaskContainerTopInput_RED{
+        border-bottom: 1.5px solid #f40404;
+        background: rgba(213, 31, 31, 0.1);
+    }
+    .addTaskContainerTopInput:focus{
+        outline: none;
+    }
+
+    textarea{
+        background: inherit;
+        font-size: 15px;
+        padding: 10px;
+        /*rows:5;*/
+    }
+
+    textarea:focus{
+        outline: none;
+    }
+    .AddTaskContainerTop_colrs{
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .AddTaskContainerTop_colrs_btnArea{
+            display: flex;
+            justify-content: space-between;
+            .AddTaskContainerTop_colrs_btn{
+                width: 43px;
+                height: 33px;
+                cursor: pointer;
+                border: none;
+            }
+            .red{
+                background: red;
+            }
+            .green{
+                background: green;
+            }
+            .blue{
+                background: blue;
+            }
+            .yellow{
+                background: yellow;
+            }
+            .purple{
+                background: purple;
+            }
+            .colorActive{
+                border: 3px solid darkmagenta;
+                border-radius: 10px;
+            }
+        }
+    }
+    .AddTaskContainerBtn{
+        padding: 10px;
+        font-size: 17px;
+        border: none;
+        border-radius: 5px;
+        background: #a8a7a7;
+        cursor: pointer;
+    }
+    .AddTaskContainerBtn:hover{
+        background: #5e5e5e;
+        /*border: 1px solid rgba(0,0,0,0);*/
+    }
+
+
+
+
+}
+
+.AddTaskContainer_dark{
+    background: var(--color-secondary-bg-opac);
+    color: var(--color-primary-font);
+
+        .dropdown-content_dark *{
+            background: var(--color-secondary);
+        }
+    .button_dark:hover{
+        color: var(--color-header-bg);
+    }
+
+    .addTaskContainerTopInput{
+        color: var(--color-primary-font);
+
+    }
+
+
+    textarea{
+        color: var(--color-primary-font);
+
+    }
+
+    .AddTaskContainerBtn_dark{
+        background: var(--color-primary);
+    }
+    .AddTaskContainerBtn_dark:hover{
+        background: var(--color-primary-hover);
+    }
+}
+
+.AddTaskContainer_Visible{
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+}
+
+@media screen and (min-width:13px) and (max-width:650px){
+
+    .AddTaskContainer{
+        left: 0;
+        right: 0;
+        margin: 0;
+        top: 0;
+        bottom: 0;
+        gap: 70px;
+        padding-top: 100px;
+    }
+}
+
+
+

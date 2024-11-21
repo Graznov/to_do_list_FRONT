@@ -1,0 +1,82 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+    server {
+        listen 80;
+        server_name taskflow-web;
+        return 301 https://$host$request_uri;
+    }
+
+    server {
+        listen 443 ssl;
+        http2 on;
+        server_name taskflow-web;
+
+        ssl_certificate $SSL_CERT_PATH;
+        ssl_certificate_key $SSL_CERT_KEY_PATH;
+
+        brotli on;
+        brotli_comp_level 6;
+        brotli_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+
+        gzip on;
+        gzip_comp_level 6;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript image/svg+xml;
+
+        add_header Vary Accept-Encoding;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-Frame-Options SAMEORIGIN;
+        add_header X-XSS-Protection "1; mode=block";
+
+         location / {
+            root /usr/share/nginx/html;
+            index index.html;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+            try_files $uri $uri/ /index.html;
+        }
+
+        location /api/ {
+            proxy_pass http://taskflow-api:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+
+            add_header 'Access-Control-Allow-Origin' $ORIGIN_URL;
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, PATCH, DELETE';
+            add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, Authorization';
+            add_header 'Access-Control-Allow-Credentials' 'true';
+
+            if ($request_method = 'OPTIONS') {
+                add_header 'Access-Control-Allow-Origin' $ORIGIN_URL;
+                add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, PATCH, DELETE';
+                add_header 'Access-Control-Allow-Headers' 'Origin, X-Requested-With, Content-Type, Accept, Authorization';
+                add_header 'Access-Control-Allow-Credentials' 'true';
+                return 204;
+            }
+        }
+    }
+
+    types {
+        text/html                             html htm shtml;
+        text/css                              css;
+        text/xml                              xml;
+        application/json                      json;
+        application/javascript                js;
+        image/gif                             gif;
+        image/jpeg                            jpeg jpg;
+        image/png                             png;
+        image/svg+xml                         svg;
+        image/webp                            webp;
+        application/pdf                       pdf;
+        application/zip                       zip;
+        application/octet-stream              bin exe;
+    }
+}

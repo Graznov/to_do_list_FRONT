@@ -1,0 +1,32 @@
+a{
+    text-decoration: none;
+}
+.button{
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    align-items:center;
+    .calendar_btn{
+        align-items:center;
+        display: flex;
+        gap: 10px;
+
+    }
+}
+
+button:hover {
+    background: #0000ff;
+    /*color: #d5d4d4;*/
+    color: white;
+}
+button:active {
+    background: #02029f;
+    /*color: #d5d4d4;*/
+
+}
