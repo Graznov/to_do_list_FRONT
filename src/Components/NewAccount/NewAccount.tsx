@@ -260,6 +260,11 @@ export const NewAccount = () => {
     }
 // ... показать/скрыть пароль
 
+    const clickRegistration = ()=>{
+        console.log(13)
+        console.log(form)
+    }
+
     return(
 
         <div className={cx('registrContainer')}>
@@ -270,7 +275,7 @@ export const NewAccount = () => {
                 {langMap.registration}
             </h3>
 
-                <form className={styles.input_area}>
+                <div className={styles.input_area}>
 
 
                     <Input
@@ -354,7 +359,8 @@ export const NewAccount = () => {
                     <Btn
                         ClassNameBtn={ClassBtn}
                         Btn_text={langMap.RegistrWinBtnRegistr}
-                        type='submit'
+                        type='button'
+                        Click={clickRegistration}
                     />
                     <div className={cx('toLogin',{
                         'toLogin_dark':theme==='dark'
@@ -365,7 +371,7 @@ export const NewAccount = () => {
                         </NavLink>
                     </div>
 
-                </form>
+                </div>
             </div>
     )
 }

@@ -141,7 +141,7 @@
     .classNameBtn{
         color: #c9c8c8;
         background: blue;
-        padding: 20px;
+        /*padding: 20px;*/
         font-family: "Exo 2", sans-serif;
         font-size: 21px;
         /*width: 80%;*/
@@ -155,16 +155,17 @@
     }
 
     .classNameBtn_dark{
+        /*background: red;*/
         background: var(--color-primary);
         color: var(--color-header-bg);
     }
 
-    .classNameBtnDiss:disabled{
-        opacity: 0.5;
-    }
-    .classNameBtnDiss_dark:disabled{
-        opacity: 0.9;
-    }
+    /*.classNameBtnDiss:disabled{*/
+    /*    opacity: 0.5;*/
+    /*}*/
+    /*.classNameBtnDiss_dark:disabled{*/
+    /*    opacity: 0.9;*/
+    /*}*/
 
 
     .classNameBtn:hover{
