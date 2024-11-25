@@ -262,8 +262,11 @@ export const NewAccount = () => {
 
     const clickRegistration = ()=>{
         console.log(13)
+        // setStatus(!status)
         console.log(form)
     }
+
+    const [status, setStatus] = useState(false)
 
     return(
 
@@ -361,6 +364,8 @@ export const NewAccount = () => {
                         Btn_text={langMap.RegistrWinBtnRegistr}
                         type='button'
                         Click={clickRegistration}
+                        disabled={status}
+
                     />
                     <div className={cx('toLogin',{
                         'toLogin_dark':theme==='dark'

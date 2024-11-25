@@ -1,8 +1,10 @@
 interface forBtn{
     Btn_text:string,
     ClassNameBtn:string,
-    type:string,
-    Click:()=>void
+    type: "submit" | "reset" | "button",
+    Click:()=>void,
+    status:'true' | 'false',
+
 }
 
 
@@ -10,15 +12,14 @@ function Btn({
                 Btn_text,
                 ClassNameBtn,
                 type,
-                Click
-
-                // disabled
-             }:forBtn){
+                Click,
+                status
+            }:forBtn){
 
     return(
         <button
+            disabled={status}
             className={ClassNameBtn}
-            // disabled
             onClick={Click}
             type={type}>
             {Btn_text}
