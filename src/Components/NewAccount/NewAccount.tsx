@@ -260,13 +260,17 @@ export const NewAccount = () => {
     }
 // ... показать/скрыть пароль
 
+    useEffect(() => {
+        if(form.password && form.name && form.email) setStatus(!status)
+    }, [form]);
+
     const clickRegistration = ()=>{
         console.log(13)
-        // setStatus(!status)
         console.log(form)
-    }
 
-    const [status, setStatus] = useState(false)
+
+    }
+    const [status, setStatus] = useState(true)
 
     return(
 
@@ -359,14 +363,22 @@ export const NewAccount = () => {
                         classNameBtn={styles.classInputBtn}
                     />
 
-                    <Btn
-                        ClassNameBtn={ClassBtn}
-                        Btn_text={langMap.RegistrWinBtnRegistr}
-                        type='button'
-                        Click={clickRegistration}
-                        disabled={status}
+                    {/*<Btn*/}
+                    {/*    ClassNameBtn={ClassBtn}*/}
+                    {/*    Btn_text={langMap.RegistrWinBtnRegistr}*/}
+                    {/*    type='button'*/}
+                    {/*    Click={clickRegistration}*/}
+                    {/*    disabled={status}*/}
 
-                    />
+                    {/*/>*/}
+                    <button
+                        className={ClassBtn}
+                        type='button'
+                        onClick={clickRegistration}
+                        disabled={status}
+                    >
+                        {langMap.RegistrWinBtnRegistr}
+                    </button>
                     <div className={cx('toLogin',{
                         'toLogin_dark':theme==='dark'
                     })}>
