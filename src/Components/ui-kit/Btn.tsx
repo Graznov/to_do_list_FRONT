@@ -13,12 +13,12 @@ function Btn({
                 ClassNameBtn,
                 type,
                 Click,
-                status
+                // status
             }:forBtn){
 
     return(
         <button
-            disabled={status}
+            // disabled={status}
             className={ClassNameBtn}
             onClick={Click}
             type={type}>

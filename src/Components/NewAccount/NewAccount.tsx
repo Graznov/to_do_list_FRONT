@@ -1,6 +1,5 @@
 import styles from "./newAccount.module.css";
 import {Input} from "../ui-kit/Input.tsx";
-import Btn from "../ui-kit/Btn.tsx";
 import {FocusEvent, useEffect, useState} from "react";
 import classNames from "classnames/bind";
 import {NavLink} from "react-router-dom";
@@ -29,11 +28,13 @@ export const NewAccount = () => {
     })
     const langMap = lang === 'ru' ? russ : eng
 
-    const [form, setForm] = useState({
+    const FORM = {
         name: '',
         email: '',
         password: '',
-    })
+    }
+
+    const [form, setForm] = useState(FORM)
 
     const ClassBtn = cx('classNameBtn', {
         'classNameBtnDiss': (!form.name || !form.email || !form.password),
@@ -268,6 +269,17 @@ export const NewAccount = () => {
         console.log(13)
         console.log(form)
 
+
+
+        fetch(`http://localhost:3000/lists/`, {
+            method: 'POST', // Указываем метод запроса
+            headers: {
+                'Content-Type': 'application/json' // Устанавливаем заголовок Content-Type для указания типа данных
+            },
+            body: JSON.stringify(form)
+        })
+
+        setForm(FORM)
 
     }
     const [status, setStatus] = useState(true)
