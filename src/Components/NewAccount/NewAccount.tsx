@@ -32,6 +32,7 @@ export const NewAccount = () => {
         name: '',
         email: '',
         password: '',
+        token: ''
     }
 
     const [form, setForm] = useState(FORM)
@@ -279,7 +280,7 @@ export const NewAccount = () => {
             body: JSON.stringify(form)
         })
 
-        setForm(FORM)
+        // setForm(FORM)
 
     }
     const [status, setStatus] = useState(true)
