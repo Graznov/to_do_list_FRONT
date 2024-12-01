@@ -2,7 +2,7 @@ import styles from "./newAccount.module.css";
 import {Input} from "../ui-kit/Input.tsx";
 import {FocusEvent, useEffect, useState} from "react";
 import classNames from "classnames/bind";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {setLang} from "../../Store/styleSlise.ts";
 import {russ} from "../../Store/Ru.ts";
@@ -32,7 +32,7 @@ export const NewAccount = () => {
         name: '',
         email: '',
         password: '',
-        token: ''
+        // _token: ''
     }
 
     const [form, setForm] = useState(FORM)
@@ -54,6 +54,7 @@ export const NewAccount = () => {
     const [emailDirty, setEmailDirty] = useState(false)
     const [emailBorder, setEmailBorder] = useState(false)
     const [emailError, setEmailError] = useState(langMap.RegistrWinNameError)
+    // const [conflictEmail, setConflictEmail] = useState(false)
 
     const [passOneDirty, setPassOneDirty] = useState(false)
     const [passOneError, setPassOneError] = useState(langMap.RegistrWinNameError)
@@ -113,6 +114,9 @@ export const NewAccount = () => {
         }
     }
 
+    const [respons, setRespons] = useState('')
+
+
     const ClassInput = cx('classNameInput',{
         classNameInput_red:nameDirty && nameBorder,
         'classNameInput_dark':theme === 'dark',
@@ -123,11 +127,12 @@ export const NewAccount = () => {
     });
 
     const ClassInputEmail = cx('classNameInputEmail',{
-        classNameInput_red:emailDirty && emailBorder,
+        classNameInput_red:emailDirty && emailBorder || respons==='Conflict',
         'classNameInput_dark':theme === 'dark',
     });
     const ClassLabelEmail = cx('classNameLabelEmail',{
-        classNameLabel_red:emailDirty && emailBorder,
+        classNameLabel_red:emailDirty && emailBorder || respons==='Conflict',
+        // classNameLabel_red:conflictEmail,
         'classNameLabel_black':theme === 'dark',
     });
     const ClassInputPass = cx('classNameInputPass',{
@@ -266,11 +271,13 @@ export const NewAccount = () => {
         if(form.password && form.name && form.email) setStatus(!status)
     }, [form]);
 
+
+
+    // const [respons, setRespons] = useState('')
+    // Conflict Created
     const clickRegistration = ()=>{
         console.log(13)
         console.log(form)
-
-
 
         fetch(`http://localhost:3000/lists/`, {
             method: 'POST', // Указываем метод запроса
@@ -279,10 +286,45 @@ export const NewAccount = () => {
             },
             body: JSON.stringify(form)
         })
+            .then((response) => {
+                if (!response.ok) {
+                    setRespons(response.statusText)
+                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
 
-        // setForm(FORM)
+                }
+
+                return response.json()
+            })
+
+            .then((data) => {
+
+                console.log('Данные получены', data)
+                setRespons(data)
+            })
+            .catch((err) => {
+                console.log('Произошла ошибка', err.message)
+
+
+            })
 
     }
+
+
+    const navigate = useNavigate()
+    if(respons==='Created'){
+        console.log('Аккаунт создан')
+        navigate('/login')
+
+    } else if(respons==='Conflict'){
+        console.log('Аккаунт с таким емейлом уже существует')
+        // setConflictEmail(!conflictEmail)
+        // setTimeout(()=>setConflictEmail(false),1000)
+    }
+    // console.log(`respons: ${respons}`)
+    // useEffect(() => {
+    //     console.log(conflictEmail)
+    // }, [conflictEmail]);
+
     const [status, setStatus] = useState(true)
 
     return(
@@ -321,6 +363,7 @@ export const NewAccount = () => {
                         name='email'
                         onBlur={e => blurHandler(e)}
                         onChange={changeEmail}
+                        // value={''}
                         classNameContainer={styles.classNameContainer}
                         classNameLabel={ClassLabelEmail}
                         classNameInput={ClassInputEmail}
@@ -371,8 +414,6 @@ export const NewAccount = () => {
                         message={passTwoError}
                         src={adressTwo}
                         onClickBtn={isShowChangeTwo}
-                        // btnImg={adressTwo}
-                        // alt="show/hide icon"/>)}
                         classNameBtn={styles.classInputBtn}
                     />
 
