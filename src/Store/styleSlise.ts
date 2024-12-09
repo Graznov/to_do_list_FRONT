@@ -24,6 +24,7 @@ export interface StyleState {
     },
     language:string,
     theme:string,
+    emailNewAccWindowToLoginWindow:string
 }
 
 const initialState:StyleState = {
@@ -49,6 +50,7 @@ const initialState:StyleState = {
     },
     language:'en',
     theme:'light',
+    emailNewAccWindowToLoginWindow:''
 }
 
 const styleSlice = createSlice({
@@ -157,6 +159,10 @@ const styleSlice = createSlice({
         },
         setLang(state, action){
             state.language=action.payload
+        },
+
+        setEmailNewAccWindowToLoginWindow(state, action){
+            state.emailNewAccWindowToLoginWindow=action.payload
         }
 
 
@@ -178,7 +184,8 @@ export const {
     setSearchStatus,
     setStyleSearchList,
     setTheme,
-    setLang
+    setLang,
+    setEmailNewAccWindowToLoginWindow
 
 } = styleSlice.actions;
 export default styleSlice.reducer

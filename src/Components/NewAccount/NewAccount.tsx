@@ -4,7 +4,7 @@ import {FocusEvent, useEffect, useState} from "react";
 import classNames from "classnames/bind";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
-import {setLang} from "../../Store/styleSlise.ts";
+import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
 
@@ -313,6 +313,7 @@ export const NewAccount = () => {
     const navigate = useNavigate()
     if(respons==='Created'){
         console.log('Аккаунт создан')
+        dispatch(setEmailNewAccWindowToLoginWindow(form.email))
         navigate('/login')
 
     } else if(respons==='Conflict'){

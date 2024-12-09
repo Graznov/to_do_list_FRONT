@@ -32,7 +32,7 @@ export const Input = (
         src,
         classNameBtn,
         reactSvg,
-        BTNdisabled
+        BTNdisabled,
     }: InputProps
 ): ReactNode => {
     return (

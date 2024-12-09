@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
-import {setLang} from "../../Store/styleSlise.ts";
+import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +17,9 @@ export const LogInWind = () => {
 
     const lang = useAppSelector(state => state.styleSlice.language)
     const theme = useAppSelector(state => state.styleSlice.theme)
+    const emailFromRegistrationWindow = useAppSelector(state => state.styleSlice.emailNewAccWindowToLoginWindow)
+
+
 
 
     useEffect(() => {
@@ -31,9 +34,18 @@ export const LogInWind = () => {
 
 
     const [formLogin, setFormLogin] = useState({
-        email: '',
+        email: emailFromRegistrationWindow,
         password: '',
     })
+
+    console.log(formLogin)
+    // if(emailFromRegistrationWindow.length!==0){
+    //     console.log(emailFromRegistrationWindow)
+    //
+    //     console.log(formLogin)
+    // } else {
+    //     console.log('no email')
+    // }
 
     const ClassBtn = cx('classNameBtn', {
         classNameBtnDiss: (!formLogin.email || !formLogin.password),
@@ -102,6 +114,11 @@ export const LogInWind = () => {
 
 // проверка почты...
     const changeEmail = (e: { target: { value: string; }; }) => {
+
+        dispatch(setEmailNewAccWindowToLoginWindow(''))
+
+
+
         const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
         function isEmailValid (value: string){
             return EMAIL_REGEXP.test(value);
@@ -118,6 +135,8 @@ export const LogInWind = () => {
             setEmailError(langMap.logInWindEmailErrorOne)
             setEmailBorder(true)
         }
+
+
     }
 // ...проверка почты
 
@@ -167,6 +186,7 @@ export const LogInWind = () => {
             <form className={styles.input_area}>
 
                 <Input
+                    value={(formLogin.email.length!==0)?formLogin.email:''}
                     name='email'
                     onBlur={e => blurHandler(e)}
                     onChange={changeEmail}
