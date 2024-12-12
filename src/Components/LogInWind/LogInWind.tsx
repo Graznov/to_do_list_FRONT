@@ -34,18 +34,9 @@ export const LogInWind = () => {
 
 
     const [formLogin, setFormLogin] = useState({
-        email: emailFromRegistrationWindow,
+        email: (emailFromRegistrationWindow.length!==0)?emailFromRegistrationWindow:'',
         password: '',
     })
-
-    console.log(formLogin)
-    // if(emailFromRegistrationWindow.length!==0){
-    //     console.log(emailFromRegistrationWindow)
-    //
-    //     console.log(formLogin)
-    // } else {
-    //     console.log('no email')
-    // }
 
     const ClassBtn = cx('classNameBtn', {
         classNameBtnDiss: (!formLogin.email || !formLogin.password),
@@ -115,19 +106,29 @@ export const LogInWind = () => {
 // проверка почты...
     const changeEmail = (e: { target: { value: string; }; }) => {
 
-        dispatch(setEmailNewAccWindowToLoginWindow(''))
-
-
+        if(emailFromRegistrationWindow.length!==0){
+            dispatch(setEmailNewAccWindowToLoginWindow(''))
+            setFormLogin({
+                ...formLogin,
+                email: ''
+            })
+        }
 
         const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
         function isEmailValid (value: string){
             return EMAIL_REGEXP.test(value);
         }
+
+        setFormLogin({
+            ...formLogin,
+            email: e.target.value
+        })
+
         if(isEmailValid(e.target.value)){
-            setFormLogin({
-                ...formLogin,
-                email: e.target.value
-            })
+            // setFormLogin({
+            //     ...formLogin,
+            //     email: e.target.value
+            // })
             setEmailDirty(!emailDirty)
             setEmailBorder(false)
             setEmailError('')
@@ -135,7 +136,6 @@ export const LogInWind = () => {
             setEmailError(langMap.logInWindEmailErrorOne)
             setEmailBorder(true)
         }
-
 
     }
 // ...проверка почты
@@ -172,6 +172,13 @@ export const LogInWind = () => {
 
 // ... показать/скрыть пароль
 
+    const clickEnter = () => {
+        console.log('Push button Enter');
+
+        
+
+    }
+
     return(
 
         <div className={cx('containerLogIn')}>
@@ -186,7 +193,8 @@ export const LogInWind = () => {
             <form className={styles.input_area}>
 
                 <Input
-                    value={(formLogin.email.length!==0)?formLogin.email:''}
+                    // value={(formLogin.email.length!==0)?formLogin.email:''}
+                    value={formLogin.email}
                     name='email'
                     onBlur={e => blurHandler(e)}
                     onChange={changeEmail}
@@ -203,6 +211,7 @@ export const LogInWind = () => {
                     classNameBtn={styles.classInputBtn}
 
                 />
+
                 <Input
                     name='passOne'
                     onBlur={e => blurHandler(e)}
@@ -226,7 +235,9 @@ export const LogInWind = () => {
                 <Btn
                     ClassNameBtn={ClassBtn}
                     Btn_text={langMap.logInWindBtn}
-                    type='submit'
+                    type='button'
+                    Click={clickEnter}
+                    status={'true'}
                 />
 
                 <div className={cx('toLogin', {
