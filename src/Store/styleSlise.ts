@@ -24,7 +24,9 @@ export interface StyleState {
     },
     language:string,
     theme:string,
-    emailNewAccWindowToLoginWindow:string
+    emailNewAccWindowToLoginWindow:string,
+    name:string,//имя, получается при входе в акк
+    token:string,//токен, получается при входе в акк
 }
 
 const initialState:StyleState = {
@@ -50,7 +52,9 @@ const initialState:StyleState = {
     },
     language:'en',
     theme:'light',
-    emailNewAccWindowToLoginWindow:''
+    emailNewAccWindowToLoginWindow:'',
+    name:'',//имя, получается при входе в акк
+    token:'',//токен, получается при входе в акк
 }
 
 const styleSlice = createSlice({
