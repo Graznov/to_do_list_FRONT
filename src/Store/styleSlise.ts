@@ -55,6 +55,7 @@ const initialState:StyleState = {
     emailNewAccWindowToLoginWindow:'',
     name:'',//имя, получается при входе в акк
     token:'',//токен, получается при входе в акк
+
 }
 
 const styleSlice = createSlice({

@@ -172,11 +172,30 @@ export const LogInWind = () => {
 
 // ... показать/скрыть пароль
 
-    const clickEnter = () => {
+
+
+     const clickEnter = async () => {
+
+         console.log(formLogin.email)
+
+
+        await fetch(`http://localhost:3000/lists/${formLogin.email} ${formLogin.password}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                }
+
+                return response.json()
+            })
+
+            .then((data) => {
+                console.log('Данные получены', data)
+            })
+            .catch((err) => {
+                console.log('Произошла ошибка', err.message)
+            })
+
         console.log('Push button Enter');
-
-        
-
     }
 
     return(
