@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
 import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
+import {setCreatDat, setEmail, setName, setTasks, setToken, setTokenTwo} from "../../Store/defSlice.ts";
 
 const cx = classNames.bind(styles);
 
@@ -172,6 +173,31 @@ export const LogInWind = () => {
 
 // ... показать/скрыть пароль
 
+    // function setCookie(name:string, value:string) {
+
+        // options = {
+        //     path: '/',
+        //     // при необходимости добавьте другие значения по умолчанию
+        //     ...options
+        // };
+        //
+        // if (options.expires instanceof Date) {
+        //     options.expires = options.expires.toUTCString();
+        // }
+
+        // let updatedCookie:string = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+        // document.cookie = updatedCookie;
+        // for (let optionKey in options) {
+        //     updatedCookie += "; " + optionKey;
+        //     let optionValue = options[optionKey];
+        //     if (optionValue !== true) {
+        //         updatedCookie += "=" + optionValue;
+        //     }
+        // }
+
+
+    // }
+
 
 
      const clickEnter = async () => {
@@ -190,6 +216,18 @@ export const LogInWind = () => {
 
             .then((data) => {
                 console.log('Данные получены', data)
+                document.cookie = `Token=${data.token}; max-age=16`
+                localStorage.setItem('tokenTwo', data.tokenTwo)
+
+                dispatch(setName(data.name))
+                dispatch(setEmail(data.email))
+                dispatch(setCreatDat(data.creatDat))
+                dispatch(setTasks(data.tasksList))
+                dispatch(setToken(data.token))
+                dispatch(setTokenTwo(data.tokenTwo))
+
+
+
             })
             .catch((err) => {
                 console.log('Произошла ошибка', err.message)
