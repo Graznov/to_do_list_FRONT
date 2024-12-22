@@ -40,8 +40,11 @@ function WorkWind() {
     const ActyveTag = useAppSelector(state => state.styleSlice.styleTagActive)
     const styleAdaptiveVisible = useAppSelector(state => state.styleSlice.styleAdaptiveVisible)
     const theme = useAppSelector(state => state.styleSlice.theme)
-
     const lang = useAppSelector(state => state.styleSlice.language)
+
+    const data = useAppSelector(state => state.defSlice)
+
+    console.log(`data: \n${JSON.stringify(data)}`);
     // const lang = localStorage.getItem('lang')
 
     // console.log(lang)
@@ -91,7 +94,7 @@ function WorkWind() {
                         <UserName
                             // pathAvaImg={'https://cdn.icon-icons.com/icons2/4222/PNG/512/charlie_chaplin_avatar_icon_263203.png'}
                             pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}
-                            userName={'User01'}/>
+                            userName={data.name}/>
                     </div>
 
                     <div className={cx('work_container_leftPanel_calendar')}>

@@ -1,32 +1,32 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 // const Temp:Array<Task> = [
-    // {
-    //     category:"work",
-    //     color:"blue",
-    //     description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ",
-    //     dueDate:"2024-12-12T00:00:00.000Z",
-    //     id:"sdfsпппkdf 42f4",
-    //     isCompleted:false,
-    //     title:"1 Попить пива"
-    // },
-    // {
-    //     category:"Week",
-    //     color:"yellow",
-    //     description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ",
-    //     dueDate:"2024-12-22T00:00:00.000Z",
-    //     id:"sdfsdsааghjaddf 424.",
-    //     isCompleted:false,
-    //     title:"2 Поспать"
-    // },
-    // {
-    //     category:"Game",
-    //     color:"blue",
-    //     description:"Lorem ipsum dolor sit amet",
-    //     dueDate:"2024-12-16T00:00:00.000Z",
-    //     id:"sdfsdsрвапрkвaddf 4264.",
-    //     isCompleted:false,
-    //     title:"3 постирать"
-    // },
+//     {
+//         category:"work",
+//         color:"blue",
+//         description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ",
+//         dueDate:"2024-12-22T00:00:00.000Z",
+//         id:"sdfsпппkdf 42f4",
+//         isCompleted:false,
+//         title:"1 Попить пива"
+//     },
+//     {
+//         category:"Week",
+//         color:"yellow",
+//         description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ",
+//         dueDate:"2024-12-23T00:00:00.000Z",
+//         id:"sdfsdsааghjaddf 424.",
+//         isCompleted:false,
+//         title:"2 Поспать"
+//     },
+//     {
+//         category:"Game",
+//         color:"blue",
+//         description:"Lorem ipsum dolor sit amet",
+//         dueDate:"2024-12-22T00:00:00.000Z",
+//         id:"sdfsdsрвапрkвaddf 4264.",
+//         isCompleted:false,
+//         title:"3 постирать"
+//     },
     // {
     //     category:"Work",
     //     color:"red",
@@ -465,16 +465,18 @@ export interface TaskState{
     name:string,
     email:string,
     creatDat:string,
-    token:string,
-    tokenTwo:string
+    // token:string,
+    accessToken:string
+    id:string
 }
 const initialState:TaskState = {
     tasks:[],
     name: "",
     email: "",
     creatDat: "",
-    token: "",
-    tokenTwo: ""
+    // token: "",
+    accessToken: "",
+    id:""
 }
 
 const defSlice = createSlice({
@@ -492,21 +494,30 @@ const defSlice = createSlice({
         setCreatDat (state, action){
             state.creatDat = action.payload
         },
-        setToken (state, action){
-            state.token = action.payload
-        },
-        setTokenTwo (state, action){
-            state.tokenTwo = action.payload
+        // setToken (state, action){
+        //     state.token = action.payload
+        // },
+        setAccessToken (state, action){
+            state.accessToken = action.payload
         },
 
-         setTasks (state, action){
+        setTasks (state, action){
             state.tasks = action.payload
-         },
+        },
+
+        setId (state, action){
+            state.id = action.payload
+        },
+
+        // addTaskState (state, action){
+        //
+        // },
 
         addTask (state, {payload}:PayloadAction<Task>)  {
             // console.log(payload)
             state.tasks.push(payload)
         },
+
         checkTask (state, action){
             // console.log(`CHEKED tasks "${action.payload}"`)
             state.tasks.forEach(e => {
@@ -540,12 +551,13 @@ export const {
     setName,
     setEmail,
     setCreatDat,
-    setToken,
-    setTokenTwo,
+    // setToken,
+    setAccessToken,
     setTasks,
     addTask,
     checkTask,
     defChangeTask,
-    defDelitTask
+    defDelitTask,
+    setId
 } = defSlice.actions;
 export default defSlice.reducer

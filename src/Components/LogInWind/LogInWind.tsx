@@ -3,23 +3,32 @@ import {Input} from "../ui-kit/Input.tsx";
 import Btn from "../ui-kit/Btn.tsx";
 import {FocusEvent, useEffect, useState} from "react";
 import classNames from "classnames/bind";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
 import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
-import {setCreatDat, setEmail, setName, setTasks, setToken, setTokenTwo} from "../../Store/defSlice.ts";
+import {
+    setAccessToken,
+    setCreatDat,
+    setEmail,
+    setId,
+    setName,
+    setTasks,
+} from "../../Store/defSlice.ts";
 
 const cx = classNames.bind(styles);
 
 
 export const LogInWind = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
 
     const lang = useAppSelector(state => state.styleSlice.language)
     const theme = useAppSelector(state => state.styleSlice.theme)
     const emailFromRegistrationWindow = useAppSelector(state => state.styleSlice.emailNewAccWindowToLoginWindow)
-
+    const data = useAppSelector(state => state.defSlice)
 
 
 
@@ -216,17 +225,22 @@ export const LogInWind = () => {
 
             .then((data) => {
                 console.log('Данные получены', data)
-                document.cookie = `Token=${data.token}; max-age=16`
+                // document.cookie = `Token=${data.token}; max-age=16`
                 localStorage.setItem('tokenTwo', data.tokenTwo)
 
                 dispatch(setName(data.name))
                 dispatch(setEmail(data.email))
                 dispatch(setCreatDat(data.creatDat))
                 dispatch(setTasks(data.tasksList))
-                dispatch(setToken(data.token))
-                dispatch(setTokenTwo(data.tokenTwo))
+                // dispatch(setToken(data.token))
+                dispatch(setAccessToken(data.tokenTwo))
+                dispatch(setId(data.id))
 
+                document.cookie = `refreshToken=${data.refreshToken}; max-age=7200; httpOnly`
 
+                console.log(`loginOK\nsave data:\n${data.email}`)
+
+                navigate('/workwindow/today')
 
             })
             .catch((err) => {
