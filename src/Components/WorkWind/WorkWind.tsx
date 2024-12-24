@@ -32,6 +32,7 @@ const cx = classNames.bind(styles);
 
 function WorkWind() {
     const dispatch = useAppDispatch()
+
     const list = useAppSelector(state => state.defSlice.tasks)
     const styleWindAddTask = useAppSelector(state => state.styleSlice.visibleAddTask)
     const arrayTags = useAppSelector(state => state.styleSlice.tags)
@@ -41,16 +42,11 @@ function WorkWind() {
     const styleAdaptiveVisible = useAppSelector(state => state.styleSlice.styleAdaptiveVisible)
     const theme = useAppSelector(state => state.styleSlice.theme)
     const lang = useAppSelector(state => state.styleSlice.language)
-
     const data = useAppSelector(state => state.defSlice)
 
-    console.log(`data: \n${JSON.stringify(data)}`);
-    // const lang = localStorage.getItem('lang')
+    // console.log(`data: \n${JSON.stringify(data)}`);
 
-    // console.log(lang)
-
-    // localStorage.clear()
-
+    const navigate = useNavigate()
 
     useEffect(() => {
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
@@ -61,10 +57,15 @@ function WorkWind() {
 
     const [pushed, setPushed] = useState(false)
 
-    const navigate = useNavigate()
     useEffect(()=>{
-        navigate('/workwindow/today')
-    },[navigate])
+        if(!data.accessToken){
+            console.log(data.accessToken)
+            navigate('/login')
+        } else {
+            navigate('/workwindow/today')
+        }
+
+    },[navigate, data.accessToken])
 
     const clickAddTask = () => {
         dispatch(styleVisibleAddTask(true))
@@ -73,9 +74,7 @@ function WorkWind() {
 
     const langMap = lang === 'ru' ? russ:eng
 
-
     return (
-
 
         <>
 
@@ -260,7 +259,6 @@ function WorkWind() {
 
                     </div>
 
-
                 </div>
 
                 <div className={cx('work_container_rightPanel',{
@@ -338,7 +336,6 @@ function WorkWind() {
                     </div>
 
                     <Outlet/>
-
 
                     <div className={cx('floor')}>
 

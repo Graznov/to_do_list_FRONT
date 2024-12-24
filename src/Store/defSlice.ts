@@ -466,7 +466,7 @@ export interface TaskState{
     email:string,
     creatDat:string,
     // token:string,
-    accessToken:string
+    accessToken:string|undefined
     id:string
 }
 const initialState:TaskState = {
@@ -475,7 +475,7 @@ const initialState:TaskState = {
     email: "",
     creatDat: "",
     // token: "",
-    accessToken: "",
+    accessToken: undefined,
     id:""
 }
 

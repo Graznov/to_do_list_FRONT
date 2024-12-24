@@ -148,7 +148,7 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                 </li>
                 <li>
                     <NavLink
-                        to={'/'}
+                        to={'/login'}
                             onClick={() => {
                                 setVisibleMenu(!visibleMenu)
                             }

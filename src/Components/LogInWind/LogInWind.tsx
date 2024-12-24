@@ -182,33 +182,6 @@ export const LogInWind = () => {
 
 // ... показать/скрыть пароль
 
-    // function setCookie(name:string, value:string) {
-
-        // options = {
-        //     path: '/',
-        //     // при необходимости добавьте другие значения по умолчанию
-        //     ...options
-        // };
-        //
-        // if (options.expires instanceof Date) {
-        //     options.expires = options.expires.toUTCString();
-        // }
-
-        // let updatedCookie:string = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-        // document.cookie = updatedCookie;
-        // for (let optionKey in options) {
-        //     updatedCookie += "; " + optionKey;
-        //     let optionValue = options[optionKey];
-        //     if (optionValue !== true) {
-        //         updatedCookie += "=" + optionValue;
-        //     }
-        // }
-
-
-    // }
-
-
-
      const clickEnter = async () => {
 
          console.log(formLogin.email)
@@ -226,19 +199,19 @@ export const LogInWind = () => {
             .then((data) => {
                 console.log('Данные получены', data)
                 // document.cookie = `Token=${data.token}; max-age=16`
-                localStorage.setItem('tokenTwo', data.tokenTwo)
+                // localStorage.setItem('tokenTwo', data.tokenTwo)
 
                 dispatch(setName(data.name))
                 dispatch(setEmail(data.email))
                 dispatch(setCreatDat(data.creatDat))
                 dispatch(setTasks(data.tasksList))
                 // dispatch(setToken(data.token))
-                dispatch(setAccessToken(data.tokenTwo))
+                dispatch(setAccessToken(data.accessToken))
                 dispatch(setId(data.id))
 
-                document.cookie = `refreshToken=${data.refreshToken}; max-age=7200; httpOnly`
+                document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
 
-                console.log(`loginOK\nsave data:\n${data.email}`)
+                console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
 
                 navigate('/workwindow/today')
 
