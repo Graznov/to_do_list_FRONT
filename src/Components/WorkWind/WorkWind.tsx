@@ -44,14 +44,42 @@ function WorkWind() {
     const lang = useAppSelector(state => state.styleSlice.language)
     const data = useAppSelector(state => state.defSlice)
 
-    // console.log(`data: \n${JSON.stringify(data)}`);
 
     const navigate = useNavigate()
 
     useEffect(() => {
+        setListTasksToBD(list)
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
     }, [dispatch, list]);
+
+    const setListTasksToBD = async (el:Task[]) => {
+
+        await fetch(`http://localhost:3000/lists/${data.id}`, {
+            method: 'PATCH', // Указываем метод запроса
+            headers: {
+                'Content-Type': 'application/json' // Устанавливаем заголовок Content-Type для указания типа данных
+            },
+            body: JSON.stringify(el)
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+
+                }
+
+                return response.json()
+            })
+
+            .then((data) => {
+
+                console.log('Данные получены', data)
+            })
+            .catch((err) => {
+                console.log('Произошла ошибка!!!', err.message)
+            })
+
+    }
 
     const [searchInput, setSearchInput] = useState('');
 
@@ -59,9 +87,10 @@ function WorkWind() {
 
     useEffect(()=>{
         if(!data.accessToken){
-            console.log(data.accessToken)
             navigate('/login')
         } else {
+            // console.log(data)
+
             navigate('/workwindow/today')
         }
 
