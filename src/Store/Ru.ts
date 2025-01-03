@@ -86,7 +86,7 @@ export const russ:{
         logInWindPassError:'Поле не может быть пустым',
         logInWindPassErrorOne:'не менее 6 и не более 250 символов',
         logInWindPassErrorTwo:'должна быть заглавная буква и цифра',
-        logInWindPassHidden:'Установите пароль',
+        logInWindPassHidden:'Введите пароль',
         logInWindBtn:'Войти',
         logInWinIDont:'У меня нет аккаунта ',
         logInWinRegistr:'Регистрация',

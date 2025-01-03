@@ -28,7 +28,7 @@ export const LogInWind = () => {
     const lang = useAppSelector(state => state.styleSlice.language)
     const theme = useAppSelector(state => state.styleSlice.theme)
     const emailFromRegistrationWindow = useAppSelector(state => state.styleSlice.emailNewAccWindowToLoginWindow)
-    const data = useAppSelector(state => state.defSlice)
+    // const data = useAppSelector(state => state.defSlice)
 
 
 
@@ -184,7 +184,7 @@ export const LogInWind = () => {
 
      const clickEnter = async () => {
 
-         console.log(formLogin.email)
+         // console.log(formLogin.email)
 
 
         await fetch(`http://localhost:3000/lists/${formLogin.email} ${formLogin.password}`)
@@ -209,7 +209,8 @@ export const LogInWind = () => {
                 dispatch(setAccessToken(data.accessToken))
                 dispatch(setId(data.id))
 
-                document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+                // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+                document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
 
                 console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
 

@@ -86,7 +86,7 @@ export const eng:{
         logInWindPassError:'Field cannot be empty',
         logInWindPassErrorOne:'no less than 6 and no more than 250 characters',
         logInWindPassErrorTwo:'must be a capital letter and a number',
-        logInWindPassHidden:'Set Password',
+        logInWindPassHidden:'Password',
         logInWindBtn:'Sign In',
         logInWinIDont:'I don\'t have an account ',
         logInWinRegistr:'Registration',
