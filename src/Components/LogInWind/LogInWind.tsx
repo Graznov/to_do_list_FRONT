@@ -207,6 +207,7 @@ export const LogInWind = () => {
                 dispatch(setTasks(data.tasksList))
                 // dispatch(setToken(data.token))
                 dispatch(setAccessToken(data.accessToken))
+                // localStorage.setItem('accessToken', data.accessToken)
                 dispatch(setId(data.id))
 
                 // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`

@@ -87,6 +87,7 @@ function WorkWind() {
 
     useEffect(()=>{
         if(!data.accessToken){
+        // if(!localStorage.getItem('accessToken')){
             navigate('/login')
         } else {
             // console.log(data)
