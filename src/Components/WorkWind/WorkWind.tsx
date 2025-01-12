@@ -22,7 +22,7 @@ import {
     setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
-import {Task} from "../../Store/defSlice.ts";
+import {setAccessToken, setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
 import Btn from "../ui-kit/Btn.tsx";
 import {eng} from "../../Store/En.ts";
 import {russ} from "../../Store/Ru.ts";
@@ -48,6 +48,57 @@ function WorkWind() {
     const navigate = useNavigate()
 
     useEffect(() => {
+
+        if(!localStorage.getItem('accessToken')){
+
+
+
+
+            navigate('/login')
+        } else {
+
+            fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                    }
+
+                    return response.json()
+                })
+
+                .then((data) => {
+
+                    console.log('Данные получены', data)
+                    // document.cookie = `Token=${data.token}; max-age=16`
+                    // localStorage.setItem('tokenTwo', data.tokenTwo)
+
+                    dispatch(setName(data.name))
+                    dispatch(setEmail(data.email))
+                    dispatch(setCreatDat(data.creatDat))
+                    dispatch(setTasks(data.tasksList))
+                    // dispatch(setToken(data.token))
+                    dispatch(setAccessToken(data.accessToken))
+                    // localStorage.setItem('accessToken', data.accessToken)
+                    dispatch(setId(data.id))
+
+                    document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+                    // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
+
+                    console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
+
+                    navigate('/workwindow/today')
+
+                })
+                .catch((err) => {
+                    console.log('Произошла ошибка', err.message)
+                })
+
+            console.log('Push button Enter');
+
+            // console.log(data)
+            navigate('/workwindow/today')
+        }
+
         setListTasksToBD(list)
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
@@ -57,6 +108,7 @@ function WorkWind() {
 
         await fetch(`http://localhost:3000/lists/${data.id}`, {
             method: 'PATCH', // Указываем метод запроса
+            credentials: "include",
             headers: {
                 'Content-Type': 'application/json' // Устанавливаем заголовок Content-Type для указания типа данных
             },
@@ -85,17 +137,56 @@ function WorkWind() {
 
     const [pushed, setPushed] = useState(false)
 
-    useEffect(()=>{
-        if(!data.accessToken){
-        // if(!localStorage.getItem('accessToken')){
-            navigate('/login')
-        } else {
-            // console.log(data)
-
-            navigate('/workwindow/today')
-        }
-
-    },[navigate, data.accessToken])
+    // useEffect(()=>{
+    //     // if(!data.accessToken){
+    //     if(!localStorage.getItem('accessToken')){
+    //
+    //         fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
+    //             .then((response) => {
+    //                 if (!response.ok) {
+    //                     throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+    //                 }
+    //
+    //                 return response.json()
+    //             })
+    //
+    //             .then((data) => {
+    //
+    //                 console.log('Данные получены', data)
+    //                 // document.cookie = `Token=${data.token}; max-age=16`
+    //                 // localStorage.setItem('tokenTwo', data.tokenTwo)
+    //
+    //                 dispatch(setName(data.name))
+    //                 dispatch(setEmail(data.email))
+    //                 dispatch(setCreatDat(data.creatDat))
+    //                 dispatch(setTasks(data.tasksList))
+    //                 // dispatch(setToken(data.token))
+    //                 dispatch(setAccessToken(data.accessToken))
+    //                 // localStorage.setItem('accessToken', data.accessToken)
+    //                 dispatch(setId(data.id))
+    //
+    //                 document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+    //                 // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
+    //
+    //                 console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
+    //
+    //                 navigate('/workwindow/today')
+    //
+    //             })
+    //             .catch((err) => {
+    //                 console.log('Произошла ошибка', err.message)
+    //             })
+    //
+    //         console.log('Push button Enter');
+    //
+    //
+    //         navigate('/login')
+    //     } else {
+    //         // console.log(data)
+    //         navigate('/workwindow/today')
+    //     }
+    //
+    // },[navigate, data.accessToken])
 
     const clickAddTask = () => {
         dispatch(styleVisibleAddTask(true))
@@ -388,6 +479,7 @@ function WorkWind() {
                             })}></div>
 
                         </button>
+
 
                         <button
                             onClick={clickAddTask}

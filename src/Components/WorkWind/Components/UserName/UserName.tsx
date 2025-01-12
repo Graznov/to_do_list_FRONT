@@ -151,6 +151,7 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                         to={'/login'}
                             onClick={() => {
                                 setVisibleMenu(!visibleMenu)
+                                localStorage.removeItem('accessToken')
                             }
                         }>
                         {langMap.work_left_exit}
