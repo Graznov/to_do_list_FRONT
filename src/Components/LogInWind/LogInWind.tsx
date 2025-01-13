@@ -8,14 +8,14 @@ import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
 import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
-import {
-    setAccessToken,
-    setCreatDat,
-    setEmail,
-    setId,
-    setName,
-    setTasks,
-} from "../../Store/defSlice.ts";
+// import {
+//     setAccessToken,
+//     setCreatDat,
+//     setEmail,
+//     setId,
+//     setName,
+//     setTasks,
+// } from "../../Store/defSlice.ts";
 
 const cx = classNames.bind(styles);
 
@@ -201,17 +201,18 @@ export const LogInWind = () => {
                 // document.cookie = `Token=${data.token}; max-age=16`
                 // localStorage.setItem('tokenTwo', data.tokenTwo)
 
-                dispatch(setName(data.name))
-                dispatch(setEmail(data.email))
-                dispatch(setCreatDat(data.creatDat))
-                dispatch(setTasks(data.tasksList))
+                // dispatch(setName(data.name))
+                // dispatch(setEmail(data.email))
+                // dispatch(setCreatDat(data.creatDat))
+                // dispatch(setTasks(data.tasksList))
                 // dispatch(setToken(data.token))
-                dispatch(setAccessToken(data.accessToken))
-                // localStorage.setItem('accessToken', data.accessToken)
-                dispatch(setId(data.id))
+                // dispatch(setAccessToken(data.accessToken))
+                // dispatch(setId(data.id))
 
-                document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
-                // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
+                localStorage.setItem('accessToken', data.accessToken)
+
+                // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+                document.cookie = `refreshToken=${data.refreshToken}`
 
                 console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
 
