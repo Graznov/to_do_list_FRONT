@@ -148,7 +148,8 @@ function WorkWind() {
 
     const setListTasksToBD = async (el:Task[]) => {
 
-        await fetch(`http://localhost:3000/lists/${data.id}`, {
+        // await fetch(`http://localhost:3000/lists/${data.id}`, {
+        await fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`, {
             method: 'PATCH', // Указываем метод запроса
             credentials: "include",
             headers: {
