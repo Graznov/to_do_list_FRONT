@@ -150,8 +150,11 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                     <NavLink
                         to={'/login'}
                             onClick={() => {
-                                setVisibleMenu(!visibleMenu)
+                                document.cookie = 'refreshToken=; Max-Age=-1;';
                                 localStorage.removeItem('accessToken')
+                                setVisibleMenu(!visibleMenu)
+
+
                             }
                         }>
                         {langMap.work_left_exit}
