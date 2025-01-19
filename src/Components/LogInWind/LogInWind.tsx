@@ -211,8 +211,8 @@ export const LogInWind = () => {
 
                 localStorage.setItem('accessToken', data.accessToken)
 
-                document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
-                // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
+                // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+                document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
 
                 console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
 
