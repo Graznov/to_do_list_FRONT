@@ -1,0 +1,26 @@
+:root {
+    --color-primary-font: #A89984;
+}
+
+.top_cont{
+    display: flex;
+    gap: 30px;
+    width: 80%;
+    margin: 20px auto;
+
+    .notesLogo{
+        width: 50px;
+        height: 50px;
+        fill: black;
+    }
+    h1{
+        align-self: center;
+    }
+}
+
+.top_cont_dark{
+    color: var(--color-primary-font);
+    .notesLogo_dark{
+        fill: var(--color-primary-font);
+    }
+}

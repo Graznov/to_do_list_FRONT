@@ -1,0 +1,146 @@
+:root {
+    --color-main-bg: #282828;
+    --color-secondary-bg: #3c3836;
+    --color-primary-font: #69605e;
+    --color-secondary-font: #fbf1c7;
+    --color-primmary-icon: #7C6F64;
+    --color-secondary-icon: #fbf1c7;
+    --color-primary: #8EC07C;
+    --color-primary-hover: #689D6A;
+    --color-secondary: #83A598;
+    --color-secondary-hover: #458588;
+    --color-info: #D3869B;
+    --color-info-hover: #B16286;
+    --color-warning: #FABD2F;
+    --color-warning-hover: #D79921;
+    --color-success: #B8BB26;
+    --color-success-hover: #98971A;
+    --color-danger: #FB4934;
+    --color-danger-hover: #CC241D;
+    --color-header-bg: #282828;
+    --color-search-bg: #3c3836;
+    --color-gray-font: gray;
+}
+
+.work_container_leftPanel_user_dark{
+
+    .menu {
+        background: var(--color-main-bg);
+
+        button{
+            color: var(--color-primary-font);
+
+        }
+        a{
+            color: var(--color-primary-font);
+
+        }
+    }
+
+
+}
+
+.work_container_leftPanel_user{
+
+    position: relative;
+
+    .btn_user{
+        display: flex;
+        gap: 10px;
+        align-items:center;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+
+        img{
+            width: 40px;
+            border-radius: 50%;
+            background: none;
+        }
+
+    }
+    .btn_user_dark{
+        color: var(--color-primary-font);
+    }
+
+    .btn_user:hover{
+        background: none;
+        color: black;
+    }
+    .btn_user_dark:hover{
+        background: none;
+        color: var(--color-secondary-font);
+    }
+
+}
+
+.menu{
+    position: absolute;
+    left: -20px;
+    right: 0;
+    display: none;
+    /*width: 100%;*/
+    background: rgba(218, 218, 218, 0.9); ;
+    padding: 0px;
+
+    li{
+
+        /*border-bottom: 1px solid #00040c;*/
+
+    }
+
+    ul,li{
+            list-style: none;
+            font-size: 21px;
+            /*font-weight: 800;*/
+
+
+
+
+        a{
+            color: black;
+            /*font-size: 25px;*/
+
+            /*margin: 10px;*/
+        }
+
+            .btn_menu{
+                width: 100%;
+                /*padding: 10px;*/
+                display: flex;
+                font-size: 21px;
+                /*font-weight: 600;*/
+                flex-direction: row;
+                justify-content: space-between;
+                background: none;
+                border: none;
+                cursor: pointer;
+
+
+                .us{
+                    transform: scale(1, -1)
+                }
+
+            }
+            .btn_menu:hover{
+                color: black;
+            }
+
+    }
+    li{
+        height: 50px;
+        padding: 10px;
+        border: 1px solid rgba(66,66,66,0.6);
+    }
+    li:hover{
+        background: rgba(141, 140, 140, 0.5); ;
+    }
+
+
+}
+.visibleMenu{
+    display: flex;
+    flex-direction: column;
+    /*gap: 10px;*/
+}

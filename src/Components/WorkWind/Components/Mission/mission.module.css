@@ -1,0 +1,362 @@
+.mission{
+    position: relative;
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: rgba(237, 236, 236, 0.5);
+
+    /*cursor: pointer;*/
+
+
+    .mission-top-cont{
+        display: flex;
+        gap: 10px;
+    }
+
+    input{
+        width: 25px;
+        height: 25px;
+    }
+
+
+    .mission-textContent{
+        display: flex;
+        gap: 10px;
+        /*justify-content: space-between;*/
+        width: 100%;
+        cursor: pointer;
+        /*line-break: auto;*/
+
+
+        .missTag{
+            font-size: 13px;
+            padding: 5px;
+            height: 29px;
+            min-width: 30%;
+            text-align: center;
+            border-radius: 3px;
+        }
+        .missTagGray{
+            background: #c7c4c4;
+        }
+        .missTagRed{
+            background: #f80101;
+            color: #ffffff;
+        }
+        .missTagGreen{
+            background: green;
+            color: #ffffff;
+        }
+        .missTagBlue{
+            background: blue;
+            color: #ffffff;
+
+        }
+        .missTagYellow{
+            background: yellow;
+            color: #559d4c;
+
+        }
+        .missTagPurple{
+            background: purple;
+            color: #ffffff;
+        }
+
+    }
+    .logo{
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .missText{
+        font-size: 17px;
+
+        overflow: hidden;
+        text-overflow: clip;
+        display: -webkit-box;
+        line-height: 21px;
+        max-height: 48px;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        position: relative;
+        width: 220px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: clip;
+    }
+
+    .missText::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        height: 100%;
+        width: 120px;
+        background-image: linear-gradient(to right, transparent, rgba(237, 236, 236, 0.5));
+    }
+
+    .missText-dark::after{
+        background-image: linear-gradient(to right, transparent, var(--color-header-bg));
+    }
+    .missText:hover{
+        /*display: block;*/
+    }
+
+}
+
+
+
+:root {
+    --color-main-bg: #282828;
+    --color-secondary-bg: #3c3836;
+    --color-primary-font: #A89984;
+    --color-secondary-font: #fbf1c7;
+    --color-primmary-icon: #7C6F64;
+    --color-secondary-icon: #fbf1c7;
+    --color-primary: #8EC07C;
+    --color-primary-hover: #689D6A;
+    --color-secondary: #83A598;
+    --color-secondary-hover: #458588;
+    --color-info: #D3869B;
+    --color-info-hover: #B16286;
+    --color-warning: #FABD2F;
+    --color-warning-hover: #D79921;
+    --color-success: #B8BB26;
+    --color-success-hover: #98971A;
+    --color-danger: #FB4934;
+    --color-danger-hover: #CC241D;
+    --color-header-bg: #282828;
+    --color-search-bg: #3c3836;
+    --color-gray-font: gray;
+}
+
+.mission-dark{
+    background: var(--color-main-bg);
+    color: var(--color-primary-font);
+    border: 1px solid var(--color-primary-font);
+
+    /*label{*/
+    /*    input{*/
+    /*        color: var(--color-primary-font);*/
+    /*        !*accent-color: #C56FFF*!*/
+    /*        background: #5e5e5e;*/
+
+    /*    }*/
+    /*}*/
+
+
+
+
+}
+.mission-compl{
+    background: rgba(120, 102, 102, 0.5);
+}
+.mission-trash{
+    opacity: 0.5;
+    background: rgb(141, 140, 140);
+    input{
+
+    }
+}
+.opened{
+    /*height: 300px;*/
+}
+.missionChange{
+    display: none;
+    width: 100%;
+    /*height: 300px;*/
+    background: #ededed;
+    border: 1px solid silver;
+    border-radius: 10px;
+    padding: 10px;
+    /*cursor: none;*/
+
+    .AddTaskContainerTop_colrs{
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+
+        .AddTaskContainerTop_colrs_btnArea{
+            display: flex;
+            justify-content: space-between;
+            .AddTaskContainerTop_colrs_btn{
+                width: 43px;
+                height: 33px;
+                cursor: pointer;
+                border: none;
+            }
+            .red{
+                background: red;
+            }
+            .green{
+                background: green;
+            }
+            .blue{
+                background: blue;
+            }
+            .yellow{
+                background: yellow;
+            }
+            .purple{
+                background: purple;
+            }
+            .colorActive{
+                border: 3px solid darkmagenta;
+                border-radius: 10px;
+            }
+        }
+    }
+    .input-area_content{
+        display: flex;
+        /*flex-direction: column;*/
+        p{
+            width: 30%;
+        }
+        input{
+
+            width: 80%;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #272728;
+            text-align: left;
+            padding-left: 15px;
+            outline: none;
+            font-size: 21px;
+        }
+        .input-Disabled{
+            opacity: 0.4
+        }
+
+
+    }
+    textarea{
+        background: inherit;
+        width: 100%;
+        font-size: 15px;
+        padding: 5px;
+        font-size: 17px;
+        outline: none;
+        resize: none;
+    }
+    textarea::-webkit-scrollbar {
+        width: 5px;               /* ширина scrollbar */
+    }
+    textarea::-webkit-scrollbar-track {
+        background: none;        /* цвет дорожки */
+    }
+    textarea::-webkit-scrollbar-thumb {
+        background-color: rgba(141, 140, 140, 0.5);    /* цвет плашки */
+        border-radius: 10px;       /* закругления плашки */
+        border: none;  /* padding вокруг плашки */
+    }
+
+    .btnArea{
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 10px;
+        button{
+            stroke: black;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover{
+            background: none;
+        }
+    }
+}
+
+.missionChange_dark {
+    background: var(--color-main-bg);
+    border: 1px solid var(--color-primary-font);
+    color: var(--color-primary-font);
+
+    input {
+        color: var(--color-primary-font);
+    }
+
+    textarea{
+        color: var(--color-primary-font);
+    }
+    .btnArea {
+
+
+        button{
+            background-color: var(--color-main-bg);
+
+            .icon-dark{
+
+                stroke: var(--color-primary-font);
+                fill: white;
+            }
+            .icon1-dark{
+                stroke: var(--color-primary-font);
+                fill: none;
+            }
+        }
+
+    }
+}
+
+.askDel{
+    display: none;
+    /*display: flex;*/
+    opacity: 0.95;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -151px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: #b6b4b4;
+    flex-direction: column;
+    gap: 25px;
+    font-family: "Exo 2", sans-serif;
+    font-size: 21px;
+
+    .askDel_btn_area{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+
+        button{
+            cursor: pointer;
+            width: 130px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button:hover{
+            background: #5e5e5e;
+        }
+        button:active{
+            background: #2c2c2c;
+            color: orange;
+        }
+    }
+}
+
+.askDel_dark{
+    background: var(--color-header-bg);
+    button{
+        background: var(--color-search-bg);
+        color: var(--color-primary-font);
+    }
+}
+
+.askDel_visible{
+    display: flex;
+}
+
+.missionChangeActive{
+    display: block;
+
+}
