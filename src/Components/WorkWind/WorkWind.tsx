@@ -95,42 +95,42 @@ function WorkWind() {
             navigate('/login')
         } else {
 
-            fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-                    }
-
-                    return response.json()
-                })
-
-                .then((data) => {
-
-                    console.log('Данные получены', data)
-                    // document.cookie = `Token=${data.token}; max-age=16`
-                    // localStorage.setItem('tokenTwo', data.tokenTwo)
-
-                    dispatch(setName(data.name))
-                    dispatch(setEmail(data.email))
-                    dispatch(setCreatDat(data.creatDat))
-                    dispatch(setTasks(data.tasksList))
-                    // dispatch(setToken(data.token))
-                    // dispatch(setAccessToken(data.accessToken))
-                    // localStorage.setItem('accessToken', data.accessToken)
-                    dispatch(setId(data.id))
-
-                    // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
-                    // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
-
-                    // console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
-
-                    // navigate('/workwindow/today')
-
-                })
-                .catch((err) => {
-                    console.log('Произошла ошибка', err.message)
-                    navigate('/login')
-                })
+            // fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
+            //     .then((response) => {
+            //         if (!response.ok) {
+            //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+            //         }
+            //
+            //         return response.json()
+            //     })
+            //
+            //     .then((data) => {
+            //
+            //         console.log('Данные получены', data)
+            //         // document.cookie = `Token=${data.token}; max-age=16`
+            //         // localStorage.setItem('tokenTwo', data.tokenTwo)
+            //
+            //         dispatch(setName(data.name))
+            //         dispatch(setEmail(data.email))
+            //         dispatch(setCreatDat(data.creatDat))
+            //         dispatch(setTasks(data.tasksList))
+            //         // dispatch(setToken(data.token))
+            //         // dispatch(setAccessToken(data.accessToken))
+            //         // localStorage.setItem('accessToken', data.accessToken)
+            //         dispatch(setId(data.id))
+            //
+            //         // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
+            //         // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
+            //
+            //         // console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
+            //
+            //         // navigate('/workwindow/today')
+            //
+            //     })
+            //     .catch((err) => {
+            //         console.log('Произошла ошибка', err.message)
+            //         navigate('/login')
+            //     })
 
             console.log('Push button Enter');
             // console.log(data)

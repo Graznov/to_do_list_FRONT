@@ -100,7 +100,7 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
 
     function delCookies(){
         fetch('http://localhost:3000/lists/del-cookie', {
-            method: 'GET', // Метод запроса
+            method: 'POST', // Метод запроса
             credentials: 'include' // Важно для отправки/получения cookie
         })
             .then(response => response.text()) // Читаем ответ как текст

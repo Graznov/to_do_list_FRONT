@@ -184,54 +184,13 @@ export const LogInWind = () => {
 
      const clickEnter = async () => {
 
-        // await fetch(`http://localhost:3000/lists/${formLogin.email} ${formLogin.password}`)
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-        //         }
-        //
-        //         return response.json()
-        //     })
-        //
-        //     .then((data) => {
-        //         console.log('Данные получены', data)
-        //         // setCookies()
-        //         // document.cookie = `Token=${data.token}; max-age=16`
-        //         // localStorage.setItem('tokenTwo', data.tokenTwo)
-        //         // dispatch(setName(data.name))
-        //         // dispatch(setEmail(data.email))
-        //         // dispatch(setCreatDat(data.creatDat))
-        //         // dispatch(setTasks(data.tasksList))
-        //         // dispatch(setToken(data.token))
-        //         // dispatch(setAccessToken(data.accessToken))
-        //         // dispatch(setId(data.id))
-        //
-        //         localStorage.setItem('accessToken', data.accessToken)
-        //         setCookies()
-        //
-        //         // setCookies(data.accessToken)
-        //         // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
-        //         // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
-        //
-        //         // console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
-        //
-        //
-        //         navigate('/workwindow/today')
-        //
-        //     })
-        //     .catch((err) => {
-        //         console.log('Произошла ошибка', err.message)
-        //     })
-
          fetch(`http://localhost:3000/lists/login`, {
              method: 'POST', // Указываем метод запроса
              headers: {
                  'Content-Type': 'application/json' // Устанавливаем заголовок Content-Type для указания типа данных
              },
-             body: JSON.stringify({
-                 email: formLogin.email,
-                 password: formLogin.password,
-             })
+             credentials: "include",
+             body: JSON.stringify(formLogin)
          })
              .then((response) => {
                  if (!response.ok) {
