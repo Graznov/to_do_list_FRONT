@@ -17,12 +17,12 @@ import {useEffect, useState} from "react";
 import {AddTaskWindow} from "./Components/AddTaskWindow/AddTaskWindow.tsx";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {
-    changeTaskList,
+    changeTaskList, cleanTag,
     plusTag, setAdaptiveVisible,
     setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
-import { setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
+import {resetState, setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
 import Btn from "../ui-kit/Btn.tsx";
 import {eng} from "../../Store/En.ts";
 import {russ} from "../../Store/Ru.ts";
@@ -50,6 +50,8 @@ function WorkWind() {
 
 
     const navigate = useNavigate()
+
+    console.log(`data.email: ${data.email}`)
 
     // fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
     //     .then((response) => {
@@ -89,13 +91,63 @@ function WorkWind() {
     //
     // console.log('Push button Enter');
 
+    function delCookies(){
+        fetch('http://localhost:3000/lists/del-cookie', {
+            method: 'POST', // Метод запроса
+            credentials: 'include' // Важно для отправки/получения cookie
+        })
+            .then(response => response.text()) // Читаем ответ как текст
+            .then(data => {
+                console.log(data); // Выводим ответ сервера ("Cookie has been set!")
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+    }
+
+    function cleanData(){
+        delCookies()
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('_id')
+        // dispatch(setTasks([]))
+
+        dispatch(cleanTag())
+        dispatch(resetState())
+    }
+
     useEffect(() => {
 
         if(!localStorage.getItem('accessToken')){
             navigate('/login')
         } else {
 
-            // fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`, {
+            fetch(`http://localhost:3000/lists/${localStorage.getItem('_id')}`, {
+                method: 'GET', // Указываем метод GET
+                headers: {
+                    'Content-Type': 'application/json', // Указываем тип содержимого
+                    'Authorization': localStorage.getItem('accessToken') // Если требуется авторизация
+                },
+                credentials: "include",
+            })
+                .then((response) => {
+                            if (!response.ok) {
+
+                                cleanData()
+                                navigate('/login')
+                                throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+
+                            }
+
+                            return response.json()
+                        })
+                .then(data=>{
+                    console.log(data)
+
+                    dispatch(setName(data.name))
+                    dispatch(setTasks(data.tasks))
+                })
+
+            // fetch(`http://localhost:3000/lists/${data.email}`, {
             //     method: 'GET', // Указываем метод GET
             //     headers: {
             //         'Content-Type': 'application/json', // Указываем тип содержимого
@@ -161,33 +213,33 @@ function WorkWind() {
 
     const setListTasksToBD = async (el:Task[]) => {
 
-        await fetch(`http://localhost:3000/lists/${data.email}`, {
-        // await fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`, {
-            method: 'PATCH', // Указываем метод запроса
-            credentials: "include",
-            headers: {
-
-                'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-                'Authorization': localStorage.getItem('accessToken'), // Токен передаётся в заголовке
-
-            },
-            body: JSON.stringify(el)
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-
-                }
-
-                return response.json()
-            })
-
-            .then((data) => {
-                console.log('Данные получены', data)
-            })
-            .catch((err) => {
-                console.log('Произошла ошибка!!!', err.message)
-            })
+        // await fetch(`http://localhost:3000/lists/${data.email}`, {
+        // // await fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`, {
+        //     method: 'PATCH', // Указываем метод запроса
+        //     credentials: "include",
+        //     headers: {
+        //
+        //         'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+        //         'Authorization': localStorage.getItem('accessToken'), // Токен передаётся в заголовке
+        //
+        //     },
+        //     body: JSON.stringify(el)
+        // })
+        //     .then((response) => {
+        //         if (!response.ok) {
+        //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+        //
+        //         }
+        //
+        //         return response.json()
+        //     })
+        //
+        //     .then((data) => {
+        //         console.log('Данные получены', data)
+        //     })
+        //     .catch((err) => {
+        //         console.log('Произошла ошибка!!!', err.message)
+        //     })
 
     }
 

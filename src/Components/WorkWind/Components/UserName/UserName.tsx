@@ -19,6 +19,8 @@ const darkThemePath:string = '/src/assets/night-theme.svg'
 const us:string = '/src/assets/flag-us-svgrepo-com.svg'
 const ru:string = '/src/assets/flag-ru-svgrepo-com.svg'
 
+
+
 function UserName({pathAvaImg, userName}:propsUserNames) {
     const dispatch = useAppDispatch()
     const lang = useAppSelector(state => state.styleSlice.language)
@@ -112,6 +114,16 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
             });
     }
 
+    function cleanData(){
+        delCookies()
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('_id')
+        // dispatch(setTasks([]))
+
+        dispatch(cleanTag())
+        dispatch(resetState())
+    }
+
     const langMap = lang === 'ru' ? russ:eng
     
     return (
@@ -166,12 +178,14 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                         to={'/login'}
                             onClick={() => {
                                 // document.cookie = 'refreshToken=; Max-Age=-1;';
-                                delCookies()
-                                localStorage.removeItem('accessToken')
-                                // dispatch(setTasks([]))
-
-                                dispatch(cleanTag())
-                                dispatch(resetState())
+                                cleanData()
+                                // delCookies()
+                                // localStorage.removeItem('accessToken')
+                                // localStorage.removeItem('_id')
+                                // // dispatch(setTasks([]))
+                                //
+                                // dispatch(cleanTag())
+                                // dispatch(resetState())
                                 setVisibleMenu(!visibleMenu)
 
 

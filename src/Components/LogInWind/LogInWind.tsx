@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
 import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
+import {setEmail, setName} from "../../Store/defSlice.ts";
 // import {
 //     setAccessToken,
 //     setCreatDat,
@@ -201,6 +202,9 @@ export const LogInWind = () => {
              .then((data) => {
                  console.log('Данные получены', data)
                  localStorage.setItem('accessToken', data.accessToken)
+                 localStorage.setItem('_id', data.id)
+                 // dispatch(setName(data.name))
+                 // dispatch(setEmail(data.email))
 
                  navigate('/workwindow/today')
              })
