@@ -200,7 +200,7 @@ export const LogInWind = () => {
              })
              .then((data) => {
                  console.log('Данные получены', data)
-                 localStorage.setItem('accessToken', data)
+                 localStorage.setItem('accessToken', data.accessToken)
 
                  navigate('/workwindow/today')
              })

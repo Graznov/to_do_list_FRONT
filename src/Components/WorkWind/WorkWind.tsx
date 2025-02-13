@@ -95,7 +95,15 @@ function WorkWind() {
             navigate('/login')
         } else {
 
-            // fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
+            // fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`, {
+            //     method: 'GET', // Указываем метод GET
+            //     headers: {
+            //         'Content-Type': 'application/json', // Указываем тип содержимого
+            //         'Authorization': localStorage.getItem('accessToken') // Если требуется авторизация
+            //     },
+            //     credentials: "include",
+            // })
+            //
             //     .then((response) => {
             //         if (!response.ok) {
             //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
@@ -106,7 +114,7 @@ function WorkWind() {
             //
             //     .then((data) => {
             //
-            //         console.log('Данные получены', data)
+            //         // console.log('Данные получены', data)
             //         // document.cookie = `Token=${data.token}; max-age=16`
             //         // localStorage.setItem('tokenTwo', data.tokenTwo)
             //
