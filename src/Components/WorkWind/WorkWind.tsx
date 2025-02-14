@@ -141,8 +141,15 @@ function WorkWind() {
                             return response.json()
                         })
                 .then(data=>{
-                    console.log(data)
+                    console.log(`data:\n${JSON.stringify(data)}`)
 
+                    if (data.accessToken) {
+                        localStorage.setItem('accessToken', data.accessToken)
+                        console.log(`accessToken: ${data.accessToken}`)
+
+                    }else {
+                        console.log(`NO accessToken`)
+                    }
                     dispatch(setName(data.name))
                     dispatch(setTasks(data.tasks))
                 })
