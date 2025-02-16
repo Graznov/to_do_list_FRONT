@@ -46,50 +46,12 @@ function WorkWind() {
     const lang = useAppSelector(state => state.styleSlice.language)
     const data = useAppSelector(state => state.defSlice)
 
-    console.log(list)
+    // console.log(list)
 
 
     const navigate = useNavigate()
 
-    console.log(`data.email: ${data.email}`)
-
-    // fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`)
-    //     .then((response) => {
-    //         if (!response.ok) {
-    //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-    //         }
-    //
-    //         return response.json()
-    //     })
-    //
-    //     .then((data) => {
-    //
-    //         console.log('Данные получены', data)
-    //         // document.cookie = `Token=${data.token}; max-age=16`
-    //         // localStorage.setItem('tokenTwo', data.tokenTwo)
-    //
-    //         dispatch(setName(data.name))
-    //         dispatch(setEmail(data.email))
-    //         dispatch(setCreatDat(data.creatDat))
-    //         dispatch(setTasks(data.tasksList))
-    //         // dispatch(setToken(data.token))
-    //         // dispatch(setAccessToken(data.accessToken))
-    //         // localStorage.setItem('accessToken', data.accessToken)
-    //         dispatch(setId(data.id))
-    //
-    //         document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
-    //         // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
-    //
-    //         console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
-    //
-    //         navigate('/workwindow/today')
-    //
-    //     })
-    //     .catch((err) => {
-    //         console.log('Произошла ошибка', err.message)
-    //     })
-    //
-    // console.log('Push button Enter');
+    // console.log(`data.email: ${data.email}`)
 
     function delCookies(){
         fetch('http://localhost:3000/lists/del-cookie', {
@@ -141,112 +103,72 @@ function WorkWind() {
                             return response.json()
                         })
                 .then(data=>{
-                    console.log(`data:\n${JSON.stringify(data)}`)
+                    // console.log(`data:\n${JSON.stringify(data)}`)
 
                     if (data.accessToken) {
                         localStorage.setItem('accessToken', data.accessToken)
-                        console.log(`accessToken: ${data.accessToken}`)
+                        // console.log(`accessToken: ${data.accessToken}`)
 
                     }else {
                         console.log(`NO accessToken`)
                     }
                     dispatch(setName(data.name))
                     dispatch(setTasks(data.tasks))
+                    dispatch(setId(data.id))
                 })
 
-            // fetch(`http://localhost:3000/lists/${data.email}`, {
-            //     method: 'GET', // Указываем метод GET
-            //     headers: {
-            //         'Content-Type': 'application/json', // Указываем тип содержимого
-            //         'Authorization': localStorage.getItem('accessToken') // Если требуется авторизация
-            //     },
-            //     credentials: "include",
-            // })
-            //
-            //     .then((response) => {
-            //         if (!response.ok) {
-            //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-            //         }
-            //
-            //         return response.json()
-            //     })
-            //
-            //     .then((data) => {
-            //
-            //         // console.log('Данные получены', data)
-            //         // document.cookie = `Token=${data.token}; max-age=16`
-            //         // localStorage.setItem('tokenTwo', data.tokenTwo)
-            //
-            //         dispatch(setName(data.name))
-            //         dispatch(setEmail(data.email))
-            //         dispatch(setCreatDat(data.creatDat))
-            //         dispatch(setTasks(data.tasksList))
-            //         // dispatch(setToken(data.token))
-            //         // dispatch(setAccessToken(data.accessToken))
-            //         // localStorage.setItem('accessToken', data.accessToken)
-            //         dispatch(setId(data.id))
-            //
-            //         // document.cookie = `refreshToken=${data.refreshToken}; HttpOnly; max-age=7200`
-            //         // document.cookie = `refreshToken=${data.refreshToken}; max-age=7200`
-            //
-            //         // console.log(`loginOK\nsave data:\n${JSON.stringify(data)}`)
-            //
-            //         // navigate('/workwindow/today')
-            //
-            //     })
-            //     .catch((err) => {
-            //         console.log('Произошла ошибка', err.message)
-            //         navigate('/login')
-            //     })
-
             console.log('Push button Enter');
-            // console.log(data)
-            // navigate('/workwindow/today')
         }
 
-        // setListTasksToBD(list)
-        // list.forEach((e:Task)=> dispatch(plusTag(e.category)))
-        // dispatch(setNumberTasksMenu(list))
     }, []);
 
     console.log(document.cookie)
 
     useEffect(()=>{
-        if(list.length)setListTasksToBD(list)
-        // setListTasksToBD(list)
+
+
+        // if(list.length)setListTasksToBD(list)
+        setListTasksToBD(list)
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
+
+
     },[list])
 
     const setListTasksToBD = async (el:Task[]) => {
 
-        // await fetch(`http://localhost:3000/lists/${data.email}`, {
-        // // await fetch(`http://localhost:3000/lists/${localStorage.getItem('accessToken')}`, {
-        //     method: 'PATCH', // Указываем метод запроса
-        //     credentials: "include",
-        //     headers: {
-        //
-        //         'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-        //         'Authorization': localStorage.getItem('accessToken'), // Токен передаётся в заголовке
-        //
-        //     },
-        //     body: JSON.stringify(el)
-        // })
-        //     .then((response) => {
-        //         if (!response.ok) {
-        //             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-        //
-        //         }
-        //
-        //         return response.json()
-        //     })
-        //
-        //     .then((data) => {
-        //         console.log('Данные получены', data)
-        //     })
-        //     .catch((err) => {
-        //         console.log('Произошла ошибка!!!', err.message)
-        //     })
+        await fetch(`http://localhost:3000/lists/${data.id}`, {
+            method: 'PATCH', // Указываем метод запроса
+            credentials: "include",
+            headers: {
+
+                'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                'Authorization': localStorage.getItem('accessToken'), // Токен передаётся в заголовке
+
+            },
+            body: JSON.stringify(el)
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+
+                }
+
+                return response.json()
+            })
+
+            .then((data) => {
+                console.log('Данные получены', data)
+                localStorage.setItem('accessToken', data.accessToken)
+            })
+            .catch((err) => {
+                console.log('Произошла ошибка!!!', err.message)
+
+            })
+
+        // console.log(`change tasks to BD:\n${JSON.stringify(el)}`);
+        console.log(`change tasks to BD`);
+        console.log(data.id)
 
     }
 
@@ -278,8 +200,9 @@ function WorkWind() {
 
                     <div className={cx('work_container_leftPanel_Top')}>
                         <UserName
-                            // pathAvaImg={'https://cdn.icon-icons.com/icons2/4222/PNG/512/charlie_chaplin_avatar_icon_263203.png'}
-                            pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}
+                            pathAvaImg={'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'}
+
+                            // pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}
                             userName={data.name}/>
                     </div>
 
