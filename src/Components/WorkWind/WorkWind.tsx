@@ -122,10 +122,8 @@ function WorkWind() {
 
     }, []);
 
-    console.log(document.cookie)
 
     useEffect(()=>{
-
 
         // if(list.length)setListTasksToBD(list)
         setListTasksToBD(list)
@@ -137,13 +135,15 @@ function WorkWind() {
 
     const setListTasksToBD = async (el:Task[]) => {
 
+        const token = localStorage.getItem('accessToken') ?? '';
+
         await fetch(`http://localhost:3000/lists/${data.id}`, {
             method: 'PATCH', // Указываем метод запроса
             credentials: "include",
             headers: {
 
                 'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-                'Authorization': localStorage.getItem('accessToken'), // Токен передаётся в заголовке
+                'Authorization': token, // Токен передаётся в заголовке
 
             },
             body: JSON.stringify(el)
@@ -151,24 +151,24 @@ function WorkWind() {
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-
+                } else{
+                    console.log(response.status, response.statusText)
                 }
-
+                console.log(response.json())
                 return response.json()
             })
 
             .then((data) => {
-                console.log('Данные получены', data)
-                localStorage.setItem('accessToken', data.accessToken)
+                console.log(`#############\nfetch PATCH:\nДанные получены: ${data}\n#############`)
+                // localStorage.setItem('accessToken', data.accessToken)
             })
             .catch((err) => {
-                console.log('Произошла ошибка!!!', err.message)
+                console.log(`#############\nfetch PATCH:\nПроизошла ошибка!!! ${err.message}\n#############`)
 
             })
 
         // console.log(`change tasks to BD:\n${JSON.stringify(el)}`);
-        console.log(`change tasks to BD`);
-        console.log(data.id)
+        console.log(`#############\nfetch PATCH:\nchange tasks to BD\ndata.id: ${data.id}\n#############`)
 
     }
 
