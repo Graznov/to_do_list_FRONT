@@ -130,7 +130,7 @@ function WorkWind() {
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
 
-
+        console.log('EFFECT')
     },[list])
 
     const setListTasksToBD = async (el:Task[]) => {
@@ -154,22 +154,18 @@ function WorkWind() {
                 } else{
                     console.log(response.status, response.statusText)
                 }
-                console.log(response.json())
+                // console.log(response.json())
                 return response.json()
             })
 
             .then((data) => {
-                console.log(`#############\nfetch PATCH:\nДанные получены: ${data}\n#############`)
-                // localStorage.setItem('accessToken', data.accessToken)
+                console.log(`#############\nfetch PATCH:\nДанные получены: ${data.accessToken}\n#############`)
+                localStorage.setItem('accessToken', data.accessToken)
             })
             .catch((err) => {
                 console.log(`#############\nfetch PATCH:\nПроизошла ошибка!!! ${err.message}\n#############`)
 
             })
-
-        // console.log(`change tasks to BD:\n${JSON.stringify(el)}`);
-        console.log(`#############\nfetch PATCH:\nchange tasks to BD\ndata.id: ${data.id}\n#############`)
-
     }
 
     const [searchInput, setSearchInput] = useState('');
