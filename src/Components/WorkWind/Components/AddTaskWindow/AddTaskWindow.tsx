@@ -2,21 +2,24 @@ import styles from './addTaskWindow.module.css'
 import classNames from "classnames/bind";
 import {useEffect, useState} from "react";
 import {ReactComponent as CloseSvg} from "/src/assets/close-square-svgrepo-com.svg";
-import {addTask} from "../../../../Store/defSlice.ts";
+import {addTask, resetState} from "../../../../Store/defSlice.ts";
 import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
-import {change_input_AddTaskWind, styleVisibleAddTask} from "../../../../Store/styleSlise.ts";
+import {change_input_AddTaskWind, cleanTag, styleVisibleAddTask} from "../../../../Store/styleSlise.ts";
 import {eng} from "../../../../Store/En.ts";
 import {russ} from "../../../../Store/Ru.ts";
+import {useNavigate} from "react-router-dom";
 
 
 const cx = classNames.bind(styles);
 
 export const AddTaskWindow = () => {
 
+    const navigate = useNavigate()
+
     const lang = useAppSelector(state => state.styleSlice.language)
     // const lang = localStorage.getItem('lang')
 
-
+    const id = useAppSelector(state => state.defSlice.id)
     const arrayTags: Array<string> = useAppSelector(state => state.styleSlice.tags)
 
     const errorInput = useAppSelector(state => state.styleSlice.input_AddTaskWind)
@@ -31,6 +34,7 @@ export const AddTaskWindow = () => {
         }
     }, [errorInput]);
 
+    console.log(`AddTaskWindow - ${id}`)
 
     const styleWindAddTask = useAppSelector(state => state.styleSlice.visibleAddTask)
     const dispatch = useAppDispatch()
@@ -256,17 +260,45 @@ export const AddTaskWindow = () => {
                     if (vall.title && vall.category && vall.dueDate) {
                         dispatch(styleVisibleAddTask(false))
 
-                        dispatch(
-                            addTask({
-                                    id: `${vall.title} ${Math.floor(Math.random() * 1000)}`,
-                                    title: vall.title,
-                                    description: vall.description,
-                                    dueDate: vall.dueDate+'T00:00:00.000Z',
-                                    category: vall.category,
-                                    color: vall.color,
-                                    isCompleted: false
+                        const task = {
+                            id: `${vall.title} ${Math.floor(Math.random() * 1000)}`,
+                            title: vall.title,
+                            description: vall.description,
+                            dueDate: vall.dueDate+'T00:00:00.000Z',
+                            category: vall.category,
+                            color: vall.color,
+                            isCompleted: false
+                        }
+
+                        dispatch(addTask(task))
+                        fetch(`http://localhost:3000/lists/pushtask/${id}`, {
+                            method: 'PATCH', // Указываем метод запроса
+                            credentials: "include",
+                            headers: {
+                                'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                            },
+                            body: JSON.stringify(task)
+                        })
+                            .then((response) => {
+                                if (!response.ok) {
+                                    localStorage.removeItem('accessToken')
+                                    localStorage.removeItem('_id')
+                                    dispatch(cleanTag())
+                                    dispatch(resetState())
+                                    navigate('/login')
+                                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
                                 }
-                            ))
+                                return response.json()
+                            })
+                            .then(doc=>{
+                                if(doc){
+                                    localStorage.setItem('accessToken', doc.accessToken)
+                                }
+                            })
+
+
+
                     } else {
                         console.log('add Title, Tag, Date')
                         if (!vall.title) {

@@ -92,6 +92,7 @@ function WorkWind() {
                 credentials: "include",
             })
                 .then((response) => {
+
                             if (!response.ok) {
 
                                 cleanData()
@@ -101,7 +102,7 @@ function WorkWind() {
                             }
 
                             return response.json()
-                        })
+                })
                 .then(data=>{
                     // console.log(`data:\n${JSON.stringify(data)}`)
 
@@ -123,50 +124,61 @@ function WorkWind() {
     }, []);
 
 
-    useEffect(()=>{
+    useEffect(()=> {
+
+        // fetch(`http://localhost:3000/lists/${data.id}`, {
+        //     method: 'PATCH', // Указываем метод запроса
+        //     credentials: "include",
+        //     headers: {
+        //         'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+        //         'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+        //     },
+        //     body: JSON.stringify(list)
+        // })
 
         // if(list.length)setListTasksToBD(list)
-        setListTasksToBD(list)
+        // setListTasksToBD(list)
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
 
         console.log('EFFECT')
     },[list])
 
-    const setListTasksToBD = async (el:Task[]) => {
-
-        const token = localStorage.getItem('accessToken') ?? '';
-
-        await fetch(`http://localhost:3000/lists/${data.id}`, {
-            method: 'PATCH', // Указываем метод запроса
-            credentials: "include",
-            headers: {
-
-                'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-                'Authorization': token, // Токен передаётся в заголовке
-
-            },
-            body: JSON.stringify(el)
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-                } else{
-                    console.log(response.status, response.statusText)
-                }
-                // console.log(response.json())
-                return response.json()
-            })
-
-            .then((data) => {
-                console.log(`#############\nfetch PATCH:\nДанные получены: ${data.accessToken}\n#############`)
-                localStorage.setItem('accessToken', data.accessToken)
-            })
-            .catch((err) => {
-                console.log(`#############\nfetch PATCH:\nПроизошла ошибка!!! ${err.message}\n#############`)
-
-            })
-    }
+    // const setListTasksToBD = async (el:Task[]) => {
+    //
+    //     console.log('setListTasksToBD')
+    //     // const token = localStorage.getItem('accessToken') ?? '';
+    //
+    //     await fetch(`http://localhost:3000/lists/${data.id}`, {
+    //         method: 'PATCH', // Указываем метод запроса
+    //         credentials: "include",
+    //         headers: {
+    //             'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+    //             'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+    //         },
+    //         body: JSON.stringify(el)
+    //     })
+    //         // .then((response) => {
+    //         //     if (!response.ok) {
+    //         //         throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+    //         //     } else{
+    //         //         console.log(response.status, response.statusText)
+    //         //     }
+    //         //     // console.log(response.json())
+    //         //     // return response.json()
+    //         // })
+    //         //
+    //         // .then((data) => {
+    //         //     // console.log(`#############\nfetch PATCH:\nДанные получены: ${data.accessToken}\n#############`)
+    //         //     console.log(`#############\nfetch PATCH:\nДанные получены: data.accessToken\n#############`)
+    //         //     // localStorage.setItem('accessToken', data.accessToken)
+    //         //     console.log(data)
+    //         // })
+    //         // .catch((err) => {
+    //         //     console.log(`#############\nfetch PATCH:\nПроизошла ошибка!!! ${err.message}\n#############`)
+    //         //
+    //         // })
+    // }
 
     const [searchInput, setSearchInput] = useState('');
 
