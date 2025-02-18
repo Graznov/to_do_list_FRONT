@@ -1,12 +1,14 @@
 import styles from './mission.module.css'
 import classNames from "classnames/bind";
 import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
-import {checkTask, defChangeTask, defDelitTask, Task} from "../../../../Store/defSlice.ts";
+import {checkTask, defChangeTask, defDelitTask, resetState, Task} from "../../../../Store/defSlice.ts";
 import {useEffect, useRef, useState} from "react";
 import {ReactComponent as LogoTrash} from "/src/assets/trash.svg";
 import {ReactComponent as Pencil} from "/public/pencil.svg";
 import {eng} from "../../../../Store/En.ts";
 import {russ} from "../../../../Store/Ru.ts";
+import {cleanTag} from "../../../../Store/styleSlise.ts";
+import {useNavigate} from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -20,8 +22,12 @@ interface MissionProps {
 }
 
 export function Mission({tag, text, color, listName, id, isCompleted}:MissionProps) {
+    const navigate = useNavigate()
+
+
     const lang = useAppSelector(state => state.styleSlice.language)
     // const lang = localStorage.getItem('lang')
+    const idAccount = useAppSelector(state => state.defSlice.id)
 
     const list = useAppSelector(state => state.defSlice.tasks)
     const yourDate = new Date().toISOString().split('T')[0]
@@ -37,6 +43,9 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
         isCompleted:false,
         title:"___"
     })
+
+    console.log(`Mission idTask: ${id}\nMission idAccount: ${idAccount}`)
+
 
     const [DeletedWind, setDeletedWind] = useState<boolean>(false)
 
@@ -318,6 +327,32 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                     <div className={cx('askDel_btn_area')}>
                         <button onClick={() => {
                             dispatch(defDelitTask(vall.id))
+
+                            fetch(`http://localhost:3000/lists/deletetask/${idAccount}`, {
+                                method: 'PATCH', // Указываем метод запроса
+                                credentials: "include",
+                                headers: {
+                                    'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                    'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                },
+                                body: JSON.stringify({id})
+                            })
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        localStorage.removeItem('accessToken')
+                                        localStorage.removeItem('_id')
+                                        dispatch(cleanTag())
+                                        dispatch(resetState())
+                                        navigate('/login')
+                                        throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                                    }
+                                    return response.json()
+                                })
+                                .then(doc=>{
+                                    if(doc){
+                                        localStorage.setItem('accessToken', doc.accessToken)
+                                    }
+                                })
 
                             setDeletedWind(false)
                         }}>
