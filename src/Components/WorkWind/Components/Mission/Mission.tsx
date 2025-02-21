@@ -30,6 +30,7 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
     const idAccount = useAppSelector(state => state.defSlice.id)
 
     const list = useAppSelector(state => state.defSlice.tasks)
+    const userId = useAppSelector(state => state.defSlice.id)
     const yourDate = new Date().toISOString().split('T')[0]
     const theme = useAppSelector(state => state.styleSlice.theme)
 
@@ -290,9 +291,43 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                     <button
                         onClick={() => {
 
+                            // console.log('push button change task')
+
                             if(disabled) {
                                 setDisabled(false)
                             } else {
+
+                                console.log('push button change task')
+
+                                console.log(vall)
+                                console.log(userId)
+
+                                fetch(`http://localhost:3000/lists/changetask/${userId}`, {
+                                    method: 'PATCH', // Указываем метод запроса
+                                    credentials: "include",
+                                    headers: {
+                                        'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                        'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                    },
+                                    body: JSON.stringify(vall)
+                                })
+                                    .then((response) => {
+                                        if (!response.ok) {
+                                            localStorage.removeItem('accessToken')
+                                            localStorage.removeItem('_id')
+                                            dispatch(cleanTag())
+                                            dispatch(resetState())
+                                            navigate('/login')
+                                            throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                                        }
+                                        return response.json()
+                                    })
+                                    .then(doc=>{
+                                        if(doc){
+                                            localStorage.setItem('accessToken', doc.accessToken)
+                                        }
+                                    })
+
                                 setDisabled(true)
                                 dispatch(defChangeTask(vall))
                                 setIsOpen(!isOpen)
