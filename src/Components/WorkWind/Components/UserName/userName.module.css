@@ -35,6 +35,28 @@
             color: var(--color-primary-font);
 
         }
+        /*.menu_setting{*/
+        /*    display: flex;*/
+        /*    justify-content: space-evenly;*/
+            /*button{*/
+            /*    width: max-content;*/
+            /*}*/
+
+        /*}*/
+    }
+
+
+}
+
+.work_container_leftPanel_user {
+    .menu_setting{
+        display: flex;
+        justify-content: space-evenly;
+        .button_menu_img{
+            width: max-content;
+            /*text-align: center;*/
+        }
+
     }
 
 
@@ -84,8 +106,25 @@
     background: rgba(218, 218, 218, 0.9); ;
     padding: 0px;
 
+
+    /*.menu_setting{*/
+    /*    display: flex;*/
+    /*    justify-content: space-evenly;*/
+
+    /*    button{*/
+    /*        width: max-content;*/
+    /*    }*/
+
+    /*}*/
+
     li{
 
+        /*.menu_setting{*/
+        /*    display: flex;*/
+        /*    justify-content: space-evenly;*/
+        /*    button{*/
+        /*        width: max-content;*/
+        /*    }*/
         /*border-bottom: 1px solid #00040c;*/
 
     }

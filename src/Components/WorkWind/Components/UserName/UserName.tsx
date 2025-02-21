@@ -158,35 +158,39 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
             <ul className={cx('menu', {
                 'visibleMenu': visibleMenu
             })}>
-                <li>
+                <li >
 
-                    <button
-                        className={cx('btn_menu')}
-                        onClick={changeTheme}>
-                        <span>
-                            {/*{(lang==='en')?en.work_left_theme:ru.work_left_theme}*/}
-                            {langMap.work_left_theme}
-                        </span>
-                        {/*<span>{Language.[lang].work_left_theme}</span>*/}
-                        <img src={pathImgTheme} alt=""/>
-                    </button>
+                    <div className={cx('menu_setting')}>
+                        <button
+                            className={cx('btn_menu', 'button_menu_img')}
+                            onClick={changeTheme}>
+                            {/*<span>*/}
+                            {/*    /!*{(lang==='en')?en.work_left_theme:ru.work_left_theme}*!/*/}
+                            {/*    {langMap.work_left_theme}*/}
+                            {/*</span>*/}
+                            {/*<span>{Language.[lang].work_left_theme}</span>*/}
+                            <img src={pathImgTheme} alt=""/>
+                        </button>
+
+                        <button
+                            className={cx('btn_menu', 'button_menu_img')}
+                            onClick={changeLanguage}>
+                            {/*<span>{langMap.work_left_lang}</span>*/}
+                            <img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>
+                        </button>
+                    </div>
 
 
                 </li>
+                {/*<li>*/}
+
+
+                {/*</li>*/}
                 <li>
 
                     <button
                         className={cx('btn_menu')}
-                        onClick={changeLanguage}>
-                        <span>{langMap.work_left_lang}</span>
-                        <img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>
-                    </button>
-                </li>
-                <li>
-
-                    <button
-                        className={cx('btn_menu')}
-                        onClick={()=>{
+                        onClick={() => {
                             console.log(`push btn delete account, userId:${userId}`)
                             fetch(`http://localhost:3000/lists/delete/${userId}`, {
                                 method: 'DELETE', // Метод запроса
