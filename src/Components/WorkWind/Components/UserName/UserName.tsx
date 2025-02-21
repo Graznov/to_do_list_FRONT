@@ -205,6 +205,9 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                                 })
                                 .catch(error => {
                                     console.error('Ошибка:', error);
+                                    localStorage.removeItem('accessToken')
+                                    localStorage.removeItem('_id')
+                                    navigate('/login')
                                 });
                         }}>
                         {/*<span>{langMap.work_left_lang}</span>*/}

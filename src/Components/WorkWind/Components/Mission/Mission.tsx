@@ -87,7 +87,6 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
         };
     }, []);
 
-    console.log(document.cookie)
 
     return (
         
@@ -107,6 +106,32 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                         })}
                         onChange={() => {
                             dispatch(checkTask(id))
+
+                            fetch(`http://localhost:3000/lists/chacked/${userId}`, {
+                                method: 'PATCH', // Указываем метод запроса
+                                credentials: "include",
+                                headers: {
+                                    'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                    'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                },
+                                body: JSON.stringify({id})
+                            })
+                                .then((response) => {
+                                    if (!response.ok) {
+                                        localStorage.removeItem('accessToken')
+                                        localStorage.removeItem('_id')
+                                        dispatch(cleanTag())
+                                        dispatch(resetState())
+                                        navigate('/login')
+                                        throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                                    }
+                                    return response.json()
+                                })
+                                .then(doc=>{
+                                    if(doc){
+                                        localStorage.setItem('accessToken', doc.accessToken)
+                                    }
+                                })
                         }}
                         type="checkbox"
                     />
@@ -290,18 +315,9 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                     className={cx('btnArea')}>
                     <button
                         onClick={() => {
-
-                            // console.log('push button change task')
-
                             if(disabled) {
                                 setDisabled(false)
                             } else {
-
-                                console.log('push button change task')
-
-                                console.log(vall)
-                                console.log(userId)
-
                                 fetch(`http://localhost:3000/lists/changetask/${userId}`, {
                                     method: 'PATCH', // Указываем метод запроса
                                     credentials: "include",
@@ -327,13 +343,10 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                                             localStorage.setItem('accessToken', doc.accessToken)
                                         }
                                     })
-
                                 setDisabled(true)
                                 dispatch(defChangeTask(vall))
                                 setIsOpen(!isOpen)
                             }
-
-
                         }}>
                         <Pencil
                             className={cx({'icon-dark':theme === 'dark'})}
