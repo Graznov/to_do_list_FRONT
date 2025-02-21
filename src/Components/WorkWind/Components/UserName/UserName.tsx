@@ -3,7 +3,7 @@ import styles from "./userName.module.css";
 import {useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
 import {cleanTag, setLang, setTheme} from "../../../../Store/styleSlise.ts";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {eng} from "../../../../Store/En.ts";
 import {russ} from "../../../../Store/Ru.ts";
 import {resetState} from "../../../../Store/defSlice.ts";
@@ -21,10 +21,17 @@ const ru:string = '/src/assets/flag-ru-svgrepo-com.svg'
 
 
 
+
+
 function UserName({pathAvaImg, userName}:propsUserNames) {
     const dispatch = useAppDispatch()
     const lang = useAppSelector(state => state.styleSlice.language)
     const theme = useAppSelector(state => state.styleSlice.theme)
+    const userId = useAppSelector(state => state.defSlice.id)
+
+    const navigate = useNavigate()
+
+    // console.log(`userId: ${userId}`)
 
     useEffect(()=>{
         if(!localStorage.getItem('lang')){
@@ -148,7 +155,7 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                 <h3>{userName}</h3>
             </button>
 
-            <ul className={cx('menu',{
+            <ul className={cx('menu', {
                 'visibleMenu': visibleMenu
             })}>
                 <li>
@@ -165,8 +172,6 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                     </button>
 
 
-
-
                 </li>
                 <li>
 
@@ -178,22 +183,52 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
                     </button>
                 </li>
                 <li>
+
+                    <button
+                        className={cx('btn_menu')}
+                        onClick={()=>{
+                            console.log(`push btn delete account, userId:${userId}`)
+                            fetch(`http://localhost:3000/lists/delete/${userId}`, {
+                                method: 'DELETE', // Метод запроса
+                                credentials: 'include', // Важно для отправки/получения cookie
+                                headers: {
+                                    'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                    'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                },
+                            })
+                                .then(response => response.text()) // Читаем ответ как текст
+                                .then(data => {
+                                    console.log(data); // Выводим ответ сервера ("Cookie has been set!")
+                                    localStorage.removeItem('accessToken')
+                                    localStorage.removeItem('_id')
+                                    navigate('/login')
+                                })
+                                .catch(error => {
+                                    console.error('Ошибка:', error);
+                                });
+                        }}>
+                        {/*<span>{langMap.work_left_lang}</span>*/}
+                        <span>{'Delete'}</span>
+                        {/*<img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>*/}
+                    </button>
+                </li>
+                <li>
                     <NavLink
                         to={'/login'}
-                            onClick={() => {
-                                // document.cookie = 'refreshToken=; Max-Age=-1;';
-                                cleanData()
-                                // delCookies()
-                                // localStorage.removeItem('accessToken')
-                                // localStorage.removeItem('_id')
-                                // // dispatch(setTasks([]))
-                                //
-                                // dispatch(cleanTag())
-                                // dispatch(resetState())
-                                setVisibleMenu(!visibleMenu)
+                        onClick={() => {
+                            // document.cookie = 'refreshToken=; Max-Age=-1;';
+                            cleanData()
+                            // delCookies()
+                            // localStorage.removeItem('accessToken')
+                            // localStorage.removeItem('_id')
+                            // // dispatch(setTasks([]))
+                            //
+                            // dispatch(cleanTag())
+                            // dispatch(resetState())
+                            setVisibleMenu(!visibleMenu)
 
 
-                            }
+                        }
                         }>
                         {langMap.work_left_exit}
                     </NavLink>
