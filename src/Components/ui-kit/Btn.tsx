@@ -1,9 +1,9 @@
 interface forBtn{
-    Btn_text:string,
+    Btn_text:React.ReactNode,
     ClassNameBtn:string,
     type: "submit" | "reset" | "button",
-    Click:()=>void,
-    status:'true' | 'false',
+    Click?:()=>void,
+    status?:'true' | 'false',
 
 }
 

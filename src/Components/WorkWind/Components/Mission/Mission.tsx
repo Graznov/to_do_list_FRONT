@@ -26,9 +26,7 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
 
 
     const lang = useAppSelector(state => state.styleSlice.language)
-    // const lang = localStorage.getItem('lang')
     const idAccount = useAppSelector(state => state.defSlice.id)
-
     const list = useAppSelector(state => state.defSlice.tasks)
     const userId = useAppSelector(state => state.defSlice.id)
     const yourDate = new Date().toISOString().split('T')[0]
@@ -44,9 +42,6 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
         isCompleted:false,
         title:"___"
     })
-
-    console.log(`Mission idTask: ${id}\nMission idAccount: ${idAccount}`)
-
 
     const [DeletedWind, setDeletedWind] = useState<boolean>(false)
 

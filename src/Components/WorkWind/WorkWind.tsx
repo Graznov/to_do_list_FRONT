@@ -22,15 +22,12 @@ import {
     setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
-import {resetState, setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
+import {resetState, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
 import Btn from "../ui-kit/Btn.tsx";
 import {eng} from "../../Store/En.ts";
 import {russ} from "../../Store/Ru.ts";
 
 const cx = classNames.bind(styles);
-
-
-
 
 function WorkWind() {
     const dispatch = useAppDispatch()
@@ -46,12 +43,7 @@ function WorkWind() {
     const lang = useAppSelector(state => state.styleSlice.language)
     const data = useAppSelector(state => state.defSlice)
 
-    // console.log(list)
-
-
     const navigate = useNavigate()
-
-    // console.log(`data.email: ${data.email}`)
 
     function delCookies(){
         fetch('http://localhost:3000/lists/del-cookie', {
@@ -71,8 +63,6 @@ function WorkWind() {
         delCookies()
         localStorage.removeItem('accessToken')
         localStorage.removeItem('_id')
-        // dispatch(setTasks([]))
-
         dispatch(cleanTag())
         dispatch(resetState())
     }
@@ -82,34 +72,28 @@ function WorkWind() {
         if(!localStorage.getItem('accessToken')){
             navigate('/login')
         } else {
-
+        const headersToken = localStorage.getItem('accessToken') || ''
             fetch(`http://localhost:3000/lists/${localStorage.getItem('_id')}`, {
                 method: 'GET', // Указываем метод GET
                 headers: {
                     'Content-Type': 'application/json', // Указываем тип содержимого
-                    'Authorization': localStorage.getItem('accessToken') // Если требуется авторизация
+                    'Authorization': headersToken // Если требуется авторизация
                 },
                 credentials: "include",
             })
                 .then((response) => {
 
                             if (!response.ok) {
-
                                 cleanData()
                                 navigate('/login')
                                 throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-
                             }
 
                             return response.json()
                 })
                 .then(data=>{
-                    // console.log(`data:\n${JSON.stringify(data)}`)
-
                     if (data.accessToken) {
                         localStorage.setItem('accessToken', data.accessToken)
-                        // console.log(`accessToken: ${data.accessToken}`)
-
                     }else {
                         console.log(`NO accessToken`)
                     }
@@ -117,68 +101,14 @@ function WorkWind() {
                     dispatch(setTasks(data.tasks))
                     dispatch(setId(data.id))
                 })
-
-            console.log('Push button Enter');
         }
-
     }, []);
 
 
     useEffect(()=> {
-
-        // fetch(`http://localhost:3000/lists/${data.id}`, {
-        //     method: 'PATCH', // Указываем метод запроса
-        //     credentials: "include",
-        //     headers: {
-        //         'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-        //         'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
-        //     },
-        //     body: JSON.stringify(list)
-        // })
-
-        // if(list.length)setListTasksToBD(list)
-        // setListTasksToBD(list)
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
-
-        console.log('EFFECT')
     },[list])
-
-    // const setListTasksToBD = async (el:Task[]) => {
-    //
-    //     console.log('setListTasksToBD')
-    //     // const token = localStorage.getItem('accessToken') ?? '';
-    //
-    //     await fetch(`http://localhost:3000/lists/${data.id}`, {
-    //         method: 'PATCH', // Указываем метод запроса
-    //         credentials: "include",
-    //         headers: {
-    //             'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-    //             'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
-    //         },
-    //         body: JSON.stringify(el)
-    //     })
-    //         // .then((response) => {
-    //         //     if (!response.ok) {
-    //         //         throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-    //         //     } else{
-    //         //         console.log(response.status, response.statusText)
-    //         //     }
-    //         //     // console.log(response.json())
-    //         //     // return response.json()
-    //         // })
-    //         //
-    //         // .then((data) => {
-    //         //     // console.log(`#############\nfetch PATCH:\nДанные получены: ${data.accessToken}\n#############`)
-    //         //     console.log(`#############\nfetch PATCH:\nДанные получены: data.accessToken\n#############`)
-    //         //     // localStorage.setItem('accessToken', data.accessToken)
-    //         //     console.log(data)
-    //         // })
-    //         // .catch((err) => {
-    //         //     console.log(`#############\nfetch PATCH:\nПроизошла ошибка!!! ${err.message}\n#############`)
-    //         //
-    //         // })
-    // }
 
     const [searchInput, setSearchInput] = useState('');
 

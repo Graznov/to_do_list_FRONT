@@ -78,12 +78,10 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
         if(pathImgLang===us){
             setPathImgLang(ru)
             dispatch(setLang('ru'))
-            console.log(lang)
             localStorage.setItem('lang', 'ru')
         } else if(pathImgLang===ru){
             setPathImgLang(us)
             dispatch(setLang('en'))
-            console.log(lang)
             localStorage.setItem('lang', 'en')
         }
     }

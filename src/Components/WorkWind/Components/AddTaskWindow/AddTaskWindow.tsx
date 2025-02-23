@@ -17,11 +17,8 @@ export const AddTaskWindow = () => {
     const navigate = useNavigate()
 
     const lang = useAppSelector(state => state.styleSlice.language)
-    // const lang = localStorage.getItem('lang')
-
     const id = useAppSelector(state => state.defSlice.id)
     const arrayTags: Array<string> = useAppSelector(state => state.styleSlice.tags)
-
     const errorInput = useAppSelector(state => state.styleSlice.input_AddTaskWind)
     const theme = useAppSelector(state => state.styleSlice.theme)
 
@@ -33,8 +30,6 @@ export const AddTaskWindow = () => {
             clearTimeout(timer)
         }
     }, [errorInput]);
-
-    console.log(`AddTaskWindow - ${id}`)
 
     const styleWindAddTask = useAppSelector(state => state.styleSlice.visibleAddTask)
     const dispatch = useAppDispatch()
@@ -253,10 +248,8 @@ export const AddTaskWindow = () => {
                     })
                 }}/>
             <button
-                // type='button'
                 onClick={(evt) => {
                     evt.preventDefault()
-                    console.log('evt.preventDefault()')
                     if (vall.title && vall.category && vall.dueDate) {
                         dispatch(styleVisibleAddTask(false))
 
