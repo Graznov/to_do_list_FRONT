@@ -12,7 +12,7 @@ import {ReactComponent as LogoQuestion} from "/src/assets/question.svg";
 import {ReactComponent as LogoAlarm} from "/src/assets/alarm_alert.svg";
 
 import {Input} from "../ui-kit/Input.tsx";
-import {Outlet, useNavigate} from "react-router-dom";
+import {NavLink, Outlet, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {AddTaskWindow} from "./Components/AddTaskWindow/AddTaskWindow.tsx";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
@@ -22,7 +22,7 @@ import {
     setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
-import {resetState, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
+import {resetState, setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
 import Btn from "../ui-kit/Btn.tsx";
 import {eng} from "../../Store/En.ts";
 import {russ} from "../../Store/Ru.ts";
@@ -92,6 +92,8 @@ function WorkWind() {
                             return response.json()
                 })
                 .then(data=>{
+
+
                     if (data.accessToken) {
                         localStorage.setItem('accessToken', data.accessToken)
                     }else {
@@ -100,11 +102,14 @@ function WorkWind() {
                     dispatch(setName(data.name))
                     dispatch(setTasks(data.tasks))
                     dispatch(setId(data.id))
+                    dispatch(setEmail(data.email))
+                    dispatch(setCreatDat(data.creatDat))
+
                 })
         }
     }, []);
 
-
+    console.log(data)
     useEffect(()=> {
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
@@ -137,11 +142,27 @@ function WorkWind() {
                 })}>
 
                     <div className={cx('work_container_leftPanel_Top')}>
-                        <UserName
-                            pathAvaImg={'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'}
+                        <NavLink
+                            className={cx('work_container_to_userMenu',{
+                                'work_container_to_userMenu_dark':theme==='dark'
+                            })}
+                            to={'/workwindow/menu'}>
 
-                            // pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}
-                            userName={data.name}/>
+                            <img
+                                src="https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png"
+                                alt="avatar"
+                                width={'60px'}/>
+
+                            <div>{data.name}</div>
+
+                        </NavLink>
+                    <UserName
+                        pathAvaImg={'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'}
+
+                        // pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}
+                        userName={data.name}/>
+
+
                     </div>
 
                     <div className={cx('work_container_leftPanel_calendar')}>

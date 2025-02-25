@@ -9,6 +9,7 @@ import WorkWind from "./Components/WorkWind/WorkWind.tsx";
 import TodayList from "./Components/WorkWind/Components/TodayList/TodayList.tsx";
 import {Provider} from "react-redux";
 import {store} from "./Store/store.ts";
+import UserMenu from "./Components/WorkWind/Components/UserMenu/UserMenu.tsx";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             {
                 path: '/workwindow/tags',
                 element: <TodayList/>
+            },
+            {
+                path: '/workwindow/menu',
+                element: <UserMenu/>
             }
 
         ]

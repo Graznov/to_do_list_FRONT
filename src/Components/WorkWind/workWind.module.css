@@ -63,6 +63,20 @@
 
         .work_container_leftPanel_Top{
             padding: 20px 0px 70px 20px;
+
+            .work_container_to_userMenu{
+                display: flex;
+                align-items: center;
+                color: black;
+
+
+            }
+            .work_container_to_userMenu_dark{
+                color: var(--color-primary-font);
+            }
+            .work_container_to_userMenu_dark:hover{
+                color: var(--color-secondary-font);
+            }
         }
 
         .work_container_leftPanel_calendar {
