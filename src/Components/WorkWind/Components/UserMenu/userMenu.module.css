@@ -37,6 +37,51 @@
 
 
     }
+
+    .menu_setting{
+        display: flex;
+
+
+    }
+    .deleteAkk{
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 20px;
+
+        .input_delete{
+            width: 100%;
+            background: inherit;
+            color: var(--color-primary-font);
+            padding: 13px;
+            font-size: 23px;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+    }
+    .btn_menu{
+            width: 100%;
+            /*padding: 10px;*/
+            display: flex;
+            font-size: 21px;
+            /*font-weight: 600;*/
+            flex-direction: row;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+
+            .us{
+                transform: scale(1, -1)
+            }
+
+        }
+        .btn_menu:hover{
+            color: black;
+        }
+
+
+
 }
 .userMenu_dark{
     color: var(--color-primary-font);
