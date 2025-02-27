@@ -6,6 +6,9 @@ import {eng} from "../../../../Store/En.ts";
 import {useEffect, useState} from "react";
 import {setLang, setTheme} from "../../../../Store/styleSlise.ts";
 import {useNavigate} from "react-router-dom";
+import {ReactComponent as CloseSvg} from "/src/assets/close-square-svgrepo-com.svg";
+import {ReactComponent as LogoTrash} from "/src/assets/trash.svg";
+
 
 const cx = classNames.bind(styles);
 
@@ -23,12 +26,14 @@ function UserMenu(){
     const theme = useAppSelector(state => state.styleSlice.theme)
     const lang = useAppSelector(state => state.styleSlice.language)
     const userId = useAppSelector(state => state.defSlice.id)
+    const userEmail = useAppSelector(state => state.defSlice.email)
 
 
     const [pathImgLang, setPathImgLang] = useState(us)
     const [pathImgTheme, setPathImgTheme] = useState(lightThemePath);
     const [inputIdForDelete, setInputIdForDelete] = useState('')
     const [visibleBtnDelete, setVisibleBtnDelete] = useState<boolean>(true)
+    const [visibleContainerDelete, setVisibleContainerDelete] = useState<boolean>(false)
 
     useEffect(()=>{
         if(!localStorage.getItem('lang')){
@@ -80,8 +85,10 @@ function UserMenu(){
 
     function inputDelete(e){
         setInputIdForDelete(e.target.value)
-        if(e.target.value===userId){
-            setVisibleBtnDelete(!visibleBtnDelete)
+        if(e.target.value===userEmail){
+            setVisibleBtnDelete(false)
+        } else {
+            setVisibleBtnDelete(true)
         }
         console.log(inputIdForDelete)
     }
@@ -124,16 +131,38 @@ function UserMenu(){
                     {/*<span>{langMap.work_left_lang}</span>*/}
                     <img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>
                 </button>
+
+                <button
+                    className={cx('btn_menu', 'button_menu_img')}
+                    onClick={() => {
+                        setVisibleContainerDelete(!visibleContainerDelete)
+                    }}
+                >
+                    <LogoTrash className={cx('logogo')}
+                               width={'30px'}
+                               heidth={'30px'}/>
+                </button>
             </div>
 
 
             <div className={cx('deleteAkk')}>
-                <div>
-                    Для удаления аккаунта введите указанный ниже текс:
-                </div>
 
-                {/*<div>{userId}</div>*/}
-                <div>"Я хочу удалить свой аккаунт"</div>
+
+                <div className={cx('deleteAkk_hidden', {
+                    'deleteAkk_hidden_visible': visibleContainerDelete,
+                })}>
+
+                    <button
+                        className={cx('btnDelAkk_Close_container')}
+                    onClick={()=>{setVisibleContainerDelete(!visibleContainerDelete)}}>
+                    <CloseSvg/>
+                </button>
+                <p>
+                    Для удаления аккаунта введите свой email:
+                </p>
+
+                <div className={cx('deleteAkk_Id')}>{userEmail}</div>
+                {/*<div>"Я хочу удалить свой аккаунт"</div>*/}
 
                 <div>
                     <input
@@ -145,8 +174,10 @@ function UserMenu(){
 
 
                 <button
-                    disabled={visibleBtnDelete}
-                    className={cx('btn_menu')}
+                    // disabled={visibleBtnDelete}
+                    className={cx('btn_menu', {
+                        'btn_menu_visible': !visibleBtnDelete
+                    })}
                     onClick={() => {
                         console.log(`push btn delete account, userId:${userId}`)
                         fetch(`http://localhost:3000/lists/delete/${userId}`, {
@@ -175,6 +206,7 @@ function UserMenu(){
                     <span>{'Удалить аккаунт'}</span>
                     {/*<img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>*/}
                 </button>
+                </div>
             </div>
 
 

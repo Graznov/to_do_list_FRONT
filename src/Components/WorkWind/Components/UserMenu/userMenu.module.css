@@ -41,27 +41,10 @@
     .menu_setting{
         display: flex;
 
-
-    }
-    .deleteAkk{
-        border: 2px solid black;
-        border-radius: 5px;
-        padding: 20px;
-
-        .input_delete{
-            width: 100%;
-            background: inherit;
-            color: var(--color-primary-font);
-            padding: 13px;
-            font-size: 23px;
-            border: 2px solid black;
-            border-radius: 5px;
-        }
-    }
-    .btn_menu{
+        .btn_menu{
+            /*display: none;*/
             width: 100%;
             /*padding: 10px;*/
-            display: flex;
             font-size: 21px;
             /*font-weight: 600;*/
             flex-direction: row;
@@ -69,20 +52,115 @@
             background: none;
             border: none;
             cursor: pointer;
+        }
+
+    }
+
+    .deleteAkk{
+        position: relative;
+
+        /*.btnDelAkk{*/
+        /*    !*display: none;*!*/
+        /*    !*width: 100%;*!*/
+        /*    font-size: 17px;*/
+        /*    !*font-weight: 600;*!*/
+        /*    flex-direction: row;*/
+        /*    justify-content: space-between;*/
+        /*    background: none;*/
+        /*    border: 2px solid black;*/
+        /*    border-radius: 5px;*/
+        /*    text-align: center;*/
+        /*    margin-top: 10px;*/
+        /*    padding: 10px;*/
+        /*    cursor: pointer;*/
+        /*}*/
 
 
-            .us{
-                transform: scale(1, -1)
+
+        .deleteAkk_hidden{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 270px;
+
+
+            display: none;
+            background: white;
+            /*background: inherit;*/
+            opacity: 0.95;
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 20px;
+
+            p{
+                font-size: 25px;
             }
 
+            .deleteAkk_Id{
+                text-align: center;
+                text-decoration: underline;
+                font-size: 21px;
+                padding: 10px;
+            }
+
+            .btnDelAkk_Close_container{
+                border: none;
+                background: none;
+                cursor: pointer;
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+
+            .input_delete{
+
+                /*width: 100%;*/
+                text-align: center;
+                background: inherit;
+                color: var(--color-primary-font);
+                padding: 13px;
+                font-size: 23px;
+                border: 2px solid black;
+                border-radius: 5px;
+            }
+
+            .btn_menu{
+
+                display: none;
+                width: 100%;
+                /*padding: 10px;*/
+                font-size: 21px;
+                /*font-weight: 600;*/
+                flex-direction: row;
+                justify-content: space-between;
+                background: none;
+                border: 2px solid black;
+                border-radius: 5px;
+                text-align: center;
+                margin-top: 10px;
+                padding: 10px;
+                cursor: pointer;
+            }
+            .btn_menu:hover{
+                color: black;
+            }
+
+            .btn_menu_visible{
+                display: flex;
+            }
         }
-        .btn_menu:hover{
-            color: black;
+        .deleteAkk_hidden_visible{
+            display: block;
         }
 
 
+    }
 
-}
+
+    }
+
+
 .userMenu_dark{
     color: var(--color-primary-font);
 }
