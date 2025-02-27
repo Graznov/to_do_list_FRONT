@@ -4,10 +4,14 @@ import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
 import {russ} from "../../../../Store/Ru.ts";
 import {eng} from "../../../../Store/En.ts";
 import {useEffect, useState} from "react";
-import {setLang, setTheme} from "../../../../Store/styleSlise.ts";
-import {useNavigate} from "react-router-dom";
+import {cleanTag, setLang, setTheme} from "../../../../Store/styleSlise.ts";
+import {NavLink, useNavigate} from "react-router-dom";
 import {ReactComponent as CloseSvg} from "/src/assets/close-square-svgrepo-com.svg";
-import {ReactComponent as LogoTrash} from "/src/assets/trash.svg";
+// import {ReactComponent as LogoTrash} from "/src/assets/trash.svg";
+import {ReactComponent as LogOut} from "/src/assets/logout_icon.svg";
+import {ReactComponent as DeleteUser} from "/src/assets/delete_profile_user.svg";
+
+import {resetState} from "../../../../Store/defSlice.ts";
 
 
 const cx = classNames.bind(styles);
@@ -97,31 +101,66 @@ function UserMenu(){
 
     console.log(data)
 
+    function delCookies(){
+        fetch('http://localhost:3000/lists/del-cookie', {
+            method: 'POST', // Метод запроса
+            credentials: 'include' // Важно для отправки/получения cookie
+        })
+            .then(response => response.text()) // Читаем ответ как текст
+            .then(data => {
+                console.log(data); // Выводим ответ сервера ("Cookie has been set!")
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
+    }
+
+    function cleanData(){
+        delCookies()
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('_id')
+        // dispatch(setTasks([]))
+
+        dispatch(cleanTag())
+        dispatch(resetState())
+    }
+
     const langMap = lang === 'ru' ? russ:eng
 
     return(
         <div className={cx("userMenu", {
             'userMenu_dark': theme === 'dark',
         })}>
-            <div>
+
+            <div className={cx('userMenu_Data')}>
                 <img className={cx('userMenu_avatar')} src={pathToImg} alt="UserAvatar"/>
-                <div className={cx('userMenu_Name')}>
-                    Your name: {data.name}
+
+                <div className={cx('userMenu_Data_Right')}>
+                    <div className={cx('userMenu_Name')}>
+                        <div>
+                            {langMap.yourName}
+                        </div>
+                        <div className={cx('userMenu_span')}>
+                            {data.name}
+                        </div>
+                    </div>
+                    <div className={cx('userMenu_Email')}>
+                        <div>
+                            {langMap.yourEmail}
+                        </div>
+                        <div className={cx('userMenu_span')}>
+                            {data.email}
+                        </div>
+
+                    </div>
                 </div>
-                <div className={cx('userMenu_Email')}>
-                    Your Email: {data.email}
-                </div>
+
             </div>
 
             <div className={cx('menu_setting')}>
                 <button
-                    className={cx('btn_menu', 'button_menu_img')}
+                    className={cx('btn_menu', 'btn_menu_theme', 'button_menu_img')}
                     onClick={changeTheme}>
-                    {/*<span>*/}
-                    {/*    /!*{(lang==='en')?en.work_left_theme:ru.work_left_theme}*!/*/}
-                    {/*    {langMap.work_left_theme}*/}
-                    {/*</span>*/}
-                    {/*<span>{Language.[lang].work_left_theme}</span>*/}
                     <img src={pathImgTheme} alt=""/>
                 </button>
 
@@ -133,14 +172,17 @@ function UserMenu(){
                 </button>
 
                 <button
-                    className={cx('btn_menu', 'button_menu_img')}
+                    className={cx('btn_menu', 'button_menu_img', 'btn_menu_trash',{
+                        'btn_menu_trash_dark': theme === 'dark',
+                    })}
                     onClick={() => {
                         setVisibleContainerDelete(!visibleContainerDelete)
                     }}
-                >
-                    <LogoTrash className={cx('logogo')}
-                               width={'30px'}
-                               heidth={'30px'}/>
+                ><DeleteUser/>
+
+
+
+
                 </button>
             </div>
 
@@ -150,6 +192,7 @@ function UserMenu(){
 
                 <div className={cx('deleteAkk_hidden', {
                     'deleteAkk_hidden_visible': visibleContainerDelete,
+                    'deleteAkk_hidden_dark': theme === 'dark',
                 })}>
 
                     <button
@@ -174,7 +217,6 @@ function UserMenu(){
 
 
                 <button
-                    // disabled={visibleBtnDelete}
                     className={cx('btn_menu', {
                         'btn_menu_visible': !visibleBtnDelete
                     })}
@@ -208,6 +250,20 @@ function UserMenu(){
                 </button>
                 </div>
             </div>
+
+            <NavLink
+                className={cx('linkLogout',{
+                    'linkLogout_dark':theme === 'dark',
+                })}
+                to={'/login'}
+                onClick={() => {
+                        cleanData()
+                    }
+                }>
+                <LogOut
+                    className={cx('btnLogout')}
+                    width={'30px'}/>
+            </NavLink>
 
 
         </div>

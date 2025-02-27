@@ -132,114 +132,114 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
     const langMap = lang === 'ru' ? russ:eng
     
     return (
+<div></div>
 
-
-        <div
-            ref={menuRef}
-            className={cx('work_container_leftPanel_user', {
-                'work_container_leftPanel_user_dark':theme==='dark'
-            })}
-            id='mainID'>
-            <button
-                className={cx('btn_user',{
-                    'btn_user_dark':theme==='dark'
-                })}
-                onClick={() => setVisibleMenu(!visibleMenu)}
-                >
-                <img
-                    src={pathAvaImg}
-                    alt="user ava"
-                />
-                <h3>{userName}</h3>
-            </button>
-
-            <ul className={cx('menu', {
-                'visibleMenu': visibleMenu
-            })}>
-                <li >
-
-                    <div className={cx('menu_setting')}>
-                        <button
-                            className={cx('btn_menu', 'button_menu_img')}
-                            onClick={changeTheme}>
-                            {/*<span>*/}
-                            {/*    /!*{(lang==='en')?en.work_left_theme:ru.work_left_theme}*!/*/}
-                            {/*    {langMap.work_left_theme}*/}
-                            {/*</span>*/}
-                            {/*<span>{Language.[lang].work_left_theme}</span>*/}
-                            <img src={pathImgTheme} alt=""/>
-                        </button>
-
-                        <button
-                            className={cx('btn_menu', 'button_menu_img')}
-                            onClick={changeLanguage}>
-                            {/*<span>{langMap.work_left_lang}</span>*/}
-                            <img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>
-                        </button>
-                    </div>
-
-
-                </li>
-                {/*<li>*/}
-
-
-                {/*</li>*/}
-                <li>
-
-                    <button
-                        className={cx('btn_menu')}
-                        onClick={() => {
-                            console.log(`push btn delete account, userId:${userId}`)
-                            fetch(`http://localhost:3000/lists/delete/${userId}`, {
-                                method: 'DELETE', // Метод запроса
-                                credentials: 'include', // Важно для отправки/получения cookie
-                                headers: {
-                                    'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-                                    'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
-                                },
-                            })
-                                .then(response => response.text()) // Читаем ответ как текст
-                                .then(data => {
-                                    console.log(data); // Выводим ответ сервера ("Cookie has been set!")
-                                    localStorage.removeItem('accessToken')
-                                    localStorage.removeItem('_id')
-                                    navigate('/login')
-                                })
-                                .catch(error => {
-                                    console.error('Ошибка:', error);
-                                    localStorage.removeItem('accessToken')
-                                    localStorage.removeItem('_id')
-                                    navigate('/login')
-                                });
-                        }}>
-                        {/*<span>{langMap.work_left_lang}</span>*/}
-                        <span>{'Delete'}</span>
-                        {/*<img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>*/}
-                    </button>
-                </li>
-                <li>
-                    <NavLink
-                        to={'/login'}
-                        onClick={() => {
-                            // document.cookie = 'refreshToken=; Max-Age=-1;';
-                            cleanData()
-                            // delCookies()
-                            // localStorage.removeItem('accessToken')
-                            // localStorage.removeItem('_id')
-                            // // dispatch(setTasks([]))
-                            //
-                            // dispatch(cleanTag())
-                            // dispatch(resetState())
-                            setVisibleMenu(!visibleMenu)
-
-
-                        }
-                        }>
-                        {langMap.work_left_exit}
-                    </NavLink>
-                </li>
-            </ul>
-        </div>
+        // <div
+        //     ref={menuRef}
+        //     className={cx('work_container_leftPanel_user', {
+        //         'work_container_leftPanel_user_dark':theme==='dark'
+        //     })}
+        //     id='mainID'>
+        //     <button
+        //         className={cx('btn_user',{
+        //             'btn_user_dark':theme==='dark'
+        //         })}
+        //         onClick={() => setVisibleMenu(!visibleMenu)}
+        //         >
+        //         <img
+        //             src={pathAvaImg}
+        //             alt="user ava"
+        //         />
+        //         <h3>{userName}</h3>
+        //     </button>
+        //
+        //     <ul className={cx('menu', {
+        //         'visibleMenu': visibleMenu
+        //     })}>
+        //         <li >
+        //
+        //             <div className={cx('menu_setting')}>
+        //                 <button
+        //                     className={cx('btn_menu', 'button_menu_img')}
+        //                     onClick={changeTheme}>
+        //                     {/*<span>*/}
+        //                     {/*    /!*{(lang==='en')?en.work_left_theme:ru.work_left_theme}*!/*/}
+        //                     {/*    {langMap.work_left_theme}*/}
+        //                     {/*</span>*/}
+        //                     {/*<span>{Language.[lang].work_left_theme}</span>*/}
+        //                     <img src={pathImgTheme} alt=""/>
+        //                 </button>
+        //
+        //                 <button
+        //                     className={cx('btn_menu', 'button_menu_img')}
+        //                     onClick={changeLanguage}>
+        //                     {/*<span>{langMap.work_left_lang}</span>*/}
+        //                     <img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>
+        //                 </button>
+        //             </div>
+        //
+        //
+        //         </li>
+        //         {/*<li>*/}
+        //
+        //
+        //         {/*</li>*/}
+        //         <li>
+        //
+        //             <button
+        //                 className={cx('btn_menu')}
+        //                 onClick={() => {
+        //                     console.log(`push btn delete account, userId:${userId}`)
+        //                     fetch(`http://localhost:3000/lists/delete/${userId}`, {
+        //                         method: 'DELETE', // Метод запроса
+        //                         credentials: 'include', // Важно для отправки/получения cookie
+        //                         headers: {
+        //                             'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+        //                             'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+        //                         },
+        //                     })
+        //                         .then(response => response.text()) // Читаем ответ как текст
+        //                         .then(data => {
+        //                             console.log(data); // Выводим ответ сервера ("Cookie has been set!")
+        //                             localStorage.removeItem('accessToken')
+        //                             localStorage.removeItem('_id')
+        //                             navigate('/login')
+        //                         })
+        //                         .catch(error => {
+        //                             console.error('Ошибка:', error);
+        //                             localStorage.removeItem('accessToken')
+        //                             localStorage.removeItem('_id')
+        //                             navigate('/login')
+        //                         });
+        //                 }}>
+        //                 {/*<span>{langMap.work_left_lang}</span>*/}
+        //                 <span>{'Delete'}</span>
+        //                 {/*<img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>*/}
+        //             </button>
+        //         </li>
+        //         <li>
+        //             <NavLink
+        //                 to={'/login'}
+        //                 onClick={() => {
+        //                     // document.cookie = 'refreshToken=; Max-Age=-1;';
+        //                     cleanData()
+        //                     // delCookies()
+        //                     // localStorage.removeItem('accessToken')
+        //                     // localStorage.removeItem('_id')
+        //                     // // dispatch(setTasks([]))
+        //                     //
+        //                     // dispatch(cleanTag())
+        //                     // dispatch(resetState())
+        //                     setVisibleMenu(!visibleMenu)
+        //
+        //
+        //                 }
+        //                 }>
+        //                 {langMap.work_left_exit}
+        //             </NavLink>
+        //         </li>
+        //     </ul>
+        // </div>
 
 
     );

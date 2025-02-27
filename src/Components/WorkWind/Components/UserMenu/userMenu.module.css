@@ -23,30 +23,58 @@
 }
 
 .userMenu{
+    position: relative;
     min-width: 300px;
     max-width: 500px;
     font-size: 17px;
-
-    padding-inline: 20px;
-    height: 100%;
+    padding: 20px;
     margin: 135px auto;
-    border: 1px solid var(--color-primary-font);
+    border: 2px solid rgba(168,153,132,0.1);
 
-    .userMenu_avatar{
-        width: 300px;
+    border-radius: 25px;
+
+    .userMenu_Data{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .userMenu_avatar{
+            width: 150px;
+        }
+
+        .userMenu_Data_Right{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .userMenu_Name,
+            .userMenu_Email{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-right: 10px;
+                .userMenu_span{
+                    font-size: 25px;
+                    width: 200px;
+                    overflow: hidden;
+                }
+            }
+        }
 
 
     }
 
+
     .menu_setting{
+
+        margin-bottom: -10px;
+
+        margin-top: 20px;
         display: flex;
 
         .btn_menu{
-            /*display: none;*/
             width: 100%;
-            /*padding: 10px;*/
             font-size: 21px;
-            /*font-weight: 600;*/
             flex-direction: row;
             justify-content: space-between;
             background: none;
@@ -54,28 +82,22 @@
             cursor: pointer;
         }
 
+        .btn_menu_theme{
+            text-align: left;
+        }
+
+        .btn_menu_trash{
+            text-align: right;
+            color: black;
+        }
+        .btn_menu_trash_dark{
+            color: var(--color-primary-font);
+        }
+
     }
 
     .deleteAkk{
         position: relative;
-
-        /*.btnDelAkk{*/
-        /*    !*display: none;*!*/
-        /*    !*width: 100%;*!*/
-        /*    font-size: 17px;*/
-        /*    !*font-weight: 600;*!*/
-        /*    flex-direction: row;*/
-        /*    justify-content: space-between;*/
-        /*    background: none;*/
-        /*    border: 2px solid black;*/
-        /*    border-radius: 5px;*/
-        /*    text-align: center;*/
-        /*    margin-top: 10px;*/
-        /*    padding: 10px;*/
-        /*    cursor: pointer;*/
-        /*}*/
-
-
 
         .deleteAkk_hidden{
             position: absolute;
@@ -153,8 +175,26 @@
         .deleteAkk_hidden_visible{
             display: block;
         }
+        .deleteAkk_hidden_dark{
+            background: var(--color-header-bg)
+        }
 
 
+    }
+
+
+    .linkLogout{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: black;
+    }
+    .linkLogout_dark{
+        color: var(--color-primary-font);
+    }
+
+    .btnLogout{
+        width: 30px;
     }
 
 
