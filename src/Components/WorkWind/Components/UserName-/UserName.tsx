@@ -1,138 +1,138 @@
-import classNames from "classnames/bind";
-import styles from "./userName.module.css";
-import {useEffect, useRef, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
-import {cleanTag, setLang, setTheme} from "../../../../Store/styleSlise.ts";
-import {NavLink, useNavigate} from "react-router-dom";
-import {eng} from "../../../../Store/En.ts";
-import {russ} from "../../../../Store/Ru.ts";
-import {resetState} from "../../../../Store/defSlice.ts";
+// import classNames from "classnames/bind";
+// import styles from "./userName.module.css";
+// import {useEffect, useRef, useState} from "react";
+// import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
+// import {cleanTag, setLang, setTheme} from "../../../../Store/styleSlise.ts";
+// import {NavLink, useNavigate} from "react-router-dom";
+// import {eng} from "../../../../Store/En.ts";
+// import {russ} from "../../../../Store/Ru.ts";
+// import {resetState} from "../../../../Store/defSlice.ts";
 
-const cx = classNames.bind(styles);
-interface propsUserNames{
-    pathAvaImg:string,
-    userName:string
-}
-
-const lightThemePath:string = '/src/assets/day-theme.svg'
-const darkThemePath:string = '/src/assets/night-theme.svg'
-const us:string = '/src/assets/flag-us-svgrepo-com.svg'
-const ru:string = '/src/assets/flag-ru-svgrepo-com.svg'
-
-
+// const cx = classNames.bind(styles);
+// interface propsUserNames{
+//     pathAvaImg:string,
+//     userName:string
+// }
+//
+// const lightThemePath:string = '/src/assets/day-theme.svg'
+// const darkThemePath:string = '/src/assets/night-theme.svg'
+// const us:string = '/src/assets/flag-us-svgrepo-com.svg'
+// const ru:string = '/src/assets/flag-ru-svgrepo-com.svg'
 
 
 
-function UserName({pathAvaImg, userName}:propsUserNames) {
-    const dispatch = useAppDispatch()
-    const lang = useAppSelector(state => state.styleSlice.language)
-    const theme = useAppSelector(state => state.styleSlice.theme)
-    const userId = useAppSelector(state => state.defSlice.id)
 
-    const navigate = useNavigate()
+
+// function UserName({pathAvaImg, userName}:propsUserNames) {
+    // const dispatch = useAppDispatch()
+    // const lang = useAppSelector(state => state.styleSlice.language)
+    // const theme = useAppSelector(state => state.styleSlice.theme)
+    // const userId = useAppSelector(state => state.defSlice.id)
+    //
+    // const navigate = useNavigate()
 
     // console.log(`userId: ${userId}`)
 
-    useEffect(()=>{
-        if(!localStorage.getItem('lang')){
-            localStorage.setItem('lang', lang)
-        }
-        dispatch(setLang(localStorage.getItem('lang')));
-        (lang==='ru')?setPathImgLang(ru):setPathImgLang(us);
-    }, [dispatch, lang])
+    // useEffect(()=>{
+    //     if(!localStorage.getItem('lang')){
+    //         localStorage.setItem('lang', lang)
+    //     }
+    //     dispatch(setLang(localStorage.getItem('lang')));
+    //     (lang==='ru')?setPathImgLang(ru):setPathImgLang(us);
+    // }, [dispatch, lang])
 
-    useEffect(() => {
-        if(!localStorage.getItem('theme')){
-            localStorage.setItem('theme', theme)
-        }
-
-        if(localStorage.getItem('theme')==='light') {
-            setPathImgTheme(lightThemePath)
-            dispatch(setTheme('light'))
-        } else if(localStorage.getItem('theme')==='dark') {
-            setPathImgTheme(darkThemePath);
-            dispatch(setTheme('dark'))
-        }
-
-    }, []);
+    // useEffect(() => {
+    //     if(!localStorage.getItem('theme')){
+    //         localStorage.setItem('theme', theme)
+    //     }
+    //
+    //     if(localStorage.getItem('theme')==='light') {
+    //         setPathImgTheme(lightThemePath)
+    //         dispatch(setTheme('light'))
+    //     } else if(localStorage.getItem('theme')==='dark') {
+    //         setPathImgTheme(darkThemePath);
+    //         dispatch(setTheme('dark'))
+    //     }
+    //
+    // }, []);
 
 // localStorage.clear()
 
-    const [pathImgLang, setPathImgLang] = useState(us)
-    const [pathImgTheme, setPathImgTheme] = useState(lightThemePath);
-    const [visibleMenu, setVisibleMenu] = useState(false);
+    // const [pathImgLang, setPathImgLang] = useState(us)
+    // const [pathImgTheme, setPathImgTheme] = useState(lightThemePath);
+    // const [visibleMenu, setVisibleMenu] = useState(false);
 
-    const changeTheme = () => {
-        if(theme==='light') {
-            setPathImgTheme(darkThemePath)
-            dispatch(setTheme('dark'))
-            localStorage.setItem('theme', 'dark')
-        } else if(theme==='dark') {
-            setPathImgTheme(lightThemePath);
-            dispatch(setTheme('light'))
-            localStorage.setItem('theme', 'light')
+    // const changeTheme = () => {
+    //     if(theme==='light') {
+    //         setPathImgTheme(darkThemePath)
+    //         dispatch(setTheme('dark'))
+    //         localStorage.setItem('theme', 'dark')
+    //     } else if(theme==='dark') {
+    //         setPathImgTheme(lightThemePath);
+    //         dispatch(setTheme('light'))
+    //         localStorage.setItem('theme', 'light')
+    //
+    //     }
+    // }
+    // const changeLanguage = () => {
+    //     if(pathImgLang===us){
+    //         setPathImgLang(ru)
+    //         dispatch(setLang('ru'))
+    //         localStorage.setItem('lang', 'ru')
+    //     } else if(pathImgLang===ru){
+    //         setPathImgLang(us)
+    //         dispatch(setLang('en'))
+    //         localStorage.setItem('lang', 'en')
+    //     }
+    // }
 
-        }
-    }
-    const changeLanguage = () => {
-        if(pathImgLang===us){
-            setPathImgLang(ru)
-            dispatch(setLang('ru'))
-            localStorage.setItem('lang', 'ru')
-        } else if(pathImgLang===ru){
-            setPathImgLang(us)
-            dispatch(setLang('en'))
-            localStorage.setItem('lang', 'en')
-        }
-    }
+    // const menuRef = useRef<HTMLDivElement | null>(null);
+    // useEffect(() => {
+    //     function handleClickOutside(event: MouseEvent) {
+    //         if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    //             // console.log('Клик вне компонента');
+    //             setVisibleMenu(false)
+    //             // Логика закрытия или другого действия
+    //         }
+    //     }
+    //
+    //     // Добавляем обработчик событий при монтировании компонента
+    //     document.addEventListener('mousedown', handleClickOutside);
+    //
+    //     // Убираем обработчик событий при размонтировании компонента
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     };
+    // }, []);
 
-    const menuRef = useRef<HTMLDivElement | null>(null);
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-                // console.log('Клик вне компонента');
-                setVisibleMenu(false)
-                // Логика закрытия или другого действия
-            }
-        }
+    // function delCookies(){
+    //     fetch('http://localhost:3000/lists/del-cookie', {
+    //         method: 'POST', // Метод запроса
+    //         credentials: 'include' // Важно для отправки/получения cookie
+    //     })
+    //         .then(response => response.text()) // Читаем ответ как текст
+    //         .then(data => {
+    //             console.log(data); // Выводим ответ сервера ("Cookie has been set!")
+    //         })
+    //         .catch(error => {
+    //             console.error('Ошибка:', error);
+    //         });
+    // }
+    //
+    // function cleanData(){
+    //     delCookies()
+    //     localStorage.removeItem('accessToken')
+    //     localStorage.removeItem('_id')
+    //     // dispatch(setTasks([]))
+    //
+    //     dispatch(cleanTag())
+    //     dispatch(resetState())
+    // }
 
-        // Добавляем обработчик событий при монтировании компонента
-        document.addEventListener('mousedown', handleClickOutside);
+    // const langMap = lang === 'ru' ? russ:eng
 
-        // Убираем обработчик событий при размонтировании компонента
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
-
-    function delCookies(){
-        fetch('http://localhost:3000/lists/del-cookie', {
-            method: 'POST', // Метод запроса
-            credentials: 'include' // Важно для отправки/получения cookie
-        })
-            .then(response => response.text()) // Читаем ответ как текст
-            .then(data => {
-                console.log(data); // Выводим ответ сервера ("Cookie has been set!")
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-            });
-    }
-
-    function cleanData(){
-        delCookies()
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('_id')
-        // dispatch(setTasks([]))
-
-        dispatch(cleanTag())
-        dispatch(resetState())
-    }
-
-    const langMap = lang === 'ru' ? russ:eng
-    
-    return (
-<div></div>
+//     return (
+// <div></div>
 
         // <div
         //     ref={menuRef}
@@ -241,8 +241,8 @@ function UserName({pathAvaImg, userName}:propsUserNames) {
         //     </ul>
         // </div>
 
+//
+//     );
+// }
 
-    );
-}
-
-export default UserName;
+// export default UserName;

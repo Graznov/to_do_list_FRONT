@@ -54,6 +54,8 @@ export const russ:{
         logIn:string;
         yourName: string;
         yourEmail: string;
+        deleteAkkaunt:string,
+        deleteAkkBtn:string
 } = {
         work_left_theme:'Тема',
         work_left_lang:'Язык',
@@ -109,5 +111,7 @@ export const russ:{
         registration:'Создать аккаунт',
         logIn:'Войти',
         yourName:'Ваше имя: ',
-        yourEmail:'Ваша почта: '
+        yourEmail:'Ваша почта: ',
+        deleteAkkaunt:'Для удаления аккаунта введите свой email:',
+        deleteAkkBtn:'Удалить аккаунт'
 }

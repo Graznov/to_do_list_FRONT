@@ -54,6 +54,8 @@ export const eng:{
         logIn:string;
         yourName: string;
         yourEmail: string;
+        deleteAkkaunt:string,
+        deleteAkkBtn:string
 } = {
         work_left_theme:'Theme',
         work_left_lang:'Lang',
@@ -109,5 +111,7 @@ export const eng:{
         registration:'Sign Up',
         logIn:'Log In',
         yourName:'Your Name: ',
-        yourEmail:'Your Email: '
+        yourEmail:'Your Email: ',
+        deleteAkkaunt: 'To delete your account, enter your email:',
+        deleteAkkBtn:'Delete account'
 }

@@ -26,7 +26,8 @@ export interface StyleState {
     theme:string,
     emailNewAccWindowToLoginWindow:string,
     name:string,//имя, получается при входе в акк
-    token:string,//токен, получается при входе в акк
+    token:string,//токен, получается при входе в акк,
+    pathToImg:string
 }
 
 const initialState:StyleState = {
@@ -54,8 +55,9 @@ const initialState:StyleState = {
     theme:'light',
     emailNewAccWindowToLoginWindow:'',
     name:'',//имя, получается при входе в акк
-    token:'',//токен, получается при входе в акк
-
+    token:'',//токен, получается при входе в акк,
+    pathToImg: '/src/assets/user-img.svg'
+    // pathToImg: 'https://www.svgrepo.com/show/532383/user-question-alt-1.svg'
 }
 
 const styleSlice = createSlice({

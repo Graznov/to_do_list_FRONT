@@ -458,7 +458,8 @@ export interface Task {
     dueDate: string,
     category: string,
     color: string,
-    isCompleted: boolean
+    isCompleted: boolean,
+
 }
 export interface TaskState{
     tasks:Task[],
@@ -467,7 +468,8 @@ export interface TaskState{
     creatDat:string,
     // token:string,
     accessToken:string|undefined
-    id:string
+    id:string,
+    pathImg:string
 }
 const initialState:TaskState = {
     tasks:[],
@@ -476,7 +478,8 @@ const initialState:TaskState = {
     creatDat: "",
     // token: "",
     accessToken: undefined,
-    id:""
+    id:"",
+    pathImg:''
 }
 
 const defSlice = createSlice({
@@ -554,6 +557,9 @@ const defSlice = createSlice({
             state.tasks = state.tasks.filter(a=> a.id !== action.payload)
             console.log(state.tasks)
 
+        },
+        setPathImg(state, action){
+            state.pathImg = action.payload
         }
     }
 
@@ -571,6 +577,7 @@ export const {
     checkTask,
     defChangeTask,
     defDelitTask,
-    setId
+    setId,
+    setPathImg
 } = defSlice.actions;
 export default defSlice.reducer

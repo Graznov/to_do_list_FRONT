@@ -36,11 +36,57 @@
     .userMenu_Data{
         display: flex;
         align-items: center;
+        gap: 20px;
         justify-content: space-between;
 
-        .userMenu_avatar{
+
+        .containerPhoto{
+            /*background: var(--color-secondary-bg);*/
+            position: relative;
             width: 150px;
+            height: 150px;
+            margin: 30px auto;
+            border-radius: 50%;
+
+            /*border: 0px solid silver;*/
+            overflow: hidden;
+
+            .input {
+                position: absolute;
+                bottom: 0;
+                left: 30px;
+                opacity: 0; /* Скрываем стандартный input */
+                width: 100px; /* Ширина */
+                height: 40px; /* Высота */
+                cursor: pointer; /* Курсор в виде указателя */
+            }
+
+            /* Создаем кастомную кнопку */
+            .custom-file-upload {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                bottom: 0;
+                left: 0px;
+                cursor: pointer;
+                opacity: 0;
+            }
+
+            .img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 150px;
+
+            }
+
         }
+
+        /*.userMenu_avatar{*/
+        /*    width: 150px;*/
+        /*}*/
 
         .userMenu_Data_Right{
             display: flex;

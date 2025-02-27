@@ -1,7 +1,7 @@
 import styles from './workWind.module.css'
 import classNames from "classnames/bind";
 import LeftPanelBtn from "./Components/LeftPanelBtn/LeftPanelBtn.tsx";
-import UserName from "./Components/UserName/UserName.tsx";
+// import UserName from "./Components/UserName-/UserName.tsx";
 import {ReactComponent as LogoOne} from "/src/assets/one.svg";
 import {ReactComponent as LogoSeven} from "/src/assets/Seven.svg";
 import {ReactComponent as LogoAll} from "/src/assets/All.svg";
@@ -42,6 +42,8 @@ function WorkWind() {
     const theme = useAppSelector(state => state.styleSlice.theme)
     const lang = useAppSelector(state => state.styleSlice.language)
     const data = useAppSelector(state => state.defSlice)
+    const pathToImg = useAppSelector(state => state.styleSlice.pathToImg)
+
 
     const navigate = useNavigate()
 
@@ -109,7 +111,7 @@ function WorkWind() {
         }
     }, []);
 
-    console.log(data)
+    // console.log(data)
     useEffect(()=> {
         list.forEach((e:Task)=> dispatch(plusTag(e.category)))
         dispatch(setNumberTasksMenu(list))
@@ -125,6 +127,8 @@ function WorkWind() {
     let searchTaskArr:Array<Task> = []
 
     const langMap = lang === 'ru' ? russ:eng
+
+
 
     return (
 
@@ -149,18 +153,18 @@ function WorkWind() {
                             to={'/workwindow/menu'}>
 
                             <img
-                                src="https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png"
+                                src={(data.pathImg.length)?data.pathImg:pathToImg}
                                 alt="avatar"
                                 width={'60px'}/>
 
                             <div>{data.name}</div>
 
                         </NavLink>
-                    <UserName
-                        pathAvaImg={'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'}
+                    {/*<UserName*/}
+                    {/*    pathAvaImg={'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'}*/}
 
-                        // pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}
-                        userName={data.name}/>
+                    {/*    pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}*/}
+                    {/*    userName={data.name}/>*/}
 
 
                     </div>

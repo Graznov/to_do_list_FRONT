@@ -11,7 +11,7 @@ import {ReactComponent as CloseSvg} from "/src/assets/close-square-svgrepo-com.s
 import {ReactComponent as LogOut} from "/src/assets/logout_icon.svg";
 import {ReactComponent as DeleteUser} from "/src/assets/delete_profile_user.svg";
 
-import {resetState} from "../../../../Store/defSlice.ts";
+import {resetState, setPathImg} from "../../../../Store/defSlice.ts";
 
 
 const cx = classNames.bind(styles);
@@ -22,6 +22,7 @@ const us:string = '/src/assets/flag-us-svgrepo-com.svg'
 const ru:string = '/src/assets/flag-ru-svgrepo-com.svg'
 
 function UserMenu(){
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -30,8 +31,9 @@ function UserMenu(){
     const theme = useAppSelector(state => state.styleSlice.theme)
     const lang = useAppSelector(state => state.styleSlice.language)
     const userId = useAppSelector(state => state.defSlice.id)
+    const pathPhoto = useAppSelector(state => state.defSlice.pathImg)
     const userEmail = useAppSelector(state => state.defSlice.email)
-
+    const pathToImg = useAppSelector(state => state.styleSlice.pathToImg)
 
     const [pathImgLang, setPathImgLang] = useState(us)
     const [pathImgTheme, setPathImgTheme] = useState(lightThemePath);
@@ -97,9 +99,8 @@ function UserMenu(){
         console.log(inputIdForDelete)
     }
 
-    const pathToImg = 'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'
 
-    console.log(data)
+    // console.log(data)
 
     function delCookies(){
         fetch('http://localhost:3000/lists/del-cookie', {
@@ -127,13 +128,30 @@ function UserMenu(){
 
     const langMap = lang === 'ru' ? russ:eng
 
+
+
     return(
         <div className={cx("userMenu", {
             'userMenu_dark': theme === 'dark',
         })}>
 
             <div className={cx('userMenu_Data')}>
-                <img className={cx('userMenu_avatar')} src={pathToImg} alt="UserAvatar"/>
+
+                <div className={cx('containerPhoto')}>
+
+                    <img
+                        src={(pathPhoto.length)?pathPhoto:pathToImg}
+                        className={cx('img')}/>
+                    <label htmlFor="file-upload" className={cx('custom-file-upload')}></label>
+                    <input onChange={(e)=>{
+                        const reader = new FileReader();
+                        reader.onload = e => dispatch(setPathImg(e.target.result))
+                        reader.readAsDataURL(event.target.files[0]);
+                    }} id="file-upload" className={cx('input')} type="file"/>
+
+                </div>
+
+                {/*<img className={cx('userMenu_avatar')} src={pathToImg} alt="UserAvatar"/>*/}
 
                 <div className={cx('userMenu_Data_Right')}>
                     <div className={cx('userMenu_Name')}>
@@ -161,7 +179,7 @@ function UserMenu(){
                 <button
                     className={cx('btn_menu', 'btn_menu_theme', 'button_menu_img')}
                     onClick={changeTheme}>
-                    <img src={pathImgTheme} alt=""/>
+                <img src={pathImgTheme} alt=""/>
                 </button>
 
                 <button
@@ -197,11 +215,11 @@ function UserMenu(){
 
                     <button
                         className={cx('btnDelAkk_Close_container')}
-                    onClick={()=>{setVisibleContainerDelete(!visibleContainerDelete)}}>
+                        onClick={()=>{setVisibleContainerDelete(!visibleContainerDelete)}}>
                     <CloseSvg/>
                 </button>
                 <p>
-                    Для удаления аккаунта введите свой email:
+                    {langMap.deleteAkkaunt}
                 </p>
 
                 <div className={cx('deleteAkk_Id')}>{userEmail}</div>
@@ -244,9 +262,7 @@ function UserMenu(){
                                 navigate('/login')
                             });
                     }}>
-                    {/*<span>{langMap.work_left_lang}</span>*/}
-                    <span>{'Удалить аккаунт'}</span>
-                    {/*<img className={cx({'us': pathImgLang === us})} src={pathImgLang} alt=""/>*/}
+                    <span>{langMap.deleteAkkBtn}</span>
                 </button>
                 </div>
             </div>
