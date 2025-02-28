@@ -128,7 +128,43 @@ function UserMenu(){
 
     const langMap = lang === 'ru' ? russ:eng
 
+    const [file, setFile] = useState(null);
+    console.log(file)
+    // Обработчик, который положит файл в стейт
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
 
+    // Обработчик для отпавки файла
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Проверяем, что файл выбран
+        if (!file) {
+            alert("Файл не выбран");
+            return;
+        }
+
+        // Создаем FormData
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error("Ошибка загрузки");
+            }
+
+            const data = await response.json();
+            console.log("Файл успешно загружен:", data);
+        } catch (error) {
+            console.error("Ошибка загрузки:", error);
+        }
+    };
 
     return(
         <div className={cx("userMenu", {
@@ -143,11 +179,15 @@ function UserMenu(){
                         src={(pathPhoto.length)?pathPhoto:pathToImg}
                         className={cx('img')}/>
                     <label htmlFor="file-upload" className={cx('custom-file-upload')}></label>
-                    <input onChange={(e)=>{
-                        const reader = new FileReader();
-                        reader.onload = e => dispatch(setPathImg(e.target.result))
-                        reader.readAsDataURL(event.target.files[0]);
-                    }} id="file-upload" className={cx('input')} type="file"/>
+                    <input onChange={
+                        // (e)=>{
+                        //     const reader = new FileReader();
+                        //     reader.onload = e => dispatch(setPathImg(e.target.result))
+                        //     reader.readAsDataURL(e.target.files[0]);
+                        //     setFile(e.target.files[0]);
+                        // }
+                        handleFileChange
+                    } id="file-upload" className={cx('input')} type="file"/>
 
                 </div>
 
