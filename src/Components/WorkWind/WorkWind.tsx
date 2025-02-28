@@ -18,8 +18,8 @@ import {AddTaskWindow} from "./Components/AddTaskWindow/AddTaskWindow.tsx";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {
     changeTaskList, cleanTag,
-    plusTag, setAdaptiveVisible,
-    setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive,
+    plusTag, setAdaptiveVisible, setLang,
+    setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive, setTheme,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
 import {resetState, setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
@@ -44,7 +44,23 @@ function WorkWind() {
     const data = useAppSelector(state => state.defSlice)
     const pathToImg = useAppSelector(state => state.styleSlice.pathToImg)
 
+    // useEffect(()=>{
+    //     if(!localStorage.getItem('lang')){
+    //         localStorage.setItem('lang', lang)
+    //     } else {
+    //         dispatch(setLang(localStorage.getItem('lang')))
+    //     }
+    //
+    //     if(!localStorage.getItem('theme')){
+    //         localStorage.setItem('theme', lang)
+    //     } else {
+    //         dispatch(setTheme(localStorage.getItem('theme')))
+    //     }
+    // }, [])
 
+
+
+    console.log(`lang: ${lang}\ntheme: ${theme}`)
     const navigate = useNavigate()
 
     function delCookies(){
@@ -70,6 +86,18 @@ function WorkWind() {
     }
 
     useEffect(() => {
+
+        if(!localStorage.getItem('lang')){
+            localStorage.setItem('lang', lang)
+        } else {
+            dispatch(setLang(localStorage.getItem('lang')))
+        }
+
+        if(!localStorage.getItem('theme')){
+            localStorage.setItem('theme', lang)
+        } else {
+            dispatch(setTheme(localStorage.getItem('theme')))
+        }
 
         if(!localStorage.getItem('accessToken')){
             navigate('/login')
