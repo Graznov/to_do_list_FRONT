@@ -129,11 +129,44 @@ function UserMenu(){
     const langMap = lang === 'ru' ? russ:eng
 
     const [file, setFile] = useState(null);
-    console.log(file)
+
+    useEffect(() => {
+        console.log(file)
+
+        const formData = new FormData(); // Создаем объект FormData
+        formData.append('file', file!); // Добавляем файл в FormData
+
+        fetch(`http://localhost:3000/lists/avatar`, {
+            method: 'POST', // Указываем метод запроса
+            headers: {
+                'Content-Type': 'application/json' // Устанавливаем заголовок Content-Type для указания типа данных
+            },
+            body: formData
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    // setRespons(response.statusText)
+                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                }
+
+                return response.json()
+            })
+
+            .then((data) => {
+
+                console.log('Данные получены', data)
+                // setRespons(data)
+            })
+            .catch((err) => {
+                console.log('Произошла ошибка', err.message)
+            })
+    }, [file]);
+
+
     // Обработчик, который положит файл в стейт
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
+    // const handleFileChange = (e) => {
+    //     setFile(e.target.files[0]);
+    // };
 
     // Обработчик для отпавки файла
     // const handleSubmit = async (e) => {
@@ -165,6 +198,8 @@ function UserMenu(){
     //         console.error("Ошибка загрузки:", error);
     //     }
     // };
+
+
 
     return(
         <div className={cx("userMenu", {
