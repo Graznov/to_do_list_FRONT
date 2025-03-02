@@ -128,50 +128,15 @@ function UserMenu(){
 
     const langMap = lang === 'ru' ? russ:eng
 
-    const [file, setFile] = useState(null);
-
-    useEffect(() => {
-        console.log(file)
-
-        const formData = new FormData(); // Создаем объект FormData
-        formData.append('file', file!); // Добавляем файл в FormData
-
-        fetch(`http://localhost:3000/lists/avatar`, {
-            method: 'POST', // Указываем метод запроса
-            headers: {
-                'Content-Type': 'application/json' // Устанавливаем заголовок Content-Type для указания типа данных
-            },
-            body: formData
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    // setRespons(response.statusText)
-                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
-                }
-
-                return response.json()
-            })
-
-            .then((data) => {
-
-                console.log('Данные получены', data)
-                // setRespons(data)
-            })
-            .catch((err) => {
-                console.log('Произошла ошибка', err.message)
-            })
-    }, [file]);
-
-
-    // Обработчик, который положит файл в стейт
-    // const handleFileChange = (e) => {
-    //     setFile(e.target.files[0]);
-    // };
-
-    // Обработчик для отпавки файла
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
+    // const [file, setFile] = useState(null);
     //
+    // console.log(file)
+    //
+    //
+    // const handleSubmit = async () => {
+    //     // e.preventDefault();
+    //
+    //     console.log(111)
     //     // Проверяем, что файл выбран
     //     if (!file) {
     //         alert("Файл не выбран");
@@ -182,21 +147,29 @@ function UserMenu(){
     //     const formData = new FormData();
     //     formData.append("file", file);
     //
-    //     try {
-    //         const response = await fetch('/upload', {
+    //     console.log(formData)
+    //
+    //     // try {
+    //     //     const response =
+    //             await fetch('/lists/avatar', {
     //             method: 'POST',
+    //             credentials: "include",
+    //             headers: {
+    //                 'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+    //                 'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+    //             },
     //             body: formData,
     //         });
     //
-    //         if (!response.ok) {
-    //             throw new Error("Ошибка загрузки");
-    //         }
-    //
-    //         const data = await response.json();
+    //         // if (!response.ok) {
+    //         //     throw new Error("Ошибка загрузки");
+    //         // }
+    //         //
+    //         // const data = await response.json();
     //         console.log("Файл успешно загружен:", data);
-    //     } catch (error) {
-    //         console.error("Ошибка загрузки:", error);
-    //     }
+    //     // } catch (error) {
+    //     //     console.error("Ошибка загрузки:", error);
+    //     // }
     // };
 
 
@@ -211,18 +184,48 @@ function UserMenu(){
                 <div className={cx('containerPhoto')}>
 
                     <img
-                        src={(pathPhoto.length)?pathPhoto:pathToImg}
+                        src={(pathPhoto.length) ? pathPhoto : pathToImg}
                         className={cx('img')}/>
                     <label htmlFor="file-upload" className={cx('custom-file-upload')}></label>
-                    <input onChange={
-                        (e)=>{
-                            const reader = new FileReader();
-                            reader.onload = e => dispatch(setPathImg(e.target.result))
-                            reader.readAsDataURL(e.target.files[0]);
-                            setFile(e.target.files[0]);
+
+                    <input
+                        id="file-upload"
+                        className={cx('input')}
+                        type="file"
+                        accept="image/*"
+                        onChange={
+                        async (e) => {
+                            const file = e.target.files[0]; // Получаем выбранный файл
+                            if (file) {
+                                const formData = new FormData(); // Создаем объект FormData
+                                formData.append('file', file); // Добавляем файл в FormData
+
+                                // Отправляем файл на бэкенд
+                                await fetch('/lists/avatar', { // Замени '/upload' на твой эндпоинт
+                                    method: 'POST',
+                                    credentials: "include",
+                                    headers: {
+                                        'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                        'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                    },
+                                    body: formData,
+                                })
+                                    .then(response => response.text()) // Сначала читаем ответ как текст
+                                    .then(text => {
+                                        console.log('Ответ сервера:', text); // Логируем ответ
+                                        try {
+                                            const data = JSON.parse(text); // Пробуем парсить вручную
+                                            console.log('Файл успешно загружен:', data);
+                                        } catch (error) {
+                                            console.error('Ответ не является валидным JSON:', text);
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('Ошибка при загрузке файла:', error);
+                                    });
+                            }
                         }
-                        // handleFileChange
-                    } id="file-upload" className={cx('input')} type="file"/>
+                    } />
 
                 </div>
 
@@ -231,7 +234,7 @@ function UserMenu(){
                 <div className={cx('userMenu_Data_Right')}>
                     <div className={cx('userMenu_Name')}>
                         <div>
-                            {langMap.yourName}
+                        {langMap.yourName}
                         </div>
                         <div className={cx('userMenu_span')}>
                             {data.name}

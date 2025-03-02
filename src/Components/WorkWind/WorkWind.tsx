@@ -22,7 +22,7 @@ import {
     setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive, setTheme,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
-import {resetState, setCreatDat, setEmail, setId, setName, setTasks, Task} from "../../Store/defSlice.ts";
+import {resetState, setCreatDat, setEmail, setId, setName, setPathImg, setTasks, Task} from "../../Store/defSlice.ts";
 import Btn from "../ui-kit/Btn.tsx";
 import {eng} from "../../Store/En.ts";
 import {russ} from "../../Store/Ru.ts";
@@ -134,6 +134,7 @@ function WorkWind() {
                     dispatch(setId(data.id))
                     dispatch(setEmail(data.email))
                     dispatch(setCreatDat(data.creatDat))
+                    dispatch(setPathImg(data.pathImg))
 
                 })
         }

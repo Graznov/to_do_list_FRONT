@@ -469,7 +469,8 @@ export interface TaskState{
     // token:string,
     accessToken:string|undefined
     id:string,
-    pathImg:string
+    pathImg:string,
+
 }
 const initialState:TaskState = {
     tasks:[],
