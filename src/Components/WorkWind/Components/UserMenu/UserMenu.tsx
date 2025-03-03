@@ -3,29 +3,26 @@ import styles from "./userMenu.module.css";
 import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
 import {russ} from "../../../../Store/Ru.ts";
 import {eng} from "../../../../Store/En.ts";
-import {useEffect, useState} from "react";
+import {SetStateAction, useEffect, useState} from "react";
 import {cleanTag, setLang, setTheme} from "../../../../Store/styleSlise.ts";
 import {NavLink, useNavigate} from "react-router-dom";
 import {ReactComponent as CloseSvg} from "/src/assets/close-square-svgrepo-com.svg";
-// import {ReactComponent as LogoTrash} from "/src/assets/trash.svg";
 import {ReactComponent as LogOut} from "/src/assets/logout_icon.svg";
 import {ReactComponent as DeleteUser} from "/src/assets/delete_profile_user.svg";
-
 import {resetState, setPathImg} from "../../../../Store/defSlice.ts";
 
 
 const cx = classNames.bind(styles);
 
-const lightThemePath:string = '/src/assets/day-theme.svg'
-const darkThemePath:string = '/src/assets/night-theme.svg'
-const us:string = '/src/assets/flag-us-svgrepo-com.svg'
-const ru:string = '/src/assets/flag-ru-svgrepo-com.svg'
+const lightThemePath: string = '/src/assets/day-theme.svg'
+const darkThemePath: string = '/src/assets/night-theme.svg'
+const us: string = '/src/assets/flag-us-svgrepo-com.svg'
+const ru: string = '/src/assets/flag-ru-svgrepo-com.svg'
 
-function UserMenu(){
+function UserMenu() {
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-
 
     const data = useAppSelector(state => state.defSlice)
     const theme = useAppSelector(state => state.styleSlice.theme)
@@ -41,23 +38,26 @@ function UserMenu(){
     const [visibleBtnDelete, setVisibleBtnDelete] = useState<boolean>(true)
     const [visibleContainerDelete, setVisibleContainerDelete] = useState<boolean>(false)
 
-    useEffect(()=>{
-        if(!localStorage.getItem('lang')){
+
+    useEffect(() => {
+        if (!localStorage.getItem('lang')) {
             localStorage.setItem('lang', lang)
         }
         dispatch(setLang(localStorage.getItem('lang')));
-        (lang==='ru')?setPathImgLang(ru):setPathImgLang(us);
-    }, [dispatch, lang])
+        (lang === 'ru') ? setPathImgLang(ru) : setPathImgLang(us);
+    }, [dispatch, lang, data])
 
     useEffect(() => {
-        if(!localStorage.getItem('theme')){
+
+
+        if (!localStorage.getItem('theme')) {
             localStorage.setItem('theme', theme)
         }
 
-        if(localStorage.getItem('theme')==='light') {
+        if (localStorage.getItem('theme') === 'light') {
             setPathImgTheme(lightThemePath)
             dispatch(setTheme('light'))
-        } else if(localStorage.getItem('theme')==='dark') {
+        } else if (localStorage.getItem('theme') === 'dark') {
             setPathImgTheme(darkThemePath);
             dispatch(setTheme('dark'))
         }
@@ -65,11 +65,11 @@ function UserMenu(){
     }, []);
 
     const changeTheme = () => {
-        if(theme==='light') {
+        if (theme === 'light') {
             setPathImgTheme(darkThemePath)
             dispatch(setTheme('dark'))
             localStorage.setItem('theme', 'dark')
-        } else if(theme==='dark') {
+        } else if (theme === 'dark') {
             setPathImgTheme(lightThemePath);
             dispatch(setTheme('light'))
             localStorage.setItem('theme', 'light')
@@ -77,11 +77,11 @@ function UserMenu(){
         }
     }
     const changeLanguage = () => {
-        if(pathImgLang===us){
+        if (pathImgLang === us) {
             setPathImgLang(ru)
             dispatch(setLang('ru'))
             localStorage.setItem('lang', 'ru')
-        } else if(pathImgLang===ru){
+        } else if (pathImgLang === ru) {
             setPathImgLang(us)
             dispatch(setLang('en'))
             localStorage.setItem('lang', 'en')
@@ -89,7 +89,7 @@ function UserMenu(){
     }
 
 
-    function inputDelete(e){
+    function inputDelete(e: { target: { value: SetStateAction<string>; }; }){
         setInputIdForDelete(e.target.value)
         if(e.target.value===userEmail){
             setVisibleBtnDelete(false)
@@ -98,9 +98,6 @@ function UserMenu(){
         }
         console.log(inputIdForDelete)
     }
-
-
-    // console.log(data)
 
     function delCookies(){
         fetch('http://localhost:3000/lists/del-cookie', {
@@ -126,53 +123,45 @@ function UserMenu(){
         dispatch(resetState())
     }
 
+
+
+    const handleFileChange = async (e) => {
+
+        const file = e.target.files[0];
+        if (!file) {
+            alert("Файл не выбран");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const response = await fetch(`http://localhost:3000/lists/avatar/${userId}`, {
+                method: 'POST',
+                body: formData,
+            });
+            if (!response.ok) {
+                throw new Error(`Ошибка: ${response.status} ${response.statusText}`);
+            } else {
+                console.log(response)
+            }
+            const contentType = response.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+                const data = await response.json();
+                console.log('Файл успешно загружен:', data);
+                dispatch(setPathImg(data.pathToAvatar))
+            } else {
+                const text = await response.text();
+                console.log('Ответ сервера:', text);
+            }
+        } catch (error) {
+            // console.error('Ошибка при загрузке файла:', error.message || error);
+            alert('Произошла ошибка при загрузке файла. Пожалуйста, попробуйте снова.');
+        }
+    };
+
     const langMap = lang === 'ru' ? russ:eng
-
-    // const [file, setFile] = useState(null);
-    //
-    // console.log(file)
-    //
-    //
-    // const handleSubmit = async () => {
-    //     // e.preventDefault();
-    //
-    //     console.log(111)
-    //     // Проверяем, что файл выбран
-    //     if (!file) {
-    //         alert("Файл не выбран");
-    //         return;
-    //     }
-    //
-    //     // Создаем FormData
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-    //
-    //     console.log(formData)
-    //
-    //     // try {
-    //     //     const response =
-    //             await fetch('/lists/avatar', {
-    //             method: 'POST',
-    //             credentials: "include",
-    //             headers: {
-    //                 'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-    //                 'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
-    //             },
-    //             body: formData,
-    //         });
-    //
-    //         // if (!response.ok) {
-    //         //     throw new Error("Ошибка загрузки");
-    //         // }
-    //         //
-    //         // const data = await response.json();
-    //         console.log("Файл успешно загружен:", data);
-    //     // } catch (error) {
-    //     //     console.error("Ошибка загрузки:", error);
-    //     // }
-    // };
-
-
 
     return(
         <div className={cx("userMenu", {
@@ -181,52 +170,19 @@ function UserMenu(){
 
             <div className={cx('userMenu_Data')}>
 
-                <div className={cx('containerPhoto')}>
+                <div
+                    className={cx('containerPhoto')}>
 
                     <img
                         src={(pathPhoto.length) ? pathPhoto : pathToImg}
                         className={cx('img')}/>
                     <label htmlFor="file-upload" className={cx('custom-file-upload')}></label>
-
                     <input
                         id="file-upload"
                         className={cx('input')}
                         type="file"
                         accept="image/*"
-                        onChange={
-                        async (e) => {
-                            const file = e.target.files[0]; // Получаем выбранный файл
-                            if (file) {
-                                const formData = new FormData(); // Создаем объект FormData
-                                formData.append('file', file); // Добавляем файл в FormData
-
-                                // Отправляем файл на бэкенд
-                                await fetch('/lists/avatar', { // Замени '/upload' на твой эндпоинт
-                                    method: 'POST',
-                                    credentials: "include",
-                                    headers: {
-                                        'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
-                                        'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
-                                    },
-                                    body: formData,
-                                })
-                                    .then(response => response.text()) // Сначала читаем ответ как текст
-                                    .then(text => {
-                                        console.log('Ответ сервера:', text); // Логируем ответ
-                                        try {
-                                            const data = JSON.parse(text); // Пробуем парсить вручную
-                                            console.log('Файл успешно загружен:', data);
-                                        } catch (error) {
-                                            console.error('Ответ не является валидным JSON:', text);
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Ошибка при загрузке файла:', error);
-                                    });
-                            }
-                        }
-                    } />
-
+                        onChange={ handleFileChange }/>
                 </div>
 
                 {/*<img className={cx('userMenu_avatar')} src={pathToImg} alt="UserAvatar"/>*/}

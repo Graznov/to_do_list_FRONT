@@ -1,7 +1,7 @@
 import styles from './registr.module.css'
 import TopCont from "../topCont/TopCont.tsx";
 import {RightLogoSignUp_Login} from "../RightLogoSignUp_Login/RightLogoSignUp_Login.tsx";
-import {NavLink, Outlet} from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import classNames from "classnames/bind";
 import {useEffect} from "react";
