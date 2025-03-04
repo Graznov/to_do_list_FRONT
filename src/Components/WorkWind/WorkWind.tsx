@@ -185,17 +185,12 @@ function WorkWind() {
                             <img
                                 src={(data.pathImg.length)?data.pathImg:pathToImg}
                                 alt="avatar"
-                                width={'60px'}/>
+                                // width={'60px'}
+                            />
 
                             <div>{data.name}</div>
 
                         </NavLink>
-                    {/*<UserName*/}
-                    {/*    pathAvaImg={'https://www.pngarts.com/files/5/User-Avatar-PNG-Transparent-Image.png'}*/}
-
-                    {/*    pathAvaImg={'https://wallpapers.com/images/high/stylized-manin-suitand-sunglasses-avatar-xkm7f2gkd43126ix.png'}*/}
-                    {/*    userName={data.name}/>*/}
-
 
                     </div>
 
@@ -450,14 +445,14 @@ function WorkWind() {
                                 setPushed(!pushed)
                             }}>
 
-                            <div className={cx("btn_line", "btn_1",{
-                                'btn_1_Pushed':pushed
+                            <div className={cx("btn_line", "btn_1", {
+                                'btn_1_Pushed': pushed
                             })}></div>
-                            <div className={cx("btn_line", "btn_2",{
-                                'btn_2_Pushed':pushed
+                            <div className={cx("btn_line", "btn_2", {
+                                'btn_2_Pushed': pushed
                             })}></div>
-                            <div className={cx("btn_line", "btn_3",{
-                                'btn_3_Pushed':pushed
+                            <div className={cx("btn_line", "btn_3", {
+                                'btn_3_Pushed': pushed
                             })}></div>
 
                         </button>
@@ -466,9 +461,18 @@ function WorkWind() {
                         <button
                             onClick={clickAddTask}
                             className={cx('floorBtn', {
-                                'floorBtn_dark':theme==='dark'
+                                'floorBtn_dark': theme === 'dark'
                             })}>
                             {langMap.addTask}
+                        </button>
+
+                        <button
+                            onClick={clickAddTask}
+                            className={cx('floorBtn_Mobile', {
+                                'floorBtn_Mobile_dark': theme === 'dark',
+
+                            })}>
+                            {'+'}
                         </button>
 
                     </div>
@@ -476,7 +480,7 @@ function WorkWind() {
                 </div>
 
             </div>
-                <AddTaskWindow/>
+            <AddTaskWindow/>
         </>
     );
 }
