@@ -1,7 +1,6 @@
 import styles from './workWind.module.css'
 import classNames from "classnames/bind";
 import LeftPanelBtn from "./Components/LeftPanelBtn/LeftPanelBtn.tsx";
-// import UserName from "./Components/UserName-/UserName.tsx";
 import {ReactComponent as LogoOne} from "/src/assets/one.svg";
 import {ReactComponent as LogoSeven} from "/src/assets/Seven.svg";
 import {ReactComponent as LogoAll} from "/src/assets/All.svg";
