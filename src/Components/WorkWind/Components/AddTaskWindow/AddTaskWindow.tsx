@@ -122,7 +122,9 @@ export const AddTaskWindow = () => {
                 />
 
                 <div className={cx("dropdown")}>
-                    <button type='button' className={cx("dropbtn")}>
+                    <button type='button' className={cx("dropbtn",{
+                        'dropbtn_dark':theme==='dark'
+                    })}>
                         {langMap.add_task_wind_btnTag}
                     </button>
                     <div className={cx("dropdown-content",{

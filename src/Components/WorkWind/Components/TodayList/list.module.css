@@ -42,7 +42,7 @@
 
 
 
-@media screen and (min-width:413px) and (max-width:650px){
+@media screen and (min-width:427px) and (max-width:650px){
   .cont{
 
       .adaptiveNameList{
@@ -54,6 +54,32 @@
       }
   }
 }
-@media screen and (min-width:0px) and (max-width:413px){
 
+@media screen and (min-width:320px) and (max-width:426px){
+    .cont{
+        width: 100%;
+        /*height: 72%;*/
+        color: #717171;
+        border-radius: 10px;
+        padding: 10px;
+        /*height: 10vh;*/
+        overflow: auto;
+        margin: 13vh auto 10vh auto;
+
+        .adaptiveNameList{
+            display: block;
+        }
+
+        .content{
+            margin-top: 15px;
+            max-width: 350px;
+            height: max-content;
+
+        }
+        .cont_date{
+            /*font-size: 15px;*/
+        }
+
+
+    }
 }

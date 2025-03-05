@@ -1,4 +1,14 @@
 :root {
+    --color-w-bg:#faf6d7;
+    --color-w-font: #faefc5;
+    --color-w-bgMission: #ebdbb2;
+    --color-w-btn: #076578;
+    --color-w-inputHead: #458487;
+
+    --color-w-btn_hover: #064855;
+    --color-w-font_hover: #b1ac9b;
+
+
     --color-main-bg: #282828;
     --color-secondary-bg: #3c3836;
     --color-secondary-bg-opac:rgba(60,56,54,0.95);
@@ -27,7 +37,8 @@
 .AddTaskContainer{
 
     position: absolute;
-    background: rgba(250, 250, 250, 0.89);
+    /*background: rgba(250, 250, 250, 0.89);*/
+    background: var(--color-w-bg);
     padding: 25px;
     top: 50%;
     left: 50%;
@@ -50,7 +61,8 @@
     /*Выбор тегов:*/
     /* Кнопка выпадающего списка */
     .dropbtn {
-        background-color: #4CAF50;
+        /*background-color: #4CAF50;*/
+        background-color: var(--color-w-btn);
         color: white;
         width: 100%;
         padding: 7px 16px;
@@ -65,11 +77,22 @@
 
     }
 
+    .dropbtn_dark{
+        background: var(--color-primary);
+        color: white;
+    }
+
+    /*.dropbtn_dark:hover{*/
+    /*    background: var(--color-primary-font);*/
+    /*    color: white;*/
+    /*}*/
+
     /* Выпадающее содержимое (скрыто по умолчанию) */
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f1f1f1;
+        /*background-color: #f1f1f1;*/
+        background-color: var(--color-w-bg);
         width: 100%;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
@@ -86,17 +109,29 @@
         display: flex;
         flex-direction: column;
         text-decoration: none;
+        background: var(--color-w-bg);
         /*display: block;*/
     }
 
     /* Изменение цвета выпадающих ссылок при наведении курсора */
-    .dropdown-content button:hover {background-color: #ddd;}
+    .dropdown-content button:hover {
+        /*background-color: #ddd;*/
+        background: var(--color-w-font_hover);
+
+    }
 
     /* Показать выпадающее меню при наведении курсора */
     .dropdown:hover .dropdown-content {display: block;}
 
     /* Изменение цвета фона кнопки раскрывающегося списка при отображении содержимого раскрывающегося списка */
-    .dropdown:hover .dropbtn {background-color: #3e8e41;}
+    .dropdown:hover .dropbtn {
+        /*background-color: #3e8e41;*/
+        /*background-color: var(--color-w-btn_hover);*/
+    }
+    .dropbtn_dark:hover{
+        /*background: var(--color-primary-font);*/
+        color: white;
+    }
 /*...выбор тегов*/
 
     .AddTaskContainerTop{
@@ -180,11 +215,13 @@
         font-size: 17px;
         border: none;
         border-radius: 5px;
-        background: #a8a7a7;
+        /*background: #a8a7a7;*/
+        background: var(--color-w-btn);
+        color: var(--color-w-font);
         cursor: pointer;
     }
     .AddTaskContainerBtn:hover{
-        background: #5e5e5e;
+        background: var(--color-w-btn_hover);
         /*border: 1px solid rgba(0,0,0,0);*/
     }
 

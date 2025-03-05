@@ -253,3 +253,15 @@
 .userMenu_dark{
     color: var(--color-primary-font);
 }
+
+@media screen and (min-width:320px) and (max-width:650px) {
+    .userMenu{
+        max-width: 400px;
+        min-width: 320px;
+        .userMenu_Data{
+            flex-direction: column;
+
+        }
+
+    }
+}

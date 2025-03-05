@@ -1,3 +1,33 @@
+:root {
+    --color-w-bg: #faf6d7;
+    --color-w-font: #faefc5;
+    --color-w-bgMission: #ebdbb2;
+    --color-w-btn: #076578;
+    --color-w-inputHead: #458487;
+
+    --color-main-bg: #282828;
+    --color-secondary-bg: #3c3836;
+    --color-primary-font: #A89984;
+    --color-secondary-font: #fbf1c7;
+    --color-primmary-icon: #7C6F64;
+    --color-secondary-icon: #fbf1c7;
+    --color-primary: #8EC07C;
+    --color-primary-hover: #689D6A;
+    --color-secondary: #83A598;
+    --color-secondary-hover: #458588;
+    --color-info: #D3869B;
+    --color-info-hover: #B16286;
+    --color-warning: #FABD2F;
+    --color-warning-hover: #D79921;
+    --color-success: #B8BB26;
+    --color-success-hover: #98971A;
+    --color-danger: #FB4934;
+    --color-danger-hover: #CC241D;
+    --color-header-bg: #282828;
+    --color-search-bg: #3c3836;
+    --color-gray-font: gray;
+}
+
 .mission{
     position: relative;
     border: 1px solid silver;
@@ -7,7 +37,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background: rgba(237, 236, 236, 0.5);
+    /*background: rgba(237, 236, 236, 0.5);*/
+    background: var(--color-w-bgMission);
 
     /*cursor: pointer;*/
 
@@ -15,9 +46,12 @@
     .mission-top-cont{
         display: flex;
         gap: 10px;
+
+
     }
 
     input{
+
         width: 25px;
         height: 25px;
     }
@@ -84,25 +118,25 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
 
-        position: relative;
-        width: 220px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: clip;
+        /*position: relative;*/
+        /*width: 220px;*/
+        /*overflow: hidden;*/
+        /*white-space: nowrap;*/
+        /*text-overflow: clip;*/
     }
 
-    .missText::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        height: 100%;
-        width: 120px;
-        background-image: linear-gradient(to right, transparent, rgba(237, 236, 236, 0.5));
-    }
+    /*.missText::after {*/
+    /*    content: "";*/
+    /*    position: absolute;*/
+    /*    right: 0;*/
+    /*    height: 100%;*/
+    /*    width: 120px;*/
+    /*    background-image: linear-gradient(to right, transparent, rgba(237, 236, 236, 0.5));*/
+    /*}*/
 
-    .missText-dark::after{
-        background-image: linear-gradient(to right, transparent, var(--color-header-bg));
-    }
+    /*.missText-dark::after{*/
+    /*    background-image: linear-gradient(to right, transparent, var(--color-header-bg));*/
+    /*}*/
     .missText:hover{
         /*display: block;*/
     }
@@ -111,29 +145,7 @@
 
 
 
-:root {
-    --color-main-bg: #282828;
-    --color-secondary-bg: #3c3836;
-    --color-primary-font: #A89984;
-    --color-secondary-font: #fbf1c7;
-    --color-primmary-icon: #7C6F64;
-    --color-secondary-icon: #fbf1c7;
-    --color-primary: #8EC07C;
-    --color-primary-hover: #689D6A;
-    --color-secondary: #83A598;
-    --color-secondary-hover: #458588;
-    --color-info: #D3869B;
-    --color-info-hover: #B16286;
-    --color-warning: #FABD2F;
-    --color-warning-hover: #D79921;
-    --color-success: #B8BB26;
-    --color-success-hover: #98971A;
-    --color-danger: #FB4934;
-    --color-danger-hover: #CC241D;
-    --color-header-bg: #282828;
-    --color-search-bg: #3c3836;
-    --color-gray-font: gray;
-}
+
 
 .mission-dark{
     background: var(--color-main-bg);
@@ -170,7 +182,8 @@
     display: none;
     width: 100%;
     /*height: 300px;*/
-    background: #ededed;
+    /*background: #ededed;*/
+    background: var(--color-w-bg);
     border: 1px solid silver;
     border-radius: 10px;
     padding: 10px;
@@ -358,5 +371,12 @@
 
 .missionChangeActive{
     display: block;
+
+}
+@media screen and (min-width:320px) and (max-width:426px) {
+
+    .mission{
+        max-width: 90vw;
+    }
 
 }

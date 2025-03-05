@@ -1,5 +1,14 @@
 /*!!!*/
 :root {
+    --color-w-bg: #faf6d7;
+    --color-w-font: #faefc5;
+    --color-w-bgMission: #ebdbb2;
+    --color-w-btn: #076578;
+    --color-w-inputHead: #458487;
+
+    --color-w-btn_hover: #064855;
+    --color-w-font_hover: #b1ac9b;
+
     --color-main-bg: #282828;
     --color-secondary-bg: #3c3836;
     --color-secondary-bg-opac:rgba(60,56,54,0.5);
@@ -31,14 +40,17 @@
     opacity: .89;
 }
 
-.work_container_dark{
-    background: var(--color-main-bg);
-}
+/*.work_container_dark{*/
+/*    background: var(--color-main-bg);*/
+/*}*/
 
 .work_container{
     display: flex;
     font-family: "Exo 2", sans-serif;
     height: 100vh;
+
+
+    background: var(--color-w-bg);
 
     .work_container_PanelDeactive{
         pointer-events: none;
@@ -350,7 +362,10 @@
             position: absolute;
             left: 0;
             right: 0;
-            background: #02029f;
+            /*background: #02029f;*/
+
+            background: var(--color-w-btn);
+
             padding: 25px 35px;
             display: flex;
             justify-content: space-between;
@@ -361,15 +376,20 @@
 
 
             .inputContainer{
+                color: var(--color-w-font);
 
-                color: white;
+
+                /*color: white;*/
                 position: relative;
 
                 .searchInput{
+
                     color: white;
                     font-size: 15px;
-                    background: #02029f;
-                    border: 1px solid white;
+                    /*background: #02029f;*/
+                    background: var(--color-w-inputHead);
+                    /*border: 1px solid white;*/
+                    border: none;
                     padding: 10px 15px 10px 37px;
                     border-radius: 10px;
                 }
@@ -433,6 +453,7 @@
         }
 
         .floor{
+
             position: absolute;
             left: 0;
             right: 0;
@@ -449,27 +470,31 @@
 
             .floorBtn{
                 font-size: 25px;
-                background:  none;
-                border: 2px solid #e8e7e7;
+                /*background:  none;*/
+                background:  var(--color-w-btn);
+                color: var(--color-w-font);
+                border: none;
                 border-radius: 15px;
                 padding: 1vh 135px;
                 box-sizing: border-box;
                 max-width: 500px;
                 cursor: pointer;
-                color: #a9a8a8;
+
                 text-align: left;
                 margin-bottom: 10px;
             }
             .floorBtn:hover{
-                border: 1px solid #9b9999;
-                color: #5e5e5e;
+                background:  var(--color-w-btn_hover);
+                color: var(--color-w-font_hover);
             }
             .floorBtn_dark{
                 border: 1px solid var(--color-primary-font);
+                background: none;
                 color: var(--color-primary-font);
             }
             .floorBtn_dark:hover{
                 border: 1px solid var(--color-secondary-font);
+                background: none;
                 color: var(--color-secondary-font);
             }
             .floorBtn_Mobile{
@@ -483,6 +508,38 @@
     }
 
 
+
+}
+
+.work_container_dark{
+    background: var(--color-main-bg);
+
+    .work_container_rightPanel{
+
+        .floor{
+            .floorBtn{
+                /*font-size: 25px;*/
+                /*background:  none;*/
+                /*border: 2px solid var(--color-primary-font);*/
+                /*border-radius: 15px;*/
+                /*padding: 1vh 135px;*/
+                /*box-sizing: border-box;*/
+                /*max-width: 500px;*/
+                /*cursor: pointer;*/
+
+                /*text-align: left;*/
+                /*margin-bottom: 10px;*/
+            }
+            .floorBtn_dark:hover{
+                /*border: 2px solid var(--color-primary-font);*/
+
+                /*background:  var(--color-w-btn_hover);*/
+                /*color: var(--color-primary-font);*/
+            }
+        }
+
+
+    }
 
 }
 
@@ -665,9 +722,8 @@
 @media screen and (min-width:320px) and (max-width:426px){
 
     .work_container{
-        /*position: absolute;*/
-        /*top: 0;*/
-        /*bottom: 0;*/
+        /*!*position: relative;*!*/
+        /*width: 100%;*/
         /*height: 100%;*/
 
 
@@ -675,31 +731,37 @@
         .work_container_leftPanel{
             display: none;
             position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
 
 
 
             .work_container_leftPanel_Top{
-                /*overflow: hidden;*/
+                padding: 10px 20px 20px 20px;
                 .work_container_to_userMenu{
 
 
                     font-size: 37px;
+
                     img{
                         width: 100px;
                         height: 100px;
                     }
+
                 }
             }
 
 
             button{
-                font-size: 33px
+                font-size: 19px;
             }
             h2{
-                font-size: 27px;
+                font-size: 21px;
             }
             .work_container_leftPanel_TagsList{
-
+                padding: 0;
                 .tag{
                     button{
                         /*font-size: 21px;*/
@@ -708,44 +770,40 @@
                 }
 
             }
+            .completed{
+                padding: 5px 0px;
+            }
+
 
         }
 
         .work_container_leftPanel_Adaptive_Visible{
             display: block;
-            /*position: absolute;*/
-            top: 0;
-            left: 0;
-            right: 0;
-            /*bottom: -100px;*/
             background: rgba(141, 140, 140, 0.99);
             color: black;
             z-index: 1;
-
-            /*.work_container_leftPanel_TagsList{*/
-            /*    .tags{*/
-            /*        max-height: 500px;*/
-            /*        border-bottom: 2px black solid;*/
-            /*    }*/
-            /*}*/
-
-            /*.completed{*/
-            /*    position: absolute;*/
-            /*    bottom: 35px;*/
-            /*}*/
         }
 
         .work_container_rightPanel{
-            position: absolute;
+            position: relative;
             left: 0;
             right: 0;
+            top: 0;
+            bottom: 0;
             /*height: 100vh;*/
+
             .head{
+                /*display: inline-block;*/
                 position: absolute;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+                /*width: 100%;*/
                 /*min-width: 100%;*/
                 left: 0;
                 right: 0;
-                height: 90px;
+                top: 0;
+                height: 13vh;
 
                 .inputContainer{
                     .searchBtn{
@@ -758,10 +816,14 @@
             }
 
             .floor{
-                /*position: absolute;*/
+                position: absolute;
+                height: 15vh;
+                bottom: 0;
+                left: 0;
+                right: 0;
 
-                padding-bottom: 0px;
-                height: 90px;
+                /*padding-bottom: 0px;*/
+
                 /*display: flex;*/
                 .floorBtn{
                     display: none;
