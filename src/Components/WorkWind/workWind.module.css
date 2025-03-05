@@ -135,7 +135,8 @@
             }
 
             .MyListBtn_Active{
-                background: #0000ff;
+                /*background: #0000ff;*/
+                background: var(--color-w-btn);
                 button *{
                     stroke: var(--color-secondary-font);
                     color: var(--color-secondary-font);
@@ -191,7 +192,8 @@
                 ::-webkit-scrollbar,
 
                 .tag:hover{
-                        background: #0000ff;
+                        /*background: #0000ff;*/
+                        background: var(--color-w-btn);
                         color: white;
                 }
                 .tag_dark{
@@ -245,7 +247,9 @@
                     /*color: red;*/
                 }
                 .MyListBtn_Active{
-                    background: #0000ff;
+                    /*background: #0000ff;*/
+                    background: var(--color-w-btn);
+
                     button{
                         color: white;
                     }
@@ -294,7 +298,9 @@
 
             .MyListBtn_Active{
                 button{
-                    background: #0000ff;
+                    /*background: #0000ff;*/
+                    background: var(--color-w-btn);
+
                 }
 
                 button *{
@@ -337,6 +343,8 @@
             button:hover *{
                 stroke: white;
                 stroke-width: 2px;
+                /*background: var(--color-w-btn);*/
+
             }
             /*.logogo {*/
             /*    fill: none;*/

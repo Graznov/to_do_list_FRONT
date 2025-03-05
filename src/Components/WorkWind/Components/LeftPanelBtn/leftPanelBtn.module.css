@@ -21,12 +21,16 @@ a{
 }
 
 button:hover {
-    background: #0000ff;
+    /*background: #0000ff;*/
+    background: var(--color-w-btn);
+
     /*color: #d5d4d4;*/
     color: white;
 }
 button:active {
-    background: #02029f;
+    /*background: #02029f;*/
     /*color: #d5d4d4;*/
+    background: var(--color-w-btn);
+
 
 }

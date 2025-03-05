@@ -125,9 +125,9 @@ function UserMenu() {
 
 
 
-    const handleFileChange = async (e) => {
+    const handleFileChange = async (event:React.ChangeEvent<HTMLInputElement>) => {
 
-        const file = e.target.files[0];
+        const file = (event.target as HTMLInputElement).files?.[0];
         if (!file) {
             alert("Файл не выбран");
             return;
