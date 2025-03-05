@@ -185,7 +185,6 @@ function WorkWind() {
                             <img
                                 src={(data.pathImg.length)?data.pathImg:pathToImg}
                                 alt="avatar"
-                                // width={'60px'}
                             />
 
                             <div>{data.name}</div>
@@ -487,4 +486,3 @@ function WorkWind() {
 
 export default WorkWind;
 
-// 111111111111111111111111
