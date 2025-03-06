@@ -1,4 +1,13 @@
 :root {
+    --color-w-bg: #faf6d7;
+    --color-w-font: #faefc5;
+    --color-w-bgMission: #ebdbb2;
+    --color-w-btn: #076578;
+    --color-w-inputHead: #458487;
+
+    --color-w-btn_hover: #064855;
+    --color-w-font_hover: #b1ac9b;
+
     --color-main-bg: #282828;
     --color-secondary-bg: #3c3836;
     --color-secondary-bg-opac:rgba(60,56,54,0.5);
@@ -71,11 +80,14 @@
                 font-style: normal;
                 font-size: 16px;
 
-                background-color: #FFF;
                 border: 1px solid #d5d4d4;
                 border-radius: 5px;
                 box-sizing: border-box;
-                color: #000;
+                /*color: #000;*/
+
+                background-color: var(--color-w-bg);
+                color: var(--color-primary-font);
+
                 line-height: 16px;
                 height: 50px;
                 outline: 0;
@@ -99,7 +111,7 @@
             .classNameLabelPassTwo{
                 color: #c9c8c8;
                 font-family: Verdana, sans-serif;
-                background-color: #FFF;
+                background-color: var(--color-w-bg);
                 font-size: 16px;
                 line-height: 16px;
                 padding: 5px 10px;
@@ -139,8 +151,8 @@
 
     }
     .classNameBtn{
-        color: #c9c8c8;
-        background: blue;
+        background:  var(--color-w-btn);
+        color: var(--color-w-font);
         /*padding: 20px;*/
         font-family: "Exo 2", sans-serif;
         font-size: 21px;
@@ -169,8 +181,8 @@
 
 
     .classNameBtn:hover{
-        color: #faf7f7;
-        background: #0404bd;
+        color: var(--color-w-font);
+        background: var(--color-w-btn_hover);
     }
     .classNameBtn_dark:hover{
         background: var(--color-primary-hover);

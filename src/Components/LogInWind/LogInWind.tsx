@@ -8,15 +8,7 @@ import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {russ} from "../../Store/Ru.ts";
 import {eng} from "../../Store/En.ts";
 import {setEmailNewAccWindowToLoginWindow, setLang} from "../../Store/styleSlise.ts";
-import {setEmail, setName} from "../../Store/defSlice.ts";
-// import {
-//     setAccessToken,
-//     setCreatDat,
-//     setEmail,
-//     setId,
-//     setName,
-//     setTasks,
-// } from "../../Store/defSlice.ts";
+
 
 const cx = classNames.bind(styles);
 
@@ -247,7 +239,6 @@ export const LogInWind = () => {
             <form className={styles.input_area}>
 
                 <Input
-                    // value={(formLogin.email.length!==0)?formLogin.email:''}
                     value={formLogin.email}
                     name='email'
                     onBlur={e => blurHandler(e)}

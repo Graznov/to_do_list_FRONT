@@ -418,14 +418,7 @@ export const NewAccount = () => {
                         classNameBtn={styles.classInputBtn}
                     />
 
-                    {/*<Btn*/}
-                    {/*    ClassNameBtn={ClassBtn}*/}
-                    {/*    Btn_text={langMap.RegistrWinBtnRegistr}*/}
-                    {/*    type='button'*/}
-                    {/*    Click={clickRegistration}*/}
-                    {/*    disabled={status}*/}
 
-                    {/*/>*/}
                     <button
                         className={ClassBtn}
                         type='button'

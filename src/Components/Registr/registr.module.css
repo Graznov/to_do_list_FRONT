@@ -1,4 +1,13 @@
 :root {
+    --color-w-bg: #faf6d7;
+    --color-w-font: #faefc5;
+    --color-w-bgMission: #ebdbb2;
+    --color-w-btn: #076578;
+    --color-w-inputHead: #458487;
+
+    --color-w-btn_hover: #064855;
+    --color-w-font_hover: #b1ac9b;
+
     --color-main-bg: #282828;
     --color-secondary-bg: #3c3836;
     --color-secondary-bg-opac:rgba(60,56,54,0.5);
@@ -30,6 +39,8 @@
     height: 100vh;
 
     font-family: "Inter", sans-serif;
+
+    background: var(--color-w-bg);
 
     margin: 0px auto;
     display: flex;

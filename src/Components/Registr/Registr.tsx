@@ -33,10 +33,6 @@ function Registr(){
                 <div>
                     <TopCont/>
                 </div>
-                {/*<NavLink*/}
-                {/*    to={'/workwindow'}>*/}
-                {/*    временная ссылка на рабочую страницу*/}
-                {/*</NavLink>*/}
 
                 <Outlet/>
 
