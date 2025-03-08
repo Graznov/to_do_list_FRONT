@@ -25,6 +25,7 @@ import {resetState, setCreatDat, setEmail, setId, setName, setPathImg, setTasks,
 import Btn from "../ui-kit/Btn.tsx";
 import {eng} from "../../Store/En.ts";
 import {russ} from "../../Store/Ru.ts";
+import Note from "./Components/note/Note.tsx";
 
 const cx = classNames.bind(styles);
 
@@ -43,23 +44,12 @@ function WorkWind() {
     const data = useAppSelector(state => state.defSlice)
     const pathToImg = useAppSelector(state => state.styleSlice.pathToImg)
 
-    // useEffect(()=>{
-    //     if(!localStorage.getItem('lang')){
-    //         localStorage.setItem('lang', lang)
-    //     } else {
-    //         dispatch(setLang(localStorage.getItem('lang')))
-    //     }
-    //
-    //     if(!localStorage.getItem('theme')){
-    //         localStorage.setItem('theme', lang)
-    //     } else {
-    //         dispatch(setTheme(localStorage.getItem('theme')))
-    //     }
-    // }, [])
+
+    // console.log('%c'+'WorkWind','color: #e42c64')
 
 
 
-    console.log(`lang: ${lang}\ntheme: ${theme}`)
+    console.log('%c'+`lang: ${lang}\ntheme: ${theme}`,'color: #e42c64; background-color: orange; padding: 2px; font-size:21px');
     const navigate = useNavigate()
 
     function delCookies(){
@@ -431,8 +421,10 @@ function WorkWind() {
                         </div>
 
                     </div>
-
+                    {/*<Note/>*/}
                     <Outlet/>
+
+
 
                     <div className={cx('floor')}>
 
