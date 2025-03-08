@@ -24,24 +24,30 @@ function Note() {
         <>
             <div
                 className={cx("note", {
-                    'note_redacted_visible': visible
+                    // 'note_redacted_visible': visible
                 })}
                 onClick={() => setVisible(!visible)}>
                 <div className={cx("note_title")}>{title(fish)}</div>
                 <div className={cx('note_text',{
-                    'note_text_hidden': visible
+                    // 'note_text_hidden': visible
                 })}>{fish}</div>
 
-                <textarea value={fish}/>
+
 
             </div>
 
 
-            {/*<div className={cx('note_redacted',{*/}
-            {/*    'note_redacted_visible':visible*/}
-            {/*})}>*/}
-
-            {/*</div>*/}
+            <div className={cx('note_redacted', {
+                'note_redacted_visible': visible
+            })}>
+                <button
+                    className={cx('note_redacted_btnClose', {})}
+                    onClick={()=>setVisible(!visible)}>X</button>
+                <input value={title(fish)} type="text"/>
+                <textarea value={fish}/>
+                <button>Сохранить</button>
+                <button>Удалить</button>
+            </div>
         </>
 
     )

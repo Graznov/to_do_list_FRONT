@@ -1,8 +1,9 @@
 .note{
-    position: absolute;
+    /*position: absolute;*/
     width: 150px;
     height: 150px;
     background-color: #ffdb7f;
+    margin: 0 5px 5px 0;
     /*transform: rotate(1deg);*/
     padding: 5px;
     overflow: hidden;
@@ -40,30 +41,41 @@
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;
 }
 
+.note_redacted{
+    display: none;
+    border: 2px solid rgba(248, 2, 2, 0.1);
+    max-width: 350px;
+}
 .note_redacted_visible{
-    /*position: absolute;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -200px 0 0 -175px;
+    display: block;
     /*top: calc(50%-150px);*/
     /*left: calc(50%-150px);*/
     /*display: none;*/
-    width: 90%;
-    margin: 150px auto;
+    min-width: 320px;
+    /*margin: 150px auto;*/
     height: max-content;
     background-color: #ffdb7f;
     cursor: unset;
 
+    textarea {
+        /*background-image: linear-gradient(#F1F1F1 50%, #F9F9F9 50%);*/
+        background-image: linear-gradient(#ffdb7f 50%, #eebe04 50%);
+        background-size: 100% 4rem;
+        border: 1px solid #CCC;
+        width: 100%;
+        height: 400px;
+        line-height: 2rem;
+        margin: 0 auto;
+        padding: 4px 8px;
+    }
+
 }
 
-textarea {
-    /*background-image: linear-gradient(#F1F1F1 50%, #F9F9F9 50%);*/
-    background-image: linear-gradient(#ffdb7f 50%, #eebe04 50%);
-    background-size: 100% 4rem;
-    border: 1px solid #CCC;
-    width: 100%;
-    height: 400px;
-    line-height: 2rem;
-    margin: 0 auto;
-    padding: 4px 8px;
-}
+
 
 /*.note_redacted_visible{*/
 /*    display: block;*/

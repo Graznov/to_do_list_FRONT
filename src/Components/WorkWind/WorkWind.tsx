@@ -185,6 +185,8 @@ function WorkWind() {
 
                     <div className={cx('work_container_leftPanel_calendar')}>
 
+                        <NavLink to={'/workwindow/notelist'}>Заметки</NavLink>
+
                         <LeftPanelBtn
                             className={cx('button',{
                                 'button_dark':theme==='dark',
