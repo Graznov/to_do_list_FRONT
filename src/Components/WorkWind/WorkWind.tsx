@@ -27,7 +27,7 @@ import {
     setCreatDat,
     setEmail,
     setId,
-    setName,
+    setName, setNotesList,
     setPathImg,
     setTasks,
     Task
@@ -57,6 +57,8 @@ function WorkWind() {
     const noteAddWindowVisibl:boolean = useAppSelector(state => state.styleSlice.noteWindRedactVisible)
 
     // console.log('%c'+'WorkWind','color: #e42c64')
+
+    console.log(data)
 
 
     // console.log('%c'+`lang: ${lang}\ntheme: ${theme}`,'color: #e42c64');
@@ -134,7 +136,7 @@ function WorkWind() {
                     dispatch(setEmail(data.email))
                     dispatch(setCreatDat(data.creatDat))
                     dispatch(setPathImg(data.pathImg))
-                    // dispatch(setNotesList(data.notes))
+                    dispatch(setNotesList(data.notes))
                 })
         }
     }, []);

@@ -1,9 +1,9 @@
 import styles from './note.module.css'
 import classNames from "classnames/bind";
 import {useAppDispatch, useAppSelector} from "../../../../Store/hooks.ts";
-import {setNewNote_redactedNote, setNoteRedactWindVisible, setPencil} from "../../../../Store/styleSlise.ts";
+import {cleanTag, setNewNote_redactedNote, setNoteRedactWindVisible, setPencil} from "../../../../Store/styleSlise.ts";
 import {useEffect, useState} from "react";
-import {addNewNote, deleteNote, setRedactedNote, updateNoteList} from "../../../../Store/defSlice.ts";
+import {addNewNote, deleteNote, resetState, setRedactedNote, updateNoteList} from "../../../../Store/defSlice.ts";
 import {ReactComponent as CloseSvg} from "/src/assets/close-square-svgrepo-com.svg";
 import {ReactComponent as ScrepSvg} from "/src/assets/skrep.svg";
 import {ReactComponent as SaveSvg} from "/src/assets/save2.svg";
@@ -11,6 +11,7 @@ import {ReactComponent as LogoTrash} from "/src/assets/trash2.svg";
 import {ReactComponent as PensilSvg} from "/src/assets/pencil2.svg";
 import {russ} from "../../../../Store/Ru.ts";
 import {eng} from "../../../../Store/En.ts";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -25,7 +26,11 @@ function getRandomNumber():number { //рандомное число от -3 до
 
 
 function NewNote(){
+    const navigate = useNavigate()
+
     const dispatch = useAppDispatch()
+
+    const id = useAppSelector(state => state.defSlice.id)
 
     const visible = useAppSelector(state => state.styleSlice.noteWindRedactVisible)
     const lang = useAppSelector(state => state.styleSlice.language)
@@ -224,17 +229,51 @@ function NewNote(){
                                 if (visiblBtnDelete) {
 
                                     if(!pencil) {
+
+
                                         console.log('%c'+'111111111','color: #FABD2F')
-                                        dispatch(updateNoteList({
+
+                                        const note = {
                                             ...noteData,
                                             lastRedactDate: createdDate()
-                                        }))
+                                        }
+
+                                        dispatch(updateNoteList(note))
                                         setNoteData(NOTE_START)
                                         dispatch(setRedactedNote(undefined))
                                         dispatch(setNoteRedactWindVisible(false))
                                         dispatch(setNewNote_redactedNote(false))
                                         // setSwitchRedactedNote(false)
                                         dispatch(setPencil(false))
+
+
+                                        fetch(`http://localhost:3000/lists/changenote/${id}`, {
+                                            method: 'PATCH', // Указываем метод запроса
+                                            credentials: "include",
+                                            headers: {
+                                                'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                                'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                            },
+                                            body: JSON.stringify(note)
+                                        })
+                                            .then((response) => {
+                                                if (!response.ok) {
+                                                    localStorage.removeItem('accessToken')
+                                                    localStorage.removeItem('_id')
+                                                    dispatch(cleanTag())
+                                                    dispatch(resetState())
+                                                    navigate('/login')
+                                                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                                                }
+                                                return response.json()
+                                            })
+                                            .then(doc=>{
+                                                if(doc){
+                                                    localStorage.setItem('accessToken', doc.accessToken)
+                                                }
+                                            })
+
+
                                     } else {
 
                                         console.log('%c'+'22222222222','color: #FABD2F')
@@ -245,16 +284,46 @@ function NewNote(){
                                     console.log('%c'+'Редактирование записи','color: #FABD2F')
 
                                 } else {
+
                                     console.log('%c'+'Новая запись','color: #FABD2F')
 
-                                    dispatch(addNewNote({
+                                    const note = {
                                         ...noteData,
                                         id: `${Math.random().toString(36)}_${new Date().getTime()}_${Math.random().toString(36)}`,
                                         deg: getRandomNumber(),
                                         addDate: createdDate()
-                                    }))
+                                    }
+
+                                    dispatch(addNewNote(note))
                                     setNoteData(NOTE_START)
                                     dispatch(setNoteRedactWindVisible(false))
+
+
+                                    fetch(`http://localhost:3000/lists/newnote/${id}`, {
+                                        method: 'PATCH', // Указываем метод запроса
+                                        credentials: "include",
+                                        headers: {
+                                            'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                            'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                                        },
+                                        body: JSON.stringify(note)
+                                    })
+                                        .then((response) => {
+                                            if (!response.ok) {
+                                                localStorage.removeItem('accessToken')
+                                                localStorage.removeItem('_id')
+                                                dispatch(cleanTag())
+                                                dispatch(resetState())
+                                                navigate('/login')
+                                                throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                                            }
+                                            return response.json()
+                                        })
+                                        .then(doc=>{
+                                            if(doc){
+                                                localStorage.setItem('accessToken', doc.accessToken)
+                                            }
+                                        })
 
                                 }
 
@@ -288,13 +357,41 @@ function NewNote(){
                 </div>
                 <div className={cx('askDel_btn_area')}>
                     <button onClick={() => {
-                        dispatch(deleteNote(noteData.id))
+
+                        const idDeletedNote = {id:noteData.id}
+                        console.log(idDeletedNote)
                         setNoteData(NOTE_START)
                         dispatch(setNoteRedactWindVisible(false))
                         setDeletedWind(false)
                         dispatch(setNewNote_redactedNote(false))
                         dispatch(setPencil(false))
 
+                        fetch(`http://localhost:3000/lists/deletenote/${id}`, {
+                            method: 'PATCH', // Указываем метод запроса
+                            credentials: "include",
+                            headers: {
+                                'Content-Type': 'application/json', // Устанавливаем заголовок Content-Type для указания типа данных
+                                'Authorization': localStorage.getItem('accessToken')!, // Токен передаётся в заголовке
+                            },
+                            body: JSON.stringify(idDeletedNote)
+                        })
+                            .then((response) => {
+                                if (!response.ok) {
+                                    localStorage.removeItem('accessToken')
+                                    localStorage.removeItem('_id')
+                                    dispatch(cleanTag())
+                                    dispatch(resetState())
+                                    navigate('/login')
+                                    throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
+                                }
+                                return response.json()
+                            })
+                            .then(doc=>{
+                                if(doc){
+                                    localStorage.setItem('accessToken', doc.accessToken)
+                                }
+                            })
+                        dispatch(deleteNote(noteData.id))
 
                         // setSwitchRedactedNote(false)
                     }}>
