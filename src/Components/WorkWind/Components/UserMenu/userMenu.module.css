@@ -1,0 +1,267 @@
+:root {
+    --color-main-bg: #282828;
+    --color-secondary-bg: #3c3836;
+    --color-primary-font: #69605e;
+    --color-secondary-font: #fbf1c7;
+    --color-primmary-icon: #7C6F64;
+    --color-secondary-icon: #fbf1c7;
+    --color-primary: #8EC07C;
+    --color-primary-hover: #689D6A;
+    --color-secondary: #83A598;
+    --color-secondary-hover: #458588;
+    --color-info: #D3869B;
+    --color-info-hover: #B16286;
+    --color-warning: #FABD2F;
+    --color-warning-hover: #D79921;
+    --color-success: #B8BB26;
+    --color-success-hover: #98971A;
+    --color-danger: #FB4934;
+    --color-danger-hover: #CC241D;
+    --color-header-bg: #282828;
+    --color-search-bg: #3c3836;
+    --color-gray-font: gray;
+}
+
+.userMenu{
+    position: relative;
+    min-width: 300px;
+    max-width: 500px;
+    font-size: 17px;
+    padding: 20px;
+    margin: 135px auto;
+    border: 2px solid rgba(168,153,132,0.1);
+
+    border-radius: 25px;
+
+    .userMenu_Data{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: space-between;
+
+
+        .containerPhoto{
+            /*background: var(--color-secondary-bg);*/
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 30px auto;
+            border-radius: 50%;
+
+            /*border: 0px solid silver;*/
+            overflow: hidden;
+
+            .input {
+                position: absolute;
+                bottom: 0;
+                left: 30px;
+                opacity: 0; /* Скрываем стандартный input */
+                width: 100px; /* Ширина */
+                height: 40px; /* Высота */
+                cursor: pointer; /* Курсор в виде указателя */
+            }
+
+            /* Создаем кастомную кнопку */
+            .custom-file-upload {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                bottom: 0;
+                left: 0px;
+                cursor: pointer;
+                opacity: 0;
+            }
+
+            .img{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 150px;
+
+            }
+
+        }
+
+        /*.userMenu_avatar{*/
+        /*    width: 150px;*/
+        /*}*/
+
+        .userMenu_Data_Right{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .userMenu_Name,
+            .userMenu_Email{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding-right: 10px;
+                .userMenu_span{
+                    font-size: 25px;
+                    width: 200px;
+                    overflow: hidden;
+                }
+            }
+        }
+
+
+    }
+
+
+    .menu_setting{
+
+        margin-bottom: -10px;
+
+        margin-top: 20px;
+        display: flex;
+
+        .btn_menu{
+            width: 100%;
+            font-size: 21px;
+            flex-direction: row;
+            justify-content: space-between;
+            background: none;
+            border: none;
+            cursor: pointer;
+            .us{
+                transform: scale(1, -1)
+            }
+        }
+
+        .btn_menu_theme{
+            text-align: left;
+        }
+
+        .btn_menu_trash{
+            text-align: right;
+            color: black;
+        }
+        .btn_menu_trash_dark{
+            color: var(--color-primary-font);
+        }
+
+    }
+
+    .deleteAkk{
+        position: relative;
+
+        .deleteAkk_hidden{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 270px;
+
+
+            display: none;
+            background: white;
+            /*background: inherit;*/
+            opacity: 0.95;
+            border: 2px solid black;
+            border-radius: 5px;
+            padding: 20px;
+
+            p{
+                font-size: 25px;
+            }
+
+            .deleteAkk_Id{
+                text-align: center;
+                text-decoration: underline;
+                font-size: 21px;
+                padding: 10px;
+            }
+
+            .btnDelAkk_Close_container{
+                border: none;
+                background: none;
+                cursor: pointer;
+                position: absolute;
+                right: 10px;
+                top: 10px;
+            }
+
+            .input_delete{
+
+                /*width: 100%;*/
+                text-align: center;
+                background: inherit;
+                color: var(--color-primary-font);
+                padding: 13px;
+                font-size: 23px;
+                border: 2px solid black;
+                border-radius: 5px;
+            }
+
+            .btn_menu{
+
+                display: none;
+                width: 100%;
+                /*padding: 10px;*/
+                font-size: 21px;
+                /*font-weight: 600;*/
+                flex-direction: row;
+                justify-content: space-between;
+                background: none;
+                border: 2px solid black;
+                border-radius: 5px;
+                text-align: center;
+                margin-top: 10px;
+                padding: 10px;
+                cursor: pointer;
+            }
+            .btn_menu:hover{
+                color: black;
+            }
+
+            .btn_menu_visible{
+                display: flex;
+            }
+        }
+        .deleteAkk_hidden_visible{
+            display: block;
+        }
+        .deleteAkk_hidden_dark{
+            background: var(--color-header-bg)
+        }
+
+
+    }
+
+
+    .linkLogout{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: black;
+    }
+    .linkLogout_dark{
+        color: var(--color-primary-font);
+    }
+
+    .btnLogout{
+        width: 30px;
+    }
+
+
+    }
+
+
+.userMenu_dark{
+    color: var(--color-primary-font);
+}
+
+@media screen and (min-width:320px) and (max-width:650px) {
+    .userMenu{
+        max-width: 400px;
+        min-width: 320px;
+        .userMenu_Data{
+            flex-direction: column;
+
+        }
+
+    }
+}

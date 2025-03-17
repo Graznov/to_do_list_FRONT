@@ -1,0 +1,595 @@
+:root {
+    --color-w-bg:#faf6d7;
+    --color-w-font: #faefc5;
+    --color-w-bgMission: #ebdbb2;
+    --color-w-btn: #076578;
+    --color-w-inputHead: #458487;
+
+    --color-w-btn_hover: #064855;
+    --color-w-font_hover: #b1ac9b;
+
+
+    --color-main-bg: #282828;
+    --color-secondary-bg: #3c3836;
+    --color-secondary-bg-opac:rgba(60,56,54,0.95);
+    --color-primary-font: #A89984;
+    --color-secondary-font: #fbf1c7;
+    --color-primmary-icon: #7C6F64;
+    --color-secondary-icon: #fbf1c7;
+    --color-primary: #8EC07C;
+    --color-primary-hover: #689D6A;
+    --color-secondary: #83A598;
+    --color-secondary-hover: #458588;
+    --color-info: #D3869B;
+    --color-info-hover: #B16286;
+    --color-warning: #FABD2F;
+    --color-warning-hover: #D79921;
+    --color-success: #B8BB26;
+    --color-success-hover: #98971A;
+    --color-danger: #FB4934;
+    --color-danger-hover: #CC241D;
+    --color-header-bg: #282828;
+    --color-search-bg: #3c3836;
+    --color-gray-font: gray;
+}
+
+.note {
+    /*position: absolute;*/
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background-color: #ffdb7f;
+    margin: 0 15px 15px 0;
+    /*transform: rotate(5deg);*/
+    padding: 5px;
+    /*overflow: hidden;*/
+    overflow: visible;
+
+    /*cursor: pointer;*/
+    transition: all 0.3s ease-in-out;
+
+    .note_btn_redacted{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .note_title {
+        margin-top: 3px;
+        font-size: 27px;
+        padding-bottom: 11px;
+        text-decoration: underline;
+        overflow: hidden;
+        width: 240px;
+        height: 30px;
+    }
+
+    .note_text {
+        font-size: 17px;
+        /*width: 100%;*/
+        height: 183px;
+        overflow: hidden;
+        border: none;
+        /*border: 1px solid red;*/
+
+        background: none;
+        resize: none;
+        /*cursor: pointer;*/
+
+
+    }
+    .note_text::-webkit-scrollbar {
+        display: none;
+    }
+
+    /*.note_text_hidden{*/
+    /*    display: none;*/
+    /*}*/
+
+    .note_date_Add,
+    .note_date_Change{
+        display: flex;
+        gap: 10px;
+        position: absolute;
+        /*bottom: 0;*/
+        color: #383737;
+        font-size: 13px;
+    }
+
+    /*.note_date_Add,*/
+    .note_date_Change{
+        /*position: absolute;*/
+        bottom: 0;
+        /*color: red;*/
+        /*font-size: 13px;*/
+    }
+    .note_date_Add{
+        /*position: absolute;*/
+        /*bottom: 0;*/
+        /*color: red;*/
+        /*font-size: 13px;*/
+        top: 0;
+    }
+
+
+}
+
+.askDel{
+    display: none;
+    /*display: flex;*/
+    opacity: 0.95;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -151px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: #b6b4b4;
+    flex-direction: column;
+    gap: 25px;
+    font-family: "Exo 2", sans-serif;
+    font-size: 21px;
+
+    .askDel_btn_area{
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+
+        button{
+            cursor: pointer;
+            width: 130px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button:hover{
+            background: #5e5e5e;
+        }
+        button:active{
+            background: #2c2c2c;
+            color: orange;
+        }
+    }
+}
+.askDel_visible{
+    display: flex;
+}
+
+.askDel_dark{
+    background: var(--color-header-bg);
+    color: #a5a08e;
+    button{
+        background: var(--color-search-bg);
+        /*color: var(--color-primary-font);*/
+        color: #a5a08e;
+    }
+
+    button:hover{
+        background: #5e5e5e;
+    }
+}
+
+
+.note::before{
+    content: url("/src/assets/skrep.svg");
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    rotate: -47deg;
+}
+
+.note_red::before{
+    content: url("/src/assets/skrepRed.svg");
+}
+.note_green::before{
+    content: url("/src/assets/skrepGreen.svg");
+}
+.note_yellow::before{
+    content: url("/src/assets/skrepYellow.svg");
+}
+.note_blue::before{
+    content: url("/src/assets/skrepBlue.svg");
+}
+.note_purple::before{
+    content: url("/src/assets/skrepPurple.svg");
+}
+
+
+.note:hover{
+    transform: rotate(0deg);
+
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+}
+
+/*.note:active{*/
+/*    -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;*/
+/*    -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;*/
+/*    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset;*/
+/*}*/
+
+
+
+.redactor{
+    background-color: #ffdb7f;
+    /*background-color: var(--color-w-bgMission);*/
+    color: black;
+    display: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -225px;
+    /*top: 100px;*/
+    /*bottom: 100px;*/
+    /*min-width: 360px;*/
+    /*width: 360px;*/
+    padding-top: 35px;
+
+
+
+    /*background-color: #5e5e5e;*/
+
+    .redactor_btnClose{
+
+        position: absolute;
+        top: 0;
+        right: 1px;
+        background: none;
+        width: 31px;
+        height: 31px;
+        cursor: pointer;
+        border: none;
+
+        svg{
+            width: 31px;
+            height: 31px;
+        }
+    }
+
+
+    .note_redacted_titleInput{
+        font-size: 25px;
+        padding: 10px;
+    }
+
+    .note_redacted_textArea{
+        font-size: 21px;
+        padding: 10px;
+    }
+    .note_redacted_textArea::-webkit-scrollbar{
+        width: 5px;
+    }
+    .note_redacted_textArea::-webkit-scrollbar-track {
+        background: none;        /* цвет дорожки */
+    }
+    .note_redacted_textArea::-webkit-scrollbar-thumb {
+        background-color: rgba(141, 140, 140, 0.5);    /* цвет плашки */
+        border-radius: 10px;       /* закругления плашки */
+        border: none;  /* padding вокруг плашки */
+    }
+
+
+
+    .AddTaskContainerTop_colrs_btnArea{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        .AddTaskContainerTop_colrs_btn{
+            width: 43px;
+            height: 33px;
+            cursor: pointer;
+            border: none;
+        }
+        .red{
+            background: red;
+        }
+        .green{
+            background: green;
+        }
+        .blue{
+            background: blue;
+            /*background: rgba(0, 0, 255, .3);*/
+        }
+        .yellow{
+            background: yellow;
+        }
+        .purple{
+            background: purple;
+        }
+        .colorActive{
+            border: 3px solid darkmagenta;
+            border-radius: 10px;
+        }
+    }
+
+    .redactor_btnArea{
+        position: relative;
+        button{
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .redactor_btnArea_redact{
+            position: absolute;
+            bottom: 0;
+            left: 2px;
+        }
+        .redactor_btnArea_delete{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+}
+
+.redactor_red{
+    /*border: 3px solid red;*/
+    /*border-radius: 3px;*/
+    background-color: red;
+}
+.redactor_green{
+    background-color: green;
+}
+.redactor_blue{
+    background-color: blue;
+    /*background: rgba(0, 0, 255, .3);*/
+}
+.redactor_yellow{
+    background-color: yellow;
+}
+.redactor_purple{
+    background-color: purple;
+}
+
+.redactor_visible{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 11;
+}
+
+
+
+/*добавлуние записи...*/
+.note_redacted{
+    display: none;
+    max-width: 350px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -300px 0 0 -175px;
+    min-width: 320px;
+
+
+
+    background-color: var(--color-w-bgMission);
+
+    /*background: var(--color-search-bg);*/
+    /*color: var(--color-w-font);*/
+    border-radius: 10px 4px 10px 10px;
+    padding: 10px;
+    cursor: unset;
+
+    .note_redacted_btnClose{
+        position: absolute;
+        top: 3px;
+        right: 4px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .note_redacted_title{
+
+        /*color: var(--color-w-font);*/
+
+
+        padding: 5px;
+        margin-top: 10px;
+        font-size: 25px;
+        background: none;
+        border: none;
+        border-bottom: 2px solid black;
+
+    }
+    .note_redacted_title:focus {
+        outline: none;
+        border: none;
+        border-bottom: 2px solid black;
+    }
+    textarea {
+
+        /*color: var(--color-w-font);*/
+
+
+        /*background-image: linear-gradient(#ebdbb2 50%, #ccc9be 50%);*/
+        /*background-size: 100% 4rem;*/
+        /*border: 1px solid #CCC;*/
+
+        border: none;
+
+        background: none;
+        width: 100%;
+        height: 400px;
+        line-height: 2rem;
+        margin: 0 auto;
+        padding: 4px 8px;
+        resize: none;
+        transition: 3s;
+    }
+
+    .note_redacted_text_ERROR{
+        background: rgba(255, 0, 0, 0.4);
+        /*border-right: 3px solid rgba(255, 0, 0, 0.6);*/
+
+    }
+    textarea:focus {
+        outline: none;
+    }
+    textarea::-webkit-scrollbar{
+        width: 5px;
+    }
+    textarea::-webkit-scrollbar-track {
+        background: none;        /* цвет дорожки */
+    }
+    textarea::-webkit-scrollbar-thumb {
+        background-color: rgba(141, 140, 140, 0.5);    /* цвет плашки */
+        border-radius: 10px;       /* закругления плашки */
+        border: none;  /* padding вокруг плашки */
+    }
+
+    .note_redacted_bottom_btnArea{
+        text-align: center;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        .note_redacted_btn{
+
+            background: none;
+            border: none;
+            cursor: pointer;
+
+        }
+        .note_redacted_btn-Trash{
+            stroke: black;
+        }
+
+        .note_redacted_btn-Trash_Deactivat{
+            display: none;
+        }
+
+    }
+
+        .AddTaskContainerTop_colrs_btnArea{
+            display: flex;
+            justify-content: space-between;
+            .AddTaskContainerTop_colrs_btn{
+                position: relative;
+                width: 43px;
+                height: 33px;
+                cursor: pointer;
+                border: none;
+            }
+            .red{
+                background: none;
+                fill: red;
+            }
+
+            .green{
+                background: none;
+                fill: green;
+            }
+            .blue{
+                background: none;
+                fill: blue;
+            }
+            .yellow{
+                background: none;
+                fill: yellow;
+            }
+            .purple{
+                background: none;
+                fill: purple;
+            }
+            .colorActive::before{
+                content: url("/src/assets/check.svg");
+                position: absolute;
+                top: -8px;
+                left: -5px;
+                fill: black;
+                /*border: 3px solid darkmagenta;*/
+                /*border-radius: 10px;*/
+            }
+            /*.colorActive{*/
+            /*    border: 3px solid black;*/
+            /*    border-radius: 50%;*/
+            /*}*/
+        }
+    /*}*/
+
+}
+
+.note_redacted_dark{
+    background: var(--color-search-bg);
+
+    .note_redacted_btnClose{
+        fill: #a5a08e;
+    }
+
+    .note_redacted_title {
+        color: var(--color-w-font);
+        border-bottom: 2px solid #a5a08e;
+
+
+    }
+
+    .note_redacted_title:focus {
+        outline: none;
+        border: none;
+        border-bottom: 2px solid #a5a08e;
+    }
+
+    textarea {
+        color: var(--color-w-font);
+    }
+
+    .AddTaskContainerTop_colrs_btnArea{
+        .colorActive::before{
+            content: url("/src/assets/check2.svg");
+        }
+    }
+
+    .note_redacted_bottom_btnArea{
+
+        .note_redacted_btn{
+            fill: #a5a08e;
+        }
+        .note_redacted_btn-PensilSave*{
+                fill: #a5a08e;
+        }
+        .note_redacted_btn-Trash{
+            stroke: #a5a08e;
+        }
+
+
+    }
+
+}
+
+
+
+.note_redacted_visible {
+
+    display: block;
+
+}
+
+@media screen and (min-width:320px) and (max-width:426px) {
+
+
+    .redactor{
+
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: 0;
+
+    }
+
+    /*.note_redacted_visible{*/
+    /*    top: 0;*/
+    /*    bottom: 0;*/
+    /*    left: 0;*/
+    /*    right: 0;*/
+    /*    margin: 0;*/
+    /*    height: auto;*/
+    /*    width: 100%;*/
+    /*}*/
+
+}
