@@ -27,6 +27,7 @@ function TodayList() {
     const ActyveTag = useAppSelector(state => state.styleSlice.styleTagActive)
     const styleSearchStatus = useAppSelector(state => state.styleSlice.styleSearchStatus)
     const styleSearchList = useAppSelector(state => state.styleSlice.styleSearchList)
+    const styleSearchNoteList = useAppSelector(state => state.styleSlice.styleSearchNoteList)
     const lang = useAppSelector(state => state.styleSlice.language)
     // const lang = localStorage.getItem('lang')
     const notes = useAppSelector(state => state.defSlice.notes)
@@ -61,12 +62,76 @@ function TodayList() {
 
         document.title = langMap.search
 
+        if(listName==='Note'){
+            return (
+                <div className={cx('cont_note')}>
+
+                    {
+                        styleSearchNoteList.map(item => (
+                            <Note
+                                key={item.id}
+
+                                id={item.id}
+                                title={item.title}
+                                description={item.description}
+                                color={item.color}
+                                addDate={item.addDate}
+                                // addDate={curentDate(item.addDate)}
+                                // lastRedactDate={(item.lastRedactDate)?curentDate(item.lastRedactDate):''}
+                                lastRedactDate={item.lastRedactDate}
+                                deg={item.deg}
+                            />
+                        ))
+                    }
+
+                </div>
+            )
+        } else {
+
+            return (
+
+                <div className={cx('cont')}>
+                    <h1>{langMap.search}</h1>
+                    <div className={cx('content')}>
+                        {
+                            styleSearchList.map((item) => (
+                                <Mission
+                                    id={item.id}
+                                    tag={item.category}
+                                    text={item.title}
+                                    key={item.id}
+                                    color={item.color}
+                                    isCompleted={item.isCompleted}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
+
+            )
+        }
+
+
+
+
+    }
+
+    if (listName === 'All') {
+
+        document.title = langMap.all
+
+
+        const afterDay = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1, 23, 59, 59)//вчерашний день, все что меньше - просрочено
+        let AllfilterArr = list.filter(item => new Date(item.dueDate) > afterDay)
+        if (ActyveTag.length) AllfilterArr = AllfilterArr.filter(item => ActyveTag.includes(item.category))
+
         return (
             <div className={cx('cont')}>
-                <h1>{langMap.search}</h1>
+                <h1 className={cx('adaptiveNameList')}>{langMap.all}</h1>
+
                 <div className={cx('content')}>
                     {
-                        styleSearchList.map((item) => (
+                        AllfilterArr.map((item) => (
                             <Mission
                                 id={item.id}
                                 tag={item.category}
@@ -81,40 +146,8 @@ function TodayList() {
             </div>
         );
 
-    }
-
-        if(listName==='All'){
-
-            document.title = langMap.all
-
-
-            const afterDay = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()-1, 23,59,59)//вчерашний день, все что меньше - просрочено
-            let AllfilterArr = list.filter(item => new Date(item.dueDate) > afterDay)
-            if(ActyveTag.length) AllfilterArr = AllfilterArr.filter(item=>ActyveTag.includes(item.category))
-
-            return (
-                <div className={cx('cont')}>
-                    <h1 className={cx('adaptiveNameList')}>{langMap.all}</h1>
-
-                    <div className={cx('content')}>
-                        {
-                            AllfilterArr.map((item) => (
-                                <Mission
-                                    id={item.id}
-                                    tag={item.category}
-                                    text={item.title}
-                                    key={item.id}
-                                    color={item.color}
-                                    isCompleted={item.isCompleted}
-                                />
-                            ))
-                        }
-                    </div>
-                </div>
-            );
-
-        } else if(listName==='Trash'){
-            const afterDay = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()-1, 23,59,59)//вчерашний день, все что меньше - просрочено
+    } else if (listName === 'Trash') {
+        const afterDay = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()-1, 23,59,59)//вчерашний день, все что меньше - просрочено
             let filterCompletedArr = list.filter(item=>new Date(item.dueDate)<afterDay)
             if(ActyveTag.length) filterCompletedArr = filterCompletedArr.filter(item=>ActyveTag.includes(item.category))
 
@@ -341,27 +374,6 @@ function TodayList() {
         }else if(listName==='Note'){
 
             document.title = langMap.notebook
-
-            // console.log(notes)
-
-            // const curentDate = (d: string ) => {
-            //     return new Date(new Date(d).toString()).toLocaleString(lang, {
-            //         year: 'numeric',
-            //         month: 'numeric',
-            //         day: 'numeric',
-            //         // weekday: 'long',
-            //         hour: 'numeric',
-            //         minute: 'numeric',
-            //         // timezone: 'UTC',
-            //     })
-            // }
-
-            // function getRandomNumber():number {
-            //     const random = Math.random() * 7; // 11, потому что Math.random() не включает верхнюю границу
-            //     return Math.floor(random) - 3;
-            // }
-
-
 
             return (
 

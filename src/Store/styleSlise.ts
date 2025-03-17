@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {Task} from "./defSlice.ts";
+import {Note, Task} from "./defSlice.ts";
 
 export interface StyleState {
     visibleAddTask:boolean,
@@ -7,6 +7,7 @@ export interface StyleState {
     styleAdaptiveVisible:boolean,
     styleSearchStatus:boolean,
     styleSearchList:Array<Task>,
+    styleSearchNoteList:Array<Note>,
     listTasks:string,
     styleTagActive:Array<string>,
     tags:Array<string>,
@@ -40,6 +41,7 @@ const initialState:StyleState = {
     styleAdaptiveVisible:false,
     styleSearchStatus:false,
     styleSearchList:[],
+    styleSearchNoteList:[],
     listTasks:'Today',
     styleTagActive:[],
     tags:[], //теги для My List в меню
@@ -191,6 +193,9 @@ const styleSlice = createSlice({
         },
         setPencil(state, action){
             state.pencil = action.payload
+        },
+        setStyleSearchNoteList(state, action){
+            state.styleSearchNoteList=action.payload
         }
 
 
@@ -217,7 +222,8 @@ export const {
     setEmailNewAccWindowToLoginWindow,
     setNoteRedactWindVisible,
     setNewNote_redactedNote,
-    setPencil
+    setPencil,
+    setStyleSearchNoteList
 
 } = styleSlice.actions;
 export default styleSlice.reducer

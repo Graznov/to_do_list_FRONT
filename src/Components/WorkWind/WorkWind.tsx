@@ -19,10 +19,11 @@ import {useAppDispatch, useAppSelector} from "../../Store/hooks.ts";
 import {
     changeTaskList, cleanTag,
     plusTag, setAdaptiveVisible, setLang, setNoteRedactWindVisible,
-    setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleTagActive, setTheme,
+    setNumberTasksMenu, setSearchStatus, setStyleSearchList, setStyleSearchNoteList, setStyleTagActive, setTheme,
     styleVisibleAddTask
 } from "../../Store/styleSlise.ts";
 import {
+    Note,
     resetState,
     setCreatDat,
     setEmail,
@@ -44,6 +45,7 @@ function WorkWind() {
     const dispatch = useAppDispatch()
 
     const list = useAppSelector(state => state.defSlice.tasks)
+    const notes = useAppSelector(state => state.defSlice.notes)
     const styleWindAddTask = useAppSelector(state => state.styleSlice.visibleAddTask)
     const arrayTags = useAppSelector(state => state.styleSlice.tags)
     const numberTasksMenu = useAppSelector(state => state.styleSlice.numberTasksMenu)
@@ -165,6 +167,7 @@ function WorkWind() {
 
     }
     let searchTaskArr:Array<Task> = []
+    let searchNotes:Array<Note> = []
 
     const langMap = lang === 'ru' ? russ:eng
 
@@ -423,6 +426,7 @@ function WorkWind() {
 
                                 setSearchInput(event.target.value)
                                 searchTaskArr = []
+                                searchNotes = []
                                 if (event.target.value.length > 1) {
                                     dispatch(setSearchStatus(true))
                                     list.forEach((elem)=>{
@@ -430,7 +434,14 @@ function WorkWind() {
                                             searchTaskArr.push(elem)
                                         }
                                     })
+                                    notes.forEach((elem)=>{
+                                        if(elem.title.toLowerCase().includes(event.target.value.toLowerCase()) || elem.description.toLowerCase().includes(event.target.value.toLowerCase())){
+                                            searchNotes.push(elem)
+                                        }
+                                    })
                                     dispatch(setStyleSearchList(searchTaskArr))
+                                    dispatch(setStyleSearchNoteList(searchNotes))
+
                                 } else {
                                     dispatch(setSearchStatus(false))
                                 }
@@ -445,6 +456,9 @@ function WorkWind() {
                             {/*<BibMac/>*/}
                             <Btn
                                 type={'button'}
+                                Click={()=>{
+                                    alert('???')
+                                }}
                                 ClassNameBtn={cx('headerBtn',{
                                     'headerBtn_dark':theme==='dark'
                                 })}
@@ -454,6 +468,9 @@ function WorkWind() {
                                                   heidth={'30px'}/>
                                 }/>
                             <Btn
+                                Click={()=>{
+                                    alert('Dzin-dzin-dzin-dzin-dzin-dzin-dzin');
+                                }}
                                 type={'button'}
                                 ClassNameBtn={cx('headerBtn',{
                                     'headerBtn_dark':theme==='dark'
