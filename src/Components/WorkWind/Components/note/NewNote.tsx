@@ -96,7 +96,7 @@ function NewNote(){
 
     }, [visiblBtnDelete]);
 
-    console.log(`visiblBtnDelete: ${visiblBtnDelete}\npencil: ${pencil}`)
+    // console.log(`visiblBtnDelete: ${visiblBtnDelete}\npencil: ${pencil}`)
 
     const langMap = lang === 'ru' ? russ:eng
 

@@ -120,6 +120,7 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                                         navigate('/login')
                                         throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`)
                                     }
+                                    console.log(response.status)
                                     return response.json()
                                 })
                                 .then(doc=>{
@@ -127,6 +128,10 @@ export function Mission({tag, text, color, listName, id, isCompleted}:MissionPro
                                         localStorage.setItem('accessToken', doc.accessToken)
                                     }
                                 })
+                                .catch(error => {
+                                    console.error(`Ошибка запроса:, ${error.message}\nStatus: ${error.status}`);
+                                });
+
                         }}
                         type="checkbox"
                     />

@@ -32,7 +32,7 @@ function TodayList() {
     // const lang = localStorage.getItem('lang')
     const notes = useAppSelector(state => state.defSlice.notes)
 
-    console.log(`%c`+`listName: ${listName}`,'color: red; font-size: 25px')
+    // console.log(`%c`+`listName: ${listName}`,'color: red; font-size: 25px')
 
     let filtredArr = list.filter(item=>!item.isCompleted)
     function createDate(n:number):string{

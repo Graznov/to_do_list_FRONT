@@ -60,7 +60,7 @@ function WorkWind() {
 
     // console.log('%c'+'WorkWind','color: #e42c64')
 
-    console.log(data)
+    // console.log(data)
 
 
     // console.log('%c'+`lang: ${lang}\ntheme: ${theme}`,'color: #e42c64');
